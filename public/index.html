@@ -34,7 +34,7 @@
             <svg class="w-12 h-12 hover:bg-blue-100 cursor-pointer rounded-full p-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
             <svg class="w-12 h-12 hover:bg-blue-100 cursor-pointer rounded-full p-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
             <svg class="w-12 h-12 hover:bg-blue-100 cursor-pointer rounded-full p-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"></path></svg>
-            <button class="h-14 w-14 hover:bg-blue-600 shadow-lg flex justify-center items-center p-2 bg-blue-400 rounded-full">
+            <button id="leftTweetBtn" class="h-14 w-14 hover:bg-blue-600 shadow-lg flex justify-center items-center p-2 bg-blue-400 rounded-full">
                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                 <svg class="w-6 h-6 text-white" fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>
             </button>
@@ -52,7 +52,7 @@
                     <textarea id="resize-ta" class="w-full mt-4 h-full flex flex-wrap break-words text-gray-500 text-lg placeholder-gray-500 focus:outline-none" placeholder="Whats happening?"></textarea>
                 </div>
 
-                <div class="flex ml-16 justify-between items-center flex-wrap">
+                <div class="flex pt-2 ml-16 justify-between items-center flex-wrap">
                     <div class="flex justify-around space-x-4 items-center flex-wrap">
                         <div class="rounded-full hover:bg-blue-100 p-2 cursor-pointer">
                             <svg class="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
@@ -72,7 +72,7 @@
                         
                     </div>
 
-                    <button class="flex text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full">
+                    <button id="mainTweetBtn" class="flex text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full">
                         Tweet
                     </button>
                     
