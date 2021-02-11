@@ -44,23 +44,20 @@ function createTweetCard(tweet) {
     leftTopInfoDiv.appendChild(dot);
     leftTopInfoDiv.appendChild(tweetTime);
 
-    // FIX THIS: 
     // Create an SVG for info in the RHS of wrapper 
-    // const horizontalBar = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    // horizontalBar.class = "w-6 h-6 text-gray-600";
-    // horizontalBar.fill = "currentColor";
-    // horizontalBar.viewBox = "0 0 20 20";
-    // horizontalBar.xmlns = "http://www.w3.org/2000/svg";
+    const horizontalBar = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    horizontalBar.setAttribute("class", "w-6 h-6 text-gray-600");
+    horizontalBar.setAttribute("fill", "currentColor");
+    horizontalBar.setAttribute("viewBox", "0 0 20 20");
+    horizontalBar.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
     // // Create path tag within SVG element and append it to SVG 
-    // pathTag = document.querySelector("#svgPath").cloneNode()
-    // pathTag.appendTo(horizontalBar);
+    const pathTag = document.querySelector("#svgPath").cloneNode()
+    horizontalBar.appendChild(pathTag);
 
     // Append leftTopInfoDiv and SVG element to topInfoDiv
     topInfoDiv.appendChild(leftTopInfoDiv);
-    
-    // FIX THIS: 
-    // topInfoDiv.appendChild(horizontalBar);
+    topInfoDiv.appendChild(horizontalBar);
 
     // Create div for user's new tweet
     const newTweet = document.createElement("div");
