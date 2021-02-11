@@ -13,6 +13,7 @@ let modalStatusCard = document.querySelector("#modalStatusCard");
 let modalTweetBtn = document.querySelector("#modalTweetBtn");
 let modalTextArea = document.querySelector("#resize-ta-modal");
 let modalExit = document.querySelector("#modalExit");
+let image = document.querySelector("#image");
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
@@ -78,4 +79,13 @@ modalExit.addEventListener("click", () => {
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
+
 })
+
+// On image click, open user's local files
+let fileHandle;
+image.addEventListener('click', async () => {
+  // Destructure the one-element array.
+  [fileHandle] = await window.showOpenFilePicker();
+  // Do something with the file handle.
+});
