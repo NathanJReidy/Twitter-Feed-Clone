@@ -11,13 +11,13 @@ let overlay = document.querySelector("#overlay");
 let modal = document.querySelector("#modal");
 let modalStatusCard = document.querySelector("#modalStatusCard");
 let modalTweetBtn = document.querySelector("#modalTweetBtn");
+let modalTextArea = document.querySelector("#resize-ta-modal");
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
-    modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
-    characterLimit(textarea.value);
+    characterLimit(textarea.value, "#resize-ta");
 
     textarea.focus(); //sets focus to element
     let val = textarea.value; //store the value of the element
@@ -25,9 +25,25 @@ textarea.addEventListener("keyup", () => {
     textarea.value = val; //set that value back.
 });
 
+// Monitors modal tweet input box for keystrokes
+modalTextArea.addEventListener("keyup", () => {
+    modalTextArea.style = `display: flex; height: ${textarea.scrollHeight}px`;
+    modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
+    characterLimit(modalTextArea.value, "#resize-ta-modal");
+
+    modalTextArea.focus(); //sets focus to element
+    let val = modalTextArea.value; //store the value of the element
+    modalTextArea.value = ''; //clear the value of the element
+    modalTextArea.value = val; //set that value back.
+});
+
+
+// 
+
 // Monitors main tweet button and sends to the post a new tweet function on click 
 mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
+    textarea.value = "";
 });
 
 // Display overlay and modal for new tweet on click of LHS tweet btn
@@ -47,10 +63,11 @@ overlay.addEventListener("click", () => {
 
 // Monitors modal tweet button, sends the post to a new tweet function on click and hides the overlay and modal 
 modalTweetBtn.addEventListener("click", () => {
-    createTweetCard(textarea.value);
+    createTweetCard(modalTextArea.value);
     overlay.className="";
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border h-full";
+    modalTextArea.value = "";
 
 });
 

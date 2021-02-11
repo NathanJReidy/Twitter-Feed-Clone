@@ -3,9 +3,9 @@
 // Use highlightWithinTextarea module to highlight characters
 // which exceed Twitter's 280 post limit. 
 
-function characterLimit(characters) {
+function characterLimit(characters, id) {
     if (characters.length > 280) {
-        $('#resize-ta').highlightWithinTextarea({
+        $(id).highlightWithinTextarea({
             highlight: [280, characters.length]
         });
     }
