@@ -5,10 +5,9 @@ import { createTweetCard } from './dom.js';
 // Dealing with status update text area height
 
 let textarea = document.querySelector("#resize-ta");
-let statusWrapper = document.querySelector("#statusWrapper");
 let mainTweetBtn = document.querySelector("#mainTweetBtn");
-
-
+let leftTweetBtn = document.querySelector("#leftTweetBtn");
+let overlay = document.querySelector("#overlay");
 
 textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
@@ -21,10 +20,19 @@ textarea.addEventListener("keyup", () => {
     textarea.value = val; //set that value back.
 });
 
-
 mainTweetBtn.addEventListener("click", () => {
-    console.log(textarea.value);
     createTweetCard(textarea.value);
 });
 
+// Display overlay on click of LHS tweet btn
+leftTweetBtn.addEventListener("click", () => {
+    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
+    
+
+})
+
+// Hide overlay on click 
+overlay.addEventListener("click", () => {
+    overlay.className="";
+})
 
