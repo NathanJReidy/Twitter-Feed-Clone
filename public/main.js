@@ -6,15 +6,16 @@
 
 // Need to manipulate the DOM to add a span class within the .value 
 // of the tweet if characters.length > 280
-let exampleVar = '';
+// let exampleVar = '';
 
 function characterLimit(characters) {
     if (characters.length > 280) {
-        let redWord = characters.slice(280, characters.length);
-        exampleVar = redWord;
-        console.log(`exampleVar is ${exampleVar}`);
+        // let redWord = characters.slice(280, characters.length);
+        // exampleVar = redWord;
+        // console.log(`exampleVar is ${exampleVar}`);
         $('#resize-ta').highlightWithinTextarea({
-            highlight: exampleVar
+            // highlight: exampleVar
+            highlight: [280, characters.length]
         });
     }
 }

@@ -8,17 +8,22 @@ let statusWrapper = document.querySelector("#statusWrapper");
 let mainTweetBtn = document.querySelector("#mainTweetBtn");
 
 
+
 textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
-    console.log(textarea.scrollHeight);
+    //console.log(textarea.scrollHeight);
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
     characterLimit(textarea.value);
-    console.log("textarea event listener runs");
+    textarea.focus(); //sets focus to element
+    let val = textarea.value; //store the value of the element
+    textarea.value = ''; //clear the value of the element
+    textarea.value = val; //set that value back.
+    //console.log("textarea event listener runs");
 });
 
 
 mainTweetBtn.addEventListener("click", () => {
-    console.log(textarea.value);
+    //console.log(textarea.value);
 });
 
 
