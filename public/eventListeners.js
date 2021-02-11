@@ -12,6 +12,7 @@ let modal = document.querySelector("#modal");
 let modalStatusCard = document.querySelector("#modalStatusCard");
 let modalTweetBtn = document.querySelector("#modalTweetBtn");
 let modalTextArea = document.querySelector("#resize-ta-modal");
+let modalExit = document.querySelector("#modalExit");
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
@@ -49,8 +50,8 @@ mainTweetBtn.addEventListener("click", () => {
 // Display overlay and modal for new tweet on click of LHS tweet btn
 leftTweetBtn.addEventListener("click", () => {
     overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
-    modal.className = "absolute z-20 h-1/3 w-1/2 bg-white rounded-lg mt-8 ";
-    modalStatusCard.className = "flex flex-col px-5 py-2 border-gray-100 justify-center border h-full";
+    modal.className = "absolute z-20 h-1/3 w-1/2 bg-white rounded-lg mt-8";
+    modalStatusCard.className = "flex flex-col relative px-5 py-2 border-gray-100 justify-center border h-full";
 
 })
 
@@ -59,6 +60,7 @@ overlay.addEventListener("click", () => {
     overlay.className="";
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border h-full";
+    modalTextArea.value = "";
 })
 
 // Monitors modal tweet button, sends the post to a new tweet function on click and hides the overlay and modal 
@@ -66,9 +68,14 @@ modalTweetBtn.addEventListener("click", () => {
     createTweetCard(modalTextArea.value);
     overlay.className="";
     modal.className="";
-    modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border h-full";
+    modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
 
 });
 
-
+modalExit.addEventListener("click", () => {
+    overlay.className="";
+    modal.className="";
+    modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
+    modalTextArea.value = "";
+})
