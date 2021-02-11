@@ -10,11 +10,13 @@ let leftTweetBtn = document.querySelector("#leftTweetBtn");
 let overlay = document.querySelector("#overlay");
 let modal = document.querySelector("#modal");
 let modalStatusCard = document.querySelector("#modalStatusCard");
+let modalTweetBtn = document.querySelector("#modalTweetBtn");
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
+    modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
     characterLimit(textarea.value);
 
     textarea.focus(); //sets focus to element
@@ -42,5 +44,14 @@ overlay.addEventListener("click", () => {
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border h-full";
 })
+
+// Monitors modal tweet button, sends the post to a new tweet function on click and hides the overlay and modal 
+modalTweetBtn.addEventListener("click", () => {
+    createTweetCard(textarea.value);
+    overlay.className="";
+    modal.className="";
+    modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border h-full";
+
+});
 
 
