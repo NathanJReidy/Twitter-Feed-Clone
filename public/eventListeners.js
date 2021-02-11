@@ -1,3 +1,6 @@
+import { characterLimit } from './main.js';
+
+
 // Dealing with status update text area height
 
 let textarea = document.querySelector("#resize-ta");
@@ -9,9 +12,8 @@ textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     console.log(textarea.scrollHeight);
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
-//Need to align the photo of my face so 
-//that it stays at the top of the box when I start writing.
-
+    characterLimit(textarea.value);
+    console.log("textarea event listener runs");
 });
 
 
