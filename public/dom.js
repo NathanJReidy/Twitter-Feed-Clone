@@ -25,18 +25,18 @@ function createTweetCard(tweet) {
     // create paragraphs and divs within leftTopInfoDiv
     const fullName = document.createElement("p");
     fullName.className = "font-bold";
-    fullName.value = "Nathan Reidy";
+    fullName.textContent = "Nathan Reidy";
 
     const username = document.createElement("p");
     username.className = "text-gray-500";
-    username.value = "@NathanReidy";
+    username.textContent = "@NathanReidy";
 
     const dot = document.createElement("div");
     dot.className = "flex h-1 w-1 bg-gray-500 rounded-full";
 
     const tweetTime = document.createElement("p");
     tweetTime.className = "text-gray-500";
-    tweetTime.value = "Now";
+    tweetTime.textContent = "Now";
 
     // Append these elements to leftTopInfoDiv
     leftTopInfoDiv.appendChild(fullName);
@@ -44,25 +44,28 @@ function createTweetCard(tweet) {
     leftTopInfoDiv.appendChild(dot);
     leftTopInfoDiv.appendChild(tweetTime);
 
+    // FIX THIS: 
     // Create an SVG for info in the RHS of wrapper 
-    const horizontalBar = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    horizontalBar.class = "w-6 h-6 text-gray-600";
-    horizontalBar.fill = "currentColor";
-    horizontalBar.viewBox = "0 0 20 20";
-    horizontalBar.xmlns = "http://www.w3.org/2000/svg";
+    // const horizontalBar = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    // horizontalBar.class = "w-6 h-6 text-gray-600";
+    // horizontalBar.fill = "currentColor";
+    // horizontalBar.viewBox = "0 0 20 20";
+    // horizontalBar.xmlns = "http://www.w3.org/2000/svg";
 
-    // Create path tag within SVG element and append it to SVG 
-    pathTag = document.querySelector("#svgPath").cloneNode()
-    pathTag.appendTo(horizontalBar);
+    // // Create path tag within SVG element and append it to SVG 
+    // pathTag = document.querySelector("#svgPath").cloneNode()
+    // pathTag.appendTo(horizontalBar);
 
     // Append leftTopInfoDiv and SVG element to topInfoDiv
     topInfoDiv.appendChild(leftTopInfoDiv);
-    topInfoDiv.appendChild(horizontalBar);
+    
+    // FIX THIS: 
+    // topInfoDiv.appendChild(horizontalBar);
 
     // Create div for user's new tweet
     const newTweet = document.createElement("div");
     newTweet.className = "flex px-2 py-1 text-sm";
-    newTweet.value = tweet; 
+    newTweet.textContent = tweet; 
 
     // Append topInfoDiv and newTweet div to elementsDiv
     elementsDiv.appendChild(topInfoDiv);
@@ -77,5 +80,7 @@ function createTweetCard(tweet) {
     statusCard.after(newDiv);
 
 }
+
+export { createTweetCard };
 
 

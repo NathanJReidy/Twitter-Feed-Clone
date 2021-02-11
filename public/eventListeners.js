@@ -1,4 +1,5 @@
 import { characterLimit } from './main.js';
+import { createTweetCard } from './dom.js';
 
 
 // Dealing with status update text area height
@@ -23,6 +24,7 @@ textarea.addEventListener("keyup", () => {
 
 mainTweetBtn.addEventListener("click", () => {
     console.log(textarea.value);
+    createTweetCard(textarea.value);
 });
 
 
