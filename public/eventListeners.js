@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard } from './dom.js';
+import { createTweetCard, createTweetImage } from './dom.js';
 
 
 // Dealing with status update text area height
@@ -91,20 +91,22 @@ file.addEventListener("change", (event) => {
 
     let reader = new FileReader();
     let fileImgTitle = selectedFile.name;
-    let fileImage = "";
+    // let fileImage = "";
     reader.onload = function(event) {
         let fileImgSrc = event.target.result;
         console.log(`file image source is ${fileImgSrc}`);
-        fileImage = fileImgSrc;
+        // fileImage = fileImgSrc;
+        createTweetImage(fileImgSrc);
 
     }
 
     reader.readAsDataURL(selectedFile);
 
-    // create a function in dom.js that creates the image div
-    // and adds it below the tweet text. 
+    // // create a function in dom.js that creates the image div
+    // // and adds it below the tweet text. 
+    // console.log("fileImage is " + fileImage);
 
-    tweetImage(fileImage);
+    
 })
 
 
