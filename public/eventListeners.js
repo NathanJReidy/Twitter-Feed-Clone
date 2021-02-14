@@ -91,24 +91,18 @@ file.addEventListener("change", (event) => {
 
     let reader = new FileReader();
     let fileImgTitle = selectedFile.name;
-    // let fileImage = "";
+    
     reader.onload = function(event) {
         let fileImgSrc = event.target.result;
         console.log(`file image source is ${fileImgSrc}`);
-        // fileImage = fileImgSrc;
-        createTweetImage(fileImgSrc);
 
+        // Send fileImgSrc to function to manipulate dom to create image
+        createTweetImage(fileImgSrc);
     }
 
     reader.readAsDataURL(selectedFile);
 
-    // // create a function in dom.js that creates the image div
-    // // and adds it below the tweet text. 
-    // console.log("fileImage is " + fileImage);
-
-    
 })
-
 
 //On image click, open user's local files
 image.addEventListener("click", () => {
@@ -116,52 +110,3 @@ image.addEventListener("click", () => {
     file.click(); 
 })
 
-
-// let fileHandle;
-// image.addEventListener('click', async () => {
-//   // Destructure the one-element array.
-//   [fileHandle] = await window.showOpenFilePicker();
-//   // Do something with the file handle.
-//   const file = await fileHandle.getFile();
-//   const contents = await file.arrayBuffer();
-//   //console.log(contents);
- 
-
-// NEED TO FIX THIS. NEED TO READ THE IMAGE DATA AND
-// CAPTURE THE IMG SRC SO I CAN THEN ADD IT TO A NEW IMAGE DOM UNDER THE
-// TWEET STATUS. USE FILE SYSTEM ACCESS API???
-
-
-//   function typedArrayToURL(typedArray, mimeType) {
-//     return URL.createObjectURL(new Blob([typedArray.buffer], {type: mimeType}))
-//   }
-
-// //   const bytes = new Uint8Array(59);
-
-// //   for(let i = 0; i < 59; i++) {
-// //     bytes[i] = 32 + i;
-// //   }
-
-// //   const url = typedArrayToURL(contents, 'text/plain');
-//   console.log(URL.createObjectURL(fileHandle));
-//   //console.log(url);
-
-//   //console.log(URL.createObjectURL(new Blob([file.buffer], {type: MimeType})));
-
-// });
-//   // test: 
-//   function printFile(thefile) {
-//     var reader = new FileReader();
-//     reader.onload = function(evt) {
-//       console.log(evt.target.result);
-//     };
-//     reader.readAsArray(thefile);
-//   }
-
-//   printFile(file);
-
-
-
-// function typedArrayToURL(typedArray, mimeType) {
-//     return URL.createObjectURL(new Blob([typedArray.buffer], {type: mimeType}));
-// }
