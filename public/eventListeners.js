@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, createDeleteCard} from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, createDeleteCard } from './dom.js';
 
 
 // Dealing with status update text area height
@@ -171,6 +171,11 @@ function deleteBtnListener() {
             // Make three horizonal dots disappear
             const selectedDeleteBtn = document.querySelector(`#deleteBtn${datasetValue}`);
             selectedDeleteBtn.style.display = 'none';
+
+            // Add card to delete tweet
+            createDeleteCard(datasetValue);
+
+
 
             // Make entire tweet card disappear
             // const selectedCard = document.querySelector(`#tweetCard${datasetValue}`);

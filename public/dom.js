@@ -138,14 +138,25 @@ function createModalTweetImage(imageSrc) {
 // Create delete card when horizontal three dots are clicked
 function createDeleteCard(index) {
     const leftTopInfoDiv = document.querySelector(`#leftTopInfoDiv${index}`);
+    
     const deleteCard = document.createElement("div");
-    deleteCard.className = "absolute z-20 w-16 h-12 p-2 shadow-lg rounded-lg";
+    deleteCard.className = "-mb-6 z-50 bg-white w-1/5 h-12 p-2 shadow-lg rounded-lg";
+    deleteCard.id = `deleteCard${index}`;
 
     const flexDeleteCard = document.createElement("div");
-    flexDeleteCard.className = "flex p-2 w-full h-full justify-between items-center";
+    flexDeleteCard.className = "flex w-full h-full justify-center items-center";
 
-    const deleteIcon = document.createElement("img");
-    deleteIcon.textContent = "Delete Icon";
+    // const deleteIcon = document.createElement("img");
+    // deleteIcon.textContent = "Delete Icon";
+
+    const deleteIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    deleteIcon.setAttribute("class", "w-6 h-6 cursor-pointer text-red-500");
+    deleteIcon.setAttribute("fill", "currentColor");
+    deleteIcon.setAttribute("viewBox", "0 0 20 20");
+    deleteIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    const deletePathTag = document.querySelector("#deleteSVGPath").cloneNode();
+    deleteIcon.appendChild(deletePathTag);
 
     const deleteText = document.createElement("p");
     deleteText.className = "flex text-red-500 font-bold px-1";
@@ -156,7 +167,7 @@ function createDeleteCard(index) {
     flexDeleteCard.appendChild(deleteText);
     deleteCard.appendChild(flexDeleteCard);
 
-    leftTopInfoDiv.after(leftTopInfoDiv);
+    leftTopInfoDiv.after(deleteCard);
 
 
 }
