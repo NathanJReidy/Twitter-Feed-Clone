@@ -19,6 +19,7 @@ let modalFile = document.querySelector("#modalFile");
 let modalImage = document.querySelector("#modalImage");
 
 
+
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
@@ -51,6 +52,7 @@ mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
     createTweetImageCard(globalTweetImgSrc);
     textarea.value = "";
+    deleteBtnListener();
     deleteTweetImage();
 });
 
@@ -88,6 +90,7 @@ modalTweetBtn.addEventListener("click", () => {
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
     createTweetImageCard(modalGlobalTweetImgSrc);
+    deleteBtnListener();
     deleteModalTweetImage();
 });
 
@@ -149,8 +152,30 @@ modalFile.addEventListener("change", (event) => {
 
 })
 
-//On modal image click, open user's local files
+// On modal image click, open user's local files
 modalImage.addEventListener("click", () => {
     console.log("CLICK MODAL IMAGE!");
     modalFile.click(); 
 })
+
+// Create event listeners to delete each card when horizonal delete button is clicked
+function deleteBtnListener() {
+    console.log("deleteBtnListener function runs!");
+    let deleteBtns = document.querySelectorAll("#deleteBtn");
+    deleteBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            console.log(e);
+            console.log("DeleteBtn listener worked!");
+            console.log(`datasetValue is ${e.target.dataset.value}`);
+            let datasetValue = e.target.dataset.value;
+            // const selectedDeleteBtn = document.querySelector(`#deleteBtn[data-value='0']`);
+            // selectedDeleteBtn.style.display = 'none';
+            const selectedCard = document.querySelector(`#tweetCard${datasetValue}`);
+            selectedCard.style.display = 'none';
+        })
+    })
+}
+
+// function deleteTweet(index) {
+//     let selectedTweet = 
+// }

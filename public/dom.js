@@ -1,10 +1,13 @@
 // The purpose of this js file is to manipulate the DOM.
 
+let index = 0;
+
 function createTweetCard(tweet) {
     // Create wrapping div
     const newDiv = document.createElement("div");
     newDiv.className = "flex px-5 py-2 space-x-3 border hover:bg-gray-100 cursor-pointer";
-    
+    newDiv.id = `tweetCard${index}`;
+
     // Create img class
     const profileImg = document.createElement("img");
     profileImg.className = "w-12 h-12 rounded-full shadow-lg";
@@ -50,6 +53,13 @@ function createTweetCard(tweet) {
     horizontalBar.setAttribute("fill", "currentColor");
     horizontalBar.setAttribute("viewBox", "0 0 20 20");
     horizontalBar.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    horizontalBar.setAttribute("id", "deleteBtn");
+
+    // We want to give card's horizontal bar a specific 
+    // dataset value so that our event listener can then delete
+    // specific cards the user selects
+    horizontalBar.dataset.value = index;
+    index += 1;
 
     // // Create path tag within SVG element and append it to SVG 
     const pathTag = document.querySelector("#svgPath").cloneNode()
