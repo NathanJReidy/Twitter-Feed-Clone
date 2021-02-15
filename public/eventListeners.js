@@ -59,6 +59,11 @@ function deleteTweetImage() {
     tweetImage.style.display = "none";
 }
 
+function deleteModalTweetImage() {
+    const modalTweetImage = document.querySelector("#modalTweetImageID");
+    modalTweetImage.style.display = "none";
+}
+
 // Display overlay and modal for new tweet on click of LHS tweet btn
 leftTweetBtn.addEventListener("click", () => {
     overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
@@ -82,7 +87,8 @@ modalTweetBtn.addEventListener("click", () => {
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
-
+    createTweetImageCard(modalGlobalTweetImgSrc);
+    deleteModalTweetImage();
 });
 
 modalExit.addEventListener("click", () => {
@@ -133,8 +139,9 @@ modalFile.addEventListener("change", (event) => {
         let modalFileImgSrc = event.target.result;
         // Send modalFileImgSrc to function to manipulate dom to create image
         createModalTweetImage(modalFileImgSrc);
-        // Change mainTweetBtn to blue when image is uploaded
-        mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
+        // Change modalTweetBtn to blue when image is uploaded
+        modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
+        
         modalGlobalTweetImgSrc = modalFileImgSrc;
     }
 
@@ -142,7 +149,7 @@ modalFile.addEventListener("change", (event) => {
 
 })
 
-//On image click, open user's local files
+//On modal image click, open user's local files
 modalImage.addEventListener("click", () => {
     console.log("CLICK MODAL IMAGE!");
     modalFile.click(); 

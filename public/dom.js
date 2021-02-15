@@ -124,10 +124,7 @@ function createModalTweetImage(imageSrc) {
     modalStatusWrapper.after(wrappingModalDiv);
 }
 
-// Need to make the following changes:
-// 1. Changes to the size of the image uploaded in the box (it should be aligned with the what's happening margin)
-// 2. When the tweet button is clicked, it needs to the image uploaded to the dom also
-// 3. The above needs to apply to the left tweet button also 
+
 
 export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage };
 
