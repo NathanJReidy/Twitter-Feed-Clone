@@ -49,7 +49,7 @@ function createTweetCard(tweet) {
 
     // Create an SVG for info in the RHS of wrapper 
     const horizontalBar = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    horizontalBar.setAttribute("class", "w-6 h-6 text-gray-600");
+    horizontalBar.setAttribute("class", "w-10 h-10 text-gray-600 rounded-full hover:bg-blue-100 p-2 cursor-pointer");
     horizontalBar.setAttribute("fill", "currentColor");
     horizontalBar.setAttribute("viewBox", "0 0 20 20");
     horizontalBar.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -134,6 +134,11 @@ function createModalTweetImage(imageSrc) {
     modalStatusWrapper.after(wrappingModalDiv);
 }
 
+// Create delete card when horizontal three dots are clicked
+function createDeleteCard(index) {
+
+
+}
 
 
 export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage };

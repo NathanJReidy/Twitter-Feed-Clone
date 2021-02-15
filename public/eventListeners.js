@@ -59,11 +59,13 @@ mainTweetBtn.addEventListener("click", () => {
 function deleteTweetImage() {
     const tweetImage = document.querySelector("#tweetImageID");
     tweetImage.style.display = "none";
+    globalTweetImgSrc = "";
 }
 
 function deleteModalTweetImage() {
     const modalTweetImage = document.querySelector("#modalTweetImageID");
     modalTweetImage.style.display = "none";
+    modalGlobalTweetImgSrc = "";
 }
 
 // Display overlay and modal for new tweet on click of LHS tweet btn
