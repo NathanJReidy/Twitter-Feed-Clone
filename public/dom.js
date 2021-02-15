@@ -57,7 +57,6 @@ function createTweetCard(tweet) {
     horizontalBar.setAttribute("id", `deleteBtn${index}`);
 
     // Create card for a hidden delete card button 
-    // top
 
     const deleteCard = document.createElement("div");
     deleteCard.className = "-mb-6 z-50 bg-white w-1/5 h-12 p-2 shadow-lg rounded-lg hover:bg-gray-100";
@@ -86,9 +85,6 @@ function createTweetCard(tweet) {
 
     // Put delete card as hidden initially
     deleteCard.style.display = 'none';
-
-    // bottom
-
 
     // We want to give card's horizontal bar a specific 
     // dataset value so that our event listener can then delete
@@ -172,42 +168,6 @@ function createModalTweetImage(imageSrc) {
     modalStatusWrapper.after(wrappingModalDiv);
 }
 
-// // Create delete card when horizontal three dots are clicked
-// function createDeleteCard(index) {
-
-//     // top
-//     const leftTopInfoDiv = document.querySelector(`#leftTopInfoDiv${index}`);
-    
-//     const deleteCard = document.createElement("div");
-//     deleteCard.className = "-mb-6 z-50 bg-white w-1/5 h-12 p-2 shadow-lg rounded-lg hover:bg-gray-100";
-//     deleteCard.id = `deleteCard${index}`;
-
-//     const flexDeleteCard = document.createElement("div");
-//     flexDeleteCard.className = "flex w-full h-full justify-center items-center";
-
-//     const deleteIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-//     deleteIcon.setAttribute("class", "w-6 h-6 cursor-pointer text-red-500");
-//     deleteIcon.setAttribute("fill", "currentColor");
-//     deleteIcon.setAttribute("viewBox", "0 0 20 20");
-//     deleteIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-
-//     const deletePathTag = document.querySelector("#deleteSVGPath").cloneNode();
-//     deleteIcon.appendChild(deletePathTag);
-
-//     const deleteText = document.createElement("p");
-//     deleteText.className = "flex text-red-500 font-bold px-1";
-//     deleteText.textContent = "Delete";
-
-//     // Append each div to each other
-//     flexDeleteCard.appendChild(deleteIcon);
-//     flexDeleteCard.appendChild(deleteText);
-//     deleteCard.appendChild(flexDeleteCard);
-
-//     leftTopInfoDiv.after(deleteCard);
-//     // bottom
-
-
-// }
 
 
 export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage };

@@ -17,6 +17,7 @@ let image = document.querySelector("#image");
 let file = document.querySelector("#file");
 let modalFile = document.querySelector("#modalFile");
 let modalImage = document.querySelector("#modalImage");
+let main = document.querySelector("#main");
 
 
 
@@ -162,8 +163,6 @@ modalImage.addEventListener("click", () => {
 
 // Create event listeners to delete each card when horizonal delete button is clicked
 function deleteBtnListener() {
-    console.log("deleteBtnListener function runs!");
-    
     let deleteBtns = document.querySelectorAll('[id^="deleteBtn"]');
     deleteBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
@@ -173,45 +172,49 @@ function deleteBtnListener() {
             const selectedDeleteBtn = document.querySelector(`#deleteBtn${datasetValue}`);
             selectedDeleteBtn.style.display = 'none';
 
-            // createDeleteCard(datasetValue);
+            // Display card for delete button 
             let selectedDeletedCard = document.querySelector(`#deleteCard${datasetValue}`);
             selectedDeletedCard.style.display = 'flex';
+
+            // Send datasetValue to function to listen for if
+            // user clicks the specific delete card button
             deleteCardListener(datasetValue);
-            
-
-
-            // THE BELOW KEEPS DUPLICATING EVERYTHING BECAUSE OF THE 'FOR EACH' IT LOOPS THROUGH EVERYTHING THAT EXISTS AND CREATES TOO MANY. 
-            // I NEED TO SEPARATE THIS BY CREATING A SEPARATE EVENT LISTENER FOR EACH BUTTON. 
-            // I.E. SEND THE DATASET VALUE TO SOMETHING SCOPED FURTHER UP THE FUNCTION THEN LISTEN FOR THE SPECIFIC DELETE BTN CLICKED, THEN CREATE/DELETE IT.
-
-
-
-
-
-            // Make entire tweet card disappear
-            // const selectedCard = document.querySelector(`#tweetCard${datasetValue}`);
-            // selectedCard.style.display = 'none';
         })
     })
-
-    // Add card to delete tweet
-    // Make three horizonal dots disappear
-
-
 }
 
+// If user clicks the delete card button, then both the delete card button
+// and the tweet card itself disappears 
 function deleteCardListener(index) {
     const selectedDeleteCard = document.querySelector(`#deleteCard${index}`);
     const selectedCard = document.querySelector(`#tweetCard${index}`);
-
+    
+    // If user clicks anywhere except the delete button,
+    // the delete button disappears and the three dots button reappears
+    const blocker = document.querySelector("#blockerLayer");
+    const selectedDeleteBtn = document.querySelector(`#deleteBtn${index}`);
+    blocker.className = "absolute z-10 h-full w-full";
+    blocker.addEventListener('click', () => {
+        selectedDeleteCard.style.display = 'none';
+        selectedDeleteBtn.style.display = 'flex';
+        blocker.className = "hidden absolute z-10 h-full w-full";
+    })
+    
+    
+    // If user clicks the delete card button, 
+    // both the delete card button and the tweet card itself disappear
     selectedDeleteCard.addEventListener('click', () => {
         selectedDeleteCard.style.display = 'none';
         selectedCard.style.display = 'none';
+        blocker.className = "hidden absolute z-10 h-full w-full";
     })
 
-
+    // selectedCard.addEventListener('click', () => {
+    //     const selectedDeleteBtnTwo = document.querySelector(`#deleteBtn${index}`);
+    //     selectedDeleteCard.style.display = 'none';
+    //     selectedDeleteBtnTwo.style.display = 'flex';
+    //     console.log("EVENT LISTENER RAN!");
+    // })
 }
 
-// function deleteTweet(index) {
-//     let selectedTweet = 
-// }
+
