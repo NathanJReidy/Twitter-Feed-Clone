@@ -98,7 +98,7 @@ function createTweetImageCard(imageSrc) {
 
     const newImg = document.createElement("img");
     newImg.className = "flex px-2 pb-2 pt-6 items-start";
-    newImg.id="tweetImageID";
+    newImg.id="tweetImageCardID";
     console.log(`imageSrc is ${imageSrc}`);
     newImg.src = imageSrc; 
 

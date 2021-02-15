@@ -20,7 +20,7 @@ let file = document.querySelector("#file");
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
-    mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
+    mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
     characterLimit(textarea.value, "#resize-ta");
 
     textarea.focus(); //sets focus to element
@@ -49,7 +49,13 @@ mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
     createTweetImageCard(globalTweetImgSrc);
     textarea.value = "";
+    deleteTweetImage();
 });
+
+function deleteTweetImage() {
+    const tweetImage = document.querySelector("#tweetImageID");
+    tweetImage.style.display = "none";
+}
 
 // Display overlay and modal for new tweet on click of LHS tweet btn
 leftTweetBtn.addEventListener("click", () => {
@@ -90,18 +96,14 @@ let globalTweetImgSrc = "";
 file.addEventListener("change", (event) => {
     console.log("onchange handler ran!");
     let selectedFile = event.target.files[0];
-    // console.log(selectedFile);
-
     let reader = new FileReader();
-    let fileImgTitle = selectedFile.name;
-    
-    
+
     reader.onload = function(event) {
         let fileImgSrc = event.target.result;
-        console.log(`file image source is ${fileImgSrc}`);
         // Send fileImgSrc to function to manipulate dom to create image
         createTweetImage(fileImgSrc);
-        console.log(`THE file image source is ${fileImgSrc}`);
+        // Change mainTweetBtn to blue when image is uploaded
+        mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
         globalTweetImgSrc = fileImgSrc;
     }
 
