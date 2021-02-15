@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage } from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard } from './dom.js';
 
 
 // Dealing with status update text area height
@@ -15,6 +15,7 @@ let modalTextArea = document.querySelector("#resize-ta-modal");
 let modalExit = document.querySelector("#modalExit");
 let image = document.querySelector("#image");
 let file = document.querySelector("#file");
+
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
@@ -46,6 +47,7 @@ modalTextArea.addEventListener("keyup", () => {
 // Monitors main tweet button and sends to the post a new tweet function on click 
 mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
+    createTweetImageCard(globalTweetImgSrc);
     textarea.value = "";
 });
 
@@ -83,6 +85,7 @@ modalExit.addEventListener("click", () => {
 
 })
 
+let globalTweetImgSrc = "";
 // add event listener for when user selects an image file to upload
 file.addEventListener("change", (event) => {
     console.log("onchange handler ran!");
@@ -92,12 +95,14 @@ file.addEventListener("change", (event) => {
     let reader = new FileReader();
     let fileImgTitle = selectedFile.name;
     
+    
     reader.onload = function(event) {
         let fileImgSrc = event.target.result;
         console.log(`file image source is ${fileImgSrc}`);
-
         // Send fileImgSrc to function to manipulate dom to create image
         createTweetImage(fileImgSrc);
+        console.log(`THE file image source is ${fileImgSrc}`);
+        globalTweetImgSrc = fileImgSrc;
     }
 
     reader.readAsDataURL(selectedFile);

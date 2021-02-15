@@ -62,6 +62,7 @@ function createTweetCard(tweet) {
     // Create div for user's new tweet
     const newTweet = document.createElement("div");
     newTweet.className = "flex px-2 py-1 text-sm";
+    newTweet.id = "tweetText";
     newTweet.textContent = tweet; 
 
     // Append topInfoDiv and newTweet div to elementsDiv
@@ -78,11 +79,13 @@ function createTweetCard(tweet) {
 
 }
 
+// Adds selected image to below 'What's happening' status bar
 function createTweetImage(imageSrc) {
     const statusWrapper = document.querySelector("#statusWrapper");
 
     const newImg = document.createElement("img");
-    newImg.className = "flex py-2 items-start";
+    newImg.className = "flex ml-2 px-12 py-2 items-start";
+    newImg.id="tweetImageID";
     console.log(`imageSrc is ${imageSrc}`);
     newImg.src = imageSrc; 
 
@@ -90,11 +93,23 @@ function createTweetImage(imageSrc) {
 
 }
 
+function createTweetImageCard(imageSrc) {
+    const tweetText = document.querySelector("#tweetText");
+
+    const newImg = document.createElement("img");
+    newImg.className = "flex px-2 pb-2 pt-6 items-start";
+    newImg.id="tweetImageID";
+    console.log(`imageSrc is ${imageSrc}`);
+    newImg.src = imageSrc; 
+
+    tweetText.after(newImg);
+}
+
 // Need to make the following changes:
 // 1. Changes to the size of the image uploaded in the box (it should be aligned with the what's happening margin)
 // 2. When the tweet button is clicked, it needs to the image uploaded to the dom also
 // 3. The above needs to apply to the left tweet button also 
 
-export { createTweetCard, createTweetImage };
+export { createTweetCard, createTweetImage, createTweetImageCard };
 
 
