@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage } from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, createDeleteCard} from './dom.js';
 
 
 // Dealing with status update text area height
@@ -163,17 +163,18 @@ modalImage.addEventListener("click", () => {
 // Create event listeners to delete each card when horizonal delete button is clicked
 function deleteBtnListener() {
     console.log("deleteBtnListener function runs!");
-    let deleteBtns = document.querySelectorAll("#deleteBtn");
+    let deleteBtns = document.querySelectorAll('[id^="deleteBtn"]');
     deleteBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-            console.log(e);
-            console.log("DeleteBtn listener worked!");
-            console.log(`datasetValue is ${e.target.dataset.value}`);
             let datasetValue = e.target.dataset.value;
-            // const selectedDeleteBtn = document.querySelector(`#deleteBtn[data-value='0']`);
-            // selectedDeleteBtn.style.display = 'none';
-            const selectedCard = document.querySelector(`#tweetCard${datasetValue}`);
-            selectedCard.style.display = 'none';
+
+            // Make three horizonal dots disappear
+            const selectedDeleteBtn = document.querySelector(`#deleteBtn${datasetValue}`);
+            selectedDeleteBtn.style.display = 'none';
+
+            // Make entire tweet card disappear
+            // const selectedCard = document.querySelector(`#tweetCard${datasetValue}`);
+            // selectedCard.style.display = 'none';
         })
     })
 }

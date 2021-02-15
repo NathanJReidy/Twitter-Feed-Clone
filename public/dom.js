@@ -54,7 +54,7 @@ function createTweetCard(tweet) {
     horizontalBar.setAttribute("fill", "currentColor");
     horizontalBar.setAttribute("viewBox", "0 0 20 20");
     horizontalBar.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    horizontalBar.setAttribute("id", "deleteBtn");
+    horizontalBar.setAttribute("id", `deleteBtn${index}`);
 
     // We want to give card's horizontal bar a specific 
     // dataset value so that our event listener can then delete
@@ -162,6 +162,6 @@ function createDeleteCard(index) {
 }
 
 
-export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage };
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, createDeleteCard};
 
 
