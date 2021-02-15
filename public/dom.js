@@ -24,6 +24,7 @@ function createTweetCard(tweet) {
     // Create another div for info in the LHS of wrapper 
     const leftTopInfoDiv = document.createElement("div");
     leftTopInfoDiv.className = "flex space-x-3 items-center";
+    leftTopInfoDiv.id = `leftTopInfoDiv${index}`;
 
     // create paragraphs and divs within leftTopInfoDiv
     const fullName = document.createElement("p");
@@ -136,6 +137,26 @@ function createModalTweetImage(imageSrc) {
 
 // Create delete card when horizontal three dots are clicked
 function createDeleteCard(index) {
+    const leftTopInfoDiv = document.querySelector(`#leftTopInfoDiv${index}`);
+    const deleteCard = document.createElement("div");
+    deleteCard.className = "absolute z-20 w-16 h-12 p-2 shadow-lg rounded-lg";
+
+    const flexDeleteCard = document.createElement("div");
+    flexDeleteCard.className = "flex p-2 w-full h-full justify-between items-center";
+
+    const deleteIcon = document.createElement("img");
+    deleteIcon.textContent = "Delete Icon";
+
+    const deleteText = document.createElement("p");
+    deleteText.className = "flex text-red-500 font-bold px-1";
+    deleteText.textContent = "Delete";
+
+    // Append each div to each other
+    flexDeleteCard.appendChild(deleteIcon);
+    flexDeleteCard.appendChild(deleteText);
+    deleteCard.appendChild(flexDeleteCard);
+
+    leftTopInfoDiv.after(leftTopInfoDiv);
 
 
 }
