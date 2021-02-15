@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard } from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage } from './dom.js';
 
 
 // Dealing with status update text area height
@@ -15,6 +15,8 @@ let modalTextArea = document.querySelector("#resize-ta-modal");
 let modalExit = document.querySelector("#modalExit");
 let image = document.querySelector("#image");
 let file = document.querySelector("#file");
+let modalFile = document.querySelector("#modalFile");
+let modalImage = document.querySelector("#modalImage");
 
 
 // Monitors tweet input box for keystrokes 
@@ -60,7 +62,7 @@ function deleteTweetImage() {
 // Display overlay and modal for new tweet on click of LHS tweet btn
 leftTweetBtn.addEventListener("click", () => {
     overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
-    modal.className = "absolute z-20 h-1/3 w-1/2 bg-white rounded-lg mt-8";
+    modal.className = "absolute z-20 h-1/2 w-1/2 bg-white rounded-lg mt-8";
     modalStatusCard.className = "flex flex-col relative px-5 py-2 border-gray-100 justify-center border h-full";
 
 })
@@ -117,3 +119,31 @@ image.addEventListener("click", () => {
     file.click(); 
 })
 
+
+
+// Replicate the above with the modalFile image
+let modalGlobalTweetImgSrc = "";
+// add event listener for when user selects an image file to upload
+modalFile.addEventListener("change", (event) => {
+    console.log("onchange handler ran!");
+    let selectedModalFile = event.target.files[0];
+    let modalReader = new FileReader();
+
+    modalReader.onload = function(event) {
+        let modalFileImgSrc = event.target.result;
+        // Send modalFileImgSrc to function to manipulate dom to create image
+        createModalTweetImage(modalFileImgSrc);
+        // Change mainTweetBtn to blue when image is uploaded
+        mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
+        modalGlobalTweetImgSrc = modalFileImgSrc;
+    }
+
+    modalReader.readAsDataURL(selectedModalFile);
+
+})
+
+//On image click, open user's local files
+modalImage.addEventListener("click", () => {
+    console.log("CLICK MODAL IMAGE!");
+    modalFile.click(); 
+})

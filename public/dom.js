@@ -93,6 +93,7 @@ function createTweetImage(imageSrc) {
 
 }
 
+// Add uploaded image to the Feed
 function createTweetImageCard(imageSrc) {
     const tweetText = document.querySelector("#tweetText");
 
@@ -105,11 +106,29 @@ function createTweetImageCard(imageSrc) {
     tweetText.after(newImg);
 }
 
+// Adds selected image to below 'What's happening' modal status bar
+function createModalTweetImage(imageSrc) {
+    const modalStatusWrapper = document.querySelector("#modalStatusWrapper");
+    
+    const wrappingModalDiv = document.createElement("div");
+    wrappingModalDiv.className = "flex w-full justify-center items-center";
+
+    const newImg = document.createElement("img");
+    newImg.className = "flex px-12 py-4 items-start w-3/5";
+    newImg.id="modalTweetImageID";
+    console.log(`imageSrc is ${imageSrc}`);
+    newImg.src = imageSrc; 
+
+    wrappingModalDiv.appendChild(newImg);
+
+    modalStatusWrapper.after(wrappingModalDiv);
+}
+
 // Need to make the following changes:
 // 1. Changes to the size of the image uploaded in the box (it should be aligned with the what's happening margin)
 // 2. When the tweet button is clicked, it needs to the image uploaded to the dom also
 // 3. The above needs to apply to the left tweet button also 
 
-export { createTweetCard, createTweetImage, createTweetImageCard };
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage };
 
 
