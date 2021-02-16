@@ -204,6 +204,12 @@ function deleteProgressBar(characters) {
 
 }
 
-export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar };
+function hideProgressBar() {
+    const progressBar = document.querySelector("#progressBar");
+    progressBar.className = "hidden flex justify-center items-center text-lg pr-2 h-10 w-10";
+
+}
+
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar };
 
 

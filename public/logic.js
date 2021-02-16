@@ -14,18 +14,36 @@
 // Add js script for progress bar that counts how close the tweet is to the 280 character limit
 
 function createProgressBar(characterLimitDecimal) {
-    let bar = new ProgressBar.Circle(progressBar, {
-        strokeWidth: 6,
-        easing: 'easeInOut',
-        duration: 1400,
-        color: '#FFEA82',
-        trailColor: '#eee',
-        trailWidth: 1,
-        svgStyle: null,
-    })
-
+    // Creates blue bar
+    if (characterLimitDecimal <= (260 / 280)) {
+        let bar = new ProgressBar.Circle(progressBar, {
+            strokeWidth: 8,
+            easing: 'easeInOut',
+            duration: 1400,
+            color: '#2f64eb',
+            trailColor: '#eee',
+            trailWidth: 8,
+            svgStyle: null,
+        })
     
-    bar.animate(0.8);  // Number from 0.0 to 1.0
+        bar.animate(characterLimitDecimal);  // Number from 0.0 to 1.0
+    }
+    
+    // Create orange bar if only 20 characters left to type 
+    else if (characterLimitDecimal > (260 / 280)) {
+        let bar = new ProgressBar.Circle(progressBar, {
+            strokeWidth: 8,
+            easing: 'easeInOut',
+            duration: 1400,
+            color: '#FFA500',
+            trailColor: '#eee',
+            trailWidth: 8,
+            svgStyle: null,
+        })
+
+        bar.animate(characterLimitDecimal);  // Number from 0.0 to 1.0
+    }
+
 
 }
 

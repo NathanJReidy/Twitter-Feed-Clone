@@ -3,7 +3,7 @@
 // Use highlightWithinTextarea module to highlight characters
 // which exceed Twitter's 280 post limit. 
 
-import { showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar } from './dom.js';
+import { showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar } from './dom.js';
 
 function characterLimit(characters, id) {
     if (characters.length > 280) {
@@ -11,6 +11,7 @@ function characterLimit(characters, id) {
             highlight: [280, characters.length]
         });
 
+        hideProgressBar();
         showCharacterCountWatcher(characters);
     }
 
