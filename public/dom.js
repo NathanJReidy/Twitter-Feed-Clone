@@ -1,5 +1,7 @@
 // The purpose of this js file is to manipulate the DOM.
 
+import { createProgressBar } from './logic.js';
+
 let index = 0;
 
 function createTweetCard(tweet) {
@@ -180,12 +182,28 @@ function showCharacterCountWatcher(characters) {
 
 // If the character count is less than 280, this hides the character surplus div and hides the display of characters
 function hideCharacterCountWatcher() {
-        // Hide the chacterSurplus div and hide the display of number of characters > 280 
-        const characterSurplus = document.querySelector("#characterSurplus");
-        characterSurplus.className = "hidden flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300";
-        //characterSurplus.textContent = excessCharacters;
+    // Hide the chacterSurplus div and hide the display of number of characters > 280 
+    const characterSurplus = document.querySelector("#characterSurplus");
+    characterSurplus.className = "hidden flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300";
+    //characterSurplus.textContent = excessCharacters;
 }
 
-export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher };
+function showProgressBar(characters) {
+    const progressBar = document.querySelector("#progressBar");
+    progressBar.className = "flex justify-center items-center text-lg pr-2 h-10 w-10";
+    
+
+    // Divides current number of characters in tweet by the maximum allowed of 280
+    let characterLimitDecimal = (characters.length) / 280;
+    createProgressBar(characterLimitDecimal);
+}
+
+function deleteProgressBar(characters) {
+    let progressBar = document.querySelector("#progressBar");
+    progressBar.removeChild(progressBar.firstChild);
+
+}
+
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar };
 
 
