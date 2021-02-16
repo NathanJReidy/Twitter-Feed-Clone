@@ -2,7 +2,7 @@ import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage } from './dom.js';
 
 
-// Dealing with status update text area height
+// Declare query selectors that will be needed
 
 let textarea = document.querySelector("#resize-ta");
 let mainTweetBtn = document.querySelector("#mainTweetBtn");
@@ -17,9 +17,6 @@ let image = document.querySelector("#image");
 let file = document.querySelector("#file");
 let modalFile = document.querySelector("#modalFile");
 let modalImage = document.querySelector("#modalImage");
-let main = document.querySelector("#main");
-
-
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
@@ -108,7 +105,6 @@ modalExit.addEventListener("click", () => {
 let globalTweetImgSrc = "";
 // add event listener for when user selects an image file to upload
 file.addEventListener("change", (event) => {
-    console.log("onchange handler ran!");
     let selectedFile = event.target.files[0];
     let reader = new FileReader();
 
@@ -127,7 +123,6 @@ file.addEventListener("change", (event) => {
 
 //On image click, open user's local files
 image.addEventListener("click", () => {
-    console.log("CLICK IMAGE!");
     file.click(); 
 })
 
@@ -137,7 +132,6 @@ image.addEventListener("click", () => {
 let modalGlobalTweetImgSrc = "";
 // add event listener for when user selects an image file to upload
 modalFile.addEventListener("change", (event) => {
-    console.log("onchange handler ran!");
     let selectedModalFile = event.target.files[0];
     let modalReader = new FileReader();
 
@@ -157,7 +151,6 @@ modalFile.addEventListener("change", (event) => {
 
 // On modal image click, open user's local files
 modalImage.addEventListener("click", () => {
-    console.log("CLICK MODAL IMAGE!");
     modalFile.click(); 
 })
 
@@ -209,12 +202,6 @@ function deleteCardListener(index) {
         blocker.className = "hidden absolute z-10 h-full w-full";
     })
 
-    // selectedCard.addEventListener('click', () => {
-    //     const selectedDeleteBtnTwo = document.querySelector(`#deleteBtn${index}`);
-    //     selectedDeleteCard.style.display = 'none';
-    //     selectedDeleteBtnTwo.style.display = 'flex';
-    //     console.log("EVENT LISTENER RAN!");
-    // })
 }
 
 
