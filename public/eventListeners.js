@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher} from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn} from './dom.js';
 
 
 // Declare query selectors that will be needed
@@ -52,6 +52,7 @@ mainTweetBtn.addEventListener("click", () => {
     textarea.value = "";
     hideProgressBar();
     hideCharacterCountWatcher();
+    hideImageExitBtn();
     deleteBtnListener();
     deleteTweetImage();
 });
@@ -120,6 +121,8 @@ file.addEventListener("change", (event) => {
         let fileImgSrc = event.target.result;
         // Send fileImgSrc to function to manipulate dom to create image
         createTweetImage(fileImgSrc);
+        // Show image exit button;
+        showImageExitBtn();
         // Change mainTweetBtn to blue when image is uploaded
         mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
         globalTweetImgSrc = fileImgSrc;
@@ -212,4 +215,11 @@ function deleteCardListener(index) {
 
 }
 
+// Event listener for the exit button on the user's uploaded image
+// Removes the user's uploaded image on clicking the exit button 
+let imageExitBtn = document.querySelector("#imageExitBtn");
+imageExitBtn.addEventListener("click", () => {
+    deleteTweetImage();
+    hideImageExitBtn();
+})
 

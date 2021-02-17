@@ -257,9 +257,21 @@ function hideModalProgressBar() {
 
 }
 
+// Toggling the exit button for the user's uploaded image
+function showImageExitBtn() {
+    const imageExitBtn = document.querySelector("#imageExitBtn");
+    imageExitBtn.className = "absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3"
+
+}
+
+function hideImageExitBtn() {
+    const imageExitBtn = document.querySelector("#imageExitBtn");
+    imageExitBtn.className = "hidden absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3";
+}
 
 
 
-export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar };
+
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar, hideImageExitBtn, showImageExitBtn };
 
 
