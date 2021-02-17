@@ -1,7 +1,6 @@
 import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
 
-
 // Declare query selectors that will be needed
 
 let textarea = document.querySelector("#resize-ta");
