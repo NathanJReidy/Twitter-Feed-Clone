@@ -285,9 +285,113 @@ function hideModalImageExitBtn() {
 }
 
 
+// Add interactive bar (reply, retweet, like & share) to tweet cards
+function createInteractiveBar() {
+    const tweetImageCardID = document.querySelector("#tweetImageCardID");
+    
+    const interactiveBar = document.createElement("div");
+    interactiveBar.className = "flex w-full px-2 py-1 justify-start space-x-32";
+
+    // Create reply elements
+    const replyClass = document.createElement("div");
+    replyClass.className = "replyClass";
+    // Create SVG: ...
+    const replyIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    replyIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-blue-400 hover:bg-blue-100");
+    replyIcon.setAttribute("fill", "currentColor");
+    replyIcon.setAttribute("viewBox", "0 0 24 24");
+    replyIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    const replyPath = document.querySelector("#replyPath").cloneNode();
+    replyIcon.appendChild(replyPath);
+
+    // Create Span:
+    const replyText = document.createElement("span");
+    replyText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    replyText.textContent = "Reply";
+    // Append replyIcon and replyText to replyClass:
+    replyClass.appendChild(replyIcon);
+    replyClass.appendChild(replyText);
+    // Append replyClass to Interactive Bar
+    interactiveBar.appendChild(replyClass);
+
+
+    // Create retweet elements:
+    const retweetClass = document.createElement("div");
+    retweetClass.className = "retweetClass";
+    // Create SVG: 
+    const retweetIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    retweetIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-green-400 hover:bg-green-100");
+    retweetIcon.setAttribute("fill", "currentColor");
+    retweetIcon.setAttribute("viewBox", "0 0 24 24");
+    retweetIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    const retweetPath = document.querySelector("#retweetPath").cloneNode();
+    retweetIcon.appendChild(retweetPath);
+
+    // Create Span:
+    const retweetText = document.createElement("span");
+    retweetText.className = "h-6 w-14 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1 -ml-2";
+    retweetText.textContent = "Retweet";
+    // Append retweetIcon and retweetText to retweetClass:
+    retweetClass.appendChild(retweetIcon);
+    retweetClass.appendChild(retweetText);
+    // Append retweetClass to Interactive Bar
+    interactiveBar.appendChild(retweetClass);
+
+    // Create like elements:
+    const likeClass = document.createElement("div");
+    likeClass.className = "likeClass";
+    // Create SVG: ...
+    const likeIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    likeIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-red-400 hover:bg-red-100");
+    likeIcon.setAttribute("fill", "currentColor");
+    likeIcon.setAttribute("viewBox", "0 0 24 24");
+    likeIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    const likePath = document.querySelector("#likePath").cloneNode();
+    likeIcon.appendChild(likePath);
+
+    // Create Span:
+    const likeText = document.createElement("span");
+    likeText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    likeText.textContent = "Like";
+    // Append likeIcon and likeText to likeClass:
+    likeClass.appendChild(likeIcon);
+    likeClass.appendChild(likeText);
+    // Append likeClass to Interactive Bar
+    interactiveBar.appendChild(likeClass);
+
+    // Create share elements:
+    const shareClass = document.createElement("div");
+    shareClass.className = "shareClass";
+    // Create SVG: ...
+    const shareIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    shareIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-blue-400 hover:bg-blue-100");
+    shareIcon.setAttribute("fill", "currentColor");
+    shareIcon.setAttribute("viewBox", "0 0 24 24");
+    shareIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+
+    const sharePath = document.querySelector("#sharePath").cloneNode();
+    shareIcon.appendChild(sharePath);
+
+
+    // Create Span:
+    const shareText = document.createElement("span");
+    shareText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    shareText.textContent = "Share";
+    // Append shareIcon and shareText to shareClass:
+    shareClass.appendChild(shareIcon);
+    shareClass.appendChild(shareText);
+    // Append shareClass to Interactive Bar
+    interactiveBar.appendChild(shareClass);
+
+    // Add interactiveBar to position after tweetImageCardID
+    tweetImageCardID.after(interactiveBar);
+}
 
 
 
-export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn };
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar };
 
 

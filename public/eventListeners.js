@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn } from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
 
 
 // Declare query selectors that will be needed
@@ -49,6 +49,7 @@ modalTextArea.addEventListener("keyup", () => {
 mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
     createTweetImageCard(globalTweetImgSrc);
+    createInteractiveBar();
     textarea.value = "";
     hideProgressBar();
     hideCharacterCountWatcher();
@@ -100,6 +101,7 @@ modalTweetBtn.addEventListener("click", () => {
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     createTweetImageCard(modalGlobalTweetImgSrc);
+    CreateInteractiveBar();
     deleteBtnListener();
     deleteModalTweetImage();
 });

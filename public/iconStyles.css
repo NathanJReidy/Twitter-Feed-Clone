@@ -19,3 +19,23 @@
     visibility: visible;
 
 }
+
+#likeText {
+    visibility: hidden;
+}
+
+
+#likeIcon:hover + #likeText {
+    visibility: visible;
+
+}
+
+#shareText {
+    visibility: hidden;
+}
+
+
+#shareIcon:hover + #shareText {
+    visibility: visible;
+
+}
