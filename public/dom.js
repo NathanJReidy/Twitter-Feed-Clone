@@ -127,7 +127,8 @@ function createTweetCard(tweet) {
 
 // Adds selected image to below 'What's happening' status bar
 function createTweetImage(imageSrc) {
-    const statusWrapper = document.querySelector("#statusWrapper");
+    // const statusWrapper = document.querySelector("#statusWrapper");
+    const imageExitBtn = document.querySelector("#imageExitBtn");
 
     const newImg = document.createElement("img");
     newImg.className = "flex ml-2 px-12 py-2 items-start";
@@ -135,7 +136,9 @@ function createTweetImage(imageSrc) {
     console.log(`imageSrc is ${imageSrc}`);
     newImg.src = imageSrc; 
 
-    statusWrapper.after(newImg);
+    imageExitBtn.after(newImg);
+
+    // statusWrapper.after(newImg);
 
 }
 
