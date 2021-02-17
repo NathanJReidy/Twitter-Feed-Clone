@@ -301,6 +301,7 @@ function createInteractiveBar() {
     replyIcon.setAttribute("fill", "currentColor");
     replyIcon.setAttribute("viewBox", "0 0 24 24");
     replyIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    replyIcon.setAttribute("id", "replyIcon");
 
     const replyPath = document.querySelector("#replyPath").cloneNode();
     replyIcon.appendChild(replyPath);
@@ -308,6 +309,7 @@ function createInteractiveBar() {
     // Create Span:
     const replyText = document.createElement("span");
     replyText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    replyText.id = "replyText";
     replyText.textContent = "Reply";
     // Append replyIcon and replyText to replyClass:
     replyClass.appendChild(replyIcon);
@@ -325,6 +327,7 @@ function createInteractiveBar() {
     retweetIcon.setAttribute("fill", "currentColor");
     retweetIcon.setAttribute("viewBox", "0 0 24 24");
     retweetIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    retweetIcon.setAttribute("id", "retweetIcon");
 
     const retweetPath = document.querySelector("#retweetPath").cloneNode();
     retweetIcon.appendChild(retweetPath);
@@ -332,6 +335,7 @@ function createInteractiveBar() {
     // Create Span:
     const retweetText = document.createElement("span");
     retweetText.className = "h-6 w-14 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1 -ml-2";
+    retweetText.id = "retweetText";
     retweetText.textContent = "Retweet";
     // Append retweetIcon and retweetText to retweetClass:
     retweetClass.appendChild(retweetIcon);
@@ -348,6 +352,7 @@ function createInteractiveBar() {
     likeIcon.setAttribute("fill", "currentColor");
     likeIcon.setAttribute("viewBox", "0 0 24 24");
     likeIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    likeIcon.setAttribute("id", "likeIcon");
 
     const likePath = document.querySelector("#likePath").cloneNode();
     likeIcon.appendChild(likePath);
@@ -355,6 +360,7 @@ function createInteractiveBar() {
     // Create Span:
     const likeText = document.createElement("span");
     likeText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    likeText.id = "likeText";
     likeText.textContent = "Like";
     // Append likeIcon and likeText to likeClass:
     likeClass.appendChild(likeIcon);
@@ -371,6 +377,7 @@ function createInteractiveBar() {
     shareIcon.setAttribute("fill", "currentColor");
     shareIcon.setAttribute("viewBox", "0 0 24 24");
     shareIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    shareIcon.setAttribute("id", "shareIcon");
 
     const sharePath = document.querySelector("#sharePath").cloneNode();
     shareIcon.appendChild(sharePath);
@@ -379,6 +386,7 @@ function createInteractiveBar() {
     // Create Span:
     const shareText = document.createElement("span");
     shareText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    shareText.id = "shareText";
     shareText.textContent = "Share";
     // Append shareIcon and shareText to shareClass:
     shareClass.appendChild(shareIcon);

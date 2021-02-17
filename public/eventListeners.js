@@ -101,7 +101,7 @@ modalTweetBtn.addEventListener("click", () => {
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     createTweetImageCard(modalGlobalTweetImgSrc);
-    CreateInteractiveBar();
+    createInteractiveBar();
     deleteBtnListener();
     deleteModalTweetImage();
 });
