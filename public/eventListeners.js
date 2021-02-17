@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn} from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn } from './dom.js';
 
 
 // Declare query selectors that will be needed
@@ -85,6 +85,8 @@ overlay.addEventListener("click", () => {
     modalTextArea.value = "";
     hideModalProgressBar();
     hideModalCharacterCountWatcher();
+    hideModalImageExitBtn();
+    deleteModalTweetImage();
 })
 
 // Monitors modal tweet button, sends the post to a new tweet function on click and hides the overlay and modal 
@@ -96,6 +98,7 @@ modalTweetBtn.addEventListener("click", () => {
     modalTextArea.value = "";
     hideModalProgressBar();
     hideModalCharacterCountWatcher();
+    hideModalImageExitBtn();
     createTweetImageCard(modalGlobalTweetImgSrc);
     deleteBtnListener();
     deleteModalTweetImage();
@@ -108,6 +111,8 @@ modalExit.addEventListener("click", () => {
     modalTextArea.value = "";
     hideModalProgressBar();
     hideModalCharacterCountWatcher();
+    hideModalImageExitBtn();
+    deleteModalTweetImage();
 
 })
 
@@ -150,6 +155,8 @@ modalFile.addEventListener("change", (event) => {
         let modalFileImgSrc = event.target.result;
         // Send modalFileImgSrc to function to manipulate dom to create image
         createModalTweetImage(modalFileImgSrc);
+        // Show modal image exit button;
+        showModalImageExitBtn();
         // Change modalTweetBtn to blue when image is uploaded
         modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
         
@@ -216,10 +223,20 @@ function deleteCardListener(index) {
 }
 
 // Event listener for the exit button on the user's uploaded image
+
 // Removes the user's uploaded image on clicking the exit button 
 let imageExitBtn = document.querySelector("#imageExitBtn");
 imageExitBtn.addEventListener("click", () => {
     deleteTweetImage();
     hideImageExitBtn();
 })
+
+
+// Removes the user's uploaded modal image on clicking the exit button 
+let modalImageExitBtn = document.querySelector("#modalImageExitBtn");
+modalImageExitBtn.addEventListener("click", () => {
+    deleteModalTweetImage();
+    hideModalImageExitBtn();
+})
+
 

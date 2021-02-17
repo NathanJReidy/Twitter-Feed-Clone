@@ -157,7 +157,8 @@ function createTweetImageCard(imageSrc) {
 
 // Adds selected image to below 'What's happening' modal status bar
 function createModalTweetImage(imageSrc) {
-    const modalStatusWrapper = document.querySelector("#modalStatusWrapper");
+    // const modalStatusWrapper = document.querySelector("#modalStatusWrapper");
+    const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
     
     const wrappingModalDiv = document.createElement("div");
     wrappingModalDiv.className = "flex w-full justify-center items-center";
@@ -170,7 +171,9 @@ function createModalTweetImage(imageSrc) {
 
     wrappingModalDiv.appendChild(newImg);
 
-    modalStatusWrapper.after(wrappingModalDiv);
+    modalImageExitBtn.after(wrappingModalDiv);
+
+    // modalStatusWrapper.after(wrappingModalDiv);
 }
 
 
@@ -269,9 +272,22 @@ function hideImageExitBtn() {
     imageExitBtn.className = "hidden absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3";
 }
 
+// Toggling the exit button for the user's uploaded modal image
+function showModalImageExitBtn() {
+    const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
+    modalImageExitBtn.className = "absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3"
+
+}
+
+function hideModalImageExitBtn() {
+    const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
+    modalImageExitBtn.className = "hidden absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3";
+}
 
 
 
-export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar, hideImageExitBtn, showImageExitBtn };
+
+
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn };
 
 
