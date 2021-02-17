@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar } from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar } from './dom.js';
 
 
 // Declare query selectors that will be needed
@@ -50,6 +50,7 @@ mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
     createTweetImageCard(globalTweetImgSrc);
     textarea.value = "";
+    hideProgressBar();
     deleteBtnListener();
     deleteTweetImage();
 });

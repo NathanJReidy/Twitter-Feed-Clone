@@ -170,6 +170,8 @@ function createModalTweetImage(imageSrc) {
     modalStatusWrapper.after(wrappingModalDiv);
 }
 
+
+
 // If the character count exceeds 280, this unhides the character surplus div and updates it based on number of characters that exceed 280
 function showCharacterCountWatcher(characters) {
     let excessCharacters = 280 - characters.length;
@@ -195,7 +197,7 @@ function showProgressBar(characters) {
 
     // Divides current number of characters in tweet by the maximum allowed of 280
     let characterLimitDecimal = (characters.length) / 280;
-    createProgressBar(characterLimitDecimal);
+    createProgressBar(characterLimitDecimal, progressBar);
 }
 
 function deleteProgressBar(characters) {
@@ -209,6 +211,51 @@ function hideProgressBar() {
     progressBar.className = "hidden flex justify-center items-center text-lg pr-2 h-10 w-10";
 
 }
+
+
+// The below functions replicate the above, except with the modal status bar 
+// If the modal character count exceeds 280, this unhides the modal character surplus div and updates it based on number of characters that exceed 280
+function showModalCharacterCountWatcher(characters) {
+    let modalExcessCharacters = 280 - characters.length;
+
+    // Unhide the modalChacterSurplus div and update the display of number of characters > 280 
+    const modalCharacterSurplus = document.querySelector("#modalCharacterSurplus");
+    modalCharacterSurplus.className = "flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300";
+    modalCharacterSurplus.textContent = modalExcessCharacters;
+}
+
+// If the character count is less than 280, this hides the character surplus div and hides the display of characters
+function hideModalCharacterCountWatcher() {
+    // Hide the modalChacterSurplus div and hide the display of number of characters > 280 
+    const modalCharacterSurplus = document.querySelector("#modalCharacterSurplus");
+    modalCharacterSurplus.className = "hidden flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300";
+    //characterSurplus.textContent = excessCharacters;
+}
+
+function showModalProgressBar(characters) {
+    const modalProgressBar = document.querySelector("#modalProgressBar");
+    modalProgressBar.className = "flex justify-center items-center text-lg pr-2 h-10 w-10";
+    
+
+    // Divides current number of characters in tweet by the maximum allowed of 280
+    let characterLimitDecimal = (characters.length) / 280;
+    createProgressBar(characterLimitDecimal, modalProgressBar);
+}
+
+function deleteModalProgressBar(characters) {
+    let modalProgressBar = document.querySelector("#modalProgressBar");
+    modalProgressBar.removeChild(modalProgressBar.firstChild);
+
+}
+
+function hideModalProgressBar() {
+    const modalProgressBar = document.querySelector("#modalProgressBar");
+    modalProgressBar.className = "hidden flex justify-center items-center text-lg pr-2 h-10 w-10";
+
+}
+
+
+
 
 export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar };
 
