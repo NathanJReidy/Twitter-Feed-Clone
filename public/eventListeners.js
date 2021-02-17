@@ -240,3 +240,57 @@ modalImageExitBtn.addEventListener("click", () => {
 })
 
 
+
+// event listeners for delete buttons and cards that are default
+function deleteDefaultBtnListener() {
+    let deleteDefaultBtns = document.querySelectorAll('[id^="deleteDefaultBtn"]');
+    deleteDefaultBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            let datasetValue = e.target.dataset.value;
+            console.log(`THE DATASETVALE IS ${datasetValue}`)
+
+            // Make three horizonal dots disappear
+            const selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${datasetValue}`);
+            selectedDefaultDeleteBtn.style.display = 'none';
+
+            // Display card for delete button 
+            let selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${datasetValue}`);
+            selectedDefaultDeleteCard.style.display = 'flex';
+
+            // Send datasetValue to function to listen for if
+            // user clicks the specific delete card button
+            deleteDefaultCardListener(datasetValue);
+        })
+    })
+}
+
+// Run the above function in the global space
+deleteDefaultBtnListener();
+
+// If user clicks the delete card button on the default cards, then both the delete card button
+// and the tweet card itself disappears 
+function deleteDefaultCardListener(index) {
+    const selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${index}`);
+    const selectedFeedCard = document.querySelector(`#feedCard${index}`);
+    
+    // If user clicks anywhere except the delete button,
+    // the delete button disappears and the three dots button reappears
+    const blocker = document.querySelector("#blockerLayer");
+    const selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${index}`);
+    blocker.className = "absolute z-10 h-full w-full";
+    blocker.addEventListener('click', () => {
+        selectedDefaultDeleteCard.style.display = 'none';
+        selectedDefaultDeleteBtn.style.display = 'flex';
+        blocker.className = "hidden absolute z-10 h-full w-full";
+    })
+    
+    
+    // If user clicks the delete card button, 
+    // both the delete card button and the tweet card itself disappear
+    selectedDefaultDeleteCard.addEventListener('click', () => {
+        selectedDefaultDeleteCard.style.display = 'none';
+        selectedFeedCard.style.display = 'none';
+        blocker.className = "hidden absolute z-10 h-full w-full";
+    })
+
+}
