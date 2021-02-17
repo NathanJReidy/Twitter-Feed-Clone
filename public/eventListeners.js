@@ -1,5 +1,5 @@
 import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar } from './dom.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher} from './dom.js';
 
 
 // Declare query selectors that will be needed
@@ -22,7 +22,7 @@ let modalImage = document.querySelector("#modalImage");
 textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
-    characterLimit(textarea.value, "#resize-ta");
+    characterLimit(textarea.value, "#resize-ta", "main");
 
     textarea.focus(); //sets focus to element
     let val = textarea.value; //store the value of the element
@@ -34,7 +34,7 @@ textarea.addEventListener("keyup", () => {
 modalTextArea.addEventListener("keyup", () => {
     modalTextArea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
-    characterLimit(modalTextArea.value, "#resize-ta-modal");
+    characterLimit(modalTextArea.value, "#resize-ta-modal", "modal");
 
     modalTextArea.focus(); //sets focus to element
     let val = modalTextArea.value; //store the value of the element
@@ -51,6 +51,7 @@ mainTweetBtn.addEventListener("click", () => {
     createTweetImageCard(globalTweetImgSrc);
     textarea.value = "";
     hideProgressBar();
+    hideCharacterCountWatcher();
     deleteBtnListener();
     deleteTweetImage();
 });
@@ -81,6 +82,8 @@ overlay.addEventListener("click", () => {
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border h-full";
     modalTextArea.value = "";
+    hideModalProgressBar();
+    hideModalCharacterCountWatcher();
 })
 
 // Monitors modal tweet button, sends the post to a new tweet function on click and hides the overlay and modal 
@@ -90,6 +93,8 @@ modalTweetBtn.addEventListener("click", () => {
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
+    hideModalProgressBar();
+    hideModalCharacterCountWatcher();
     createTweetImageCard(modalGlobalTweetImgSrc);
     deleteBtnListener();
     deleteModalTweetImage();
@@ -100,6 +105,8 @@ modalExit.addEventListener("click", () => {
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
+    hideModalProgressBar();
+    hideModalCharacterCountWatcher();
 
 })
 

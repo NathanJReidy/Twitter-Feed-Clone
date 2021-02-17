@@ -257,6 +257,6 @@ function hideModalProgressBar() {
 
 
 
-export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar };
+export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar };
 
 
