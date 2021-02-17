@@ -1,0 +1,21 @@
+
+
+#replyText {
+    visibility: hidden;
+}
+
+
+#replyIcon:hover + #replyText {
+    visibility: visible;
+
+}
+
+#retweetText {
+    visibility: hidden;
+}
+
+
+#retweetIcon:hover + #retweetText {
+    visibility: visible;
+
+}
