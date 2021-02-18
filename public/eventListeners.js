@@ -49,6 +49,7 @@ mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
     createTweetImageCard(globalTweetImgSrc);
     createInteractiveBar();
+    retweetIconListener();
     textarea.value = "";
     hideProgressBar();
     hideCharacterCountWatcher();
@@ -294,4 +295,33 @@ function deleteDefaultCardListener(index) {
         blocker.className = "hidden absolute z-10 h-full w-full";
     })
 
+}
+
+
+
+
+// Create event listeners for retweetIcons
+function retweetIconListener() {
+    let retweetIconBtns = document.querySelectorAll('[id^="retweetIcon"]');
+    retweetIconBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            let datasetValue = e.target.dataset.value;
+            console.log(`DATASET VALUE FOR RETWEET ICON IS ${datasetValue}`);
+
+            // Send to function to retweet that specific card and change the colour of the retweet text to green to show that it has been retweeted
+            let selectedRetweetIcon = document.querySelector(`#retweetIcon${datasetValue}`);
+            selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
+            // Create retweet function here (or send it to existing creating tweet card?)
+
+
+            // Add 1 to the number of retweets 
+            let selectedRetweetNumber = document.querySelector(`#retweetNumber${datasetValue}`);
+            let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
+            currentDatasetValue += 1; 
+            selectedRetweetNumber.dataset.value = currentDatasetValue;
+            selectedRetweetNumber.textContent = currentDatasetValue;
+
+
+        })
+    })
 }

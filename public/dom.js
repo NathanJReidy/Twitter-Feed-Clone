@@ -337,7 +337,7 @@ function createInteractiveBar() {
     retweetIcon.setAttribute("fill", "currentColor");
     retweetIcon.setAttribute("viewBox", "0 0 24 24");
     retweetIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    retweetIcon.setAttribute("id", "retweetIcon");
+    retweetIcon.setAttribute("id", `retweetIcon${interactiveBarIndex}`);
     retweetIcon.dataset.value = interactiveBarIndex;
 
     const retweetPath = document.querySelector("#retweetPath").cloneNode();
@@ -345,9 +345,10 @@ function createInteractiveBar() {
 
     // Create paragraph element for number of retweets
     const retweetNumber = document.createElement("p");
-    retweetNumber.id = "retweetNumber";
+    retweetNumber.id = `retweetNumber${interactiveBarIndex}`;
     retweetNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    retweetNumber.textContent = "";
+    retweetNumber.dataset.value = parseInt(0);
+    retweetNumber.textContent = null;
 
     // Create Span:
     const retweetText = document.createElement("span");
@@ -371,7 +372,7 @@ function createInteractiveBar() {
     likeIcon.setAttribute("fill", "currentColor");
     likeIcon.setAttribute("viewBox", "0 0 24 24");
     likeIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    likeIcon.setAttribute("id", "likeIcon");
+    likeIcon.setAttribute("id", `likeIcon${interactiveBarIndex}`);
     likeIcon.dataset.value = interactiveBarIndex;
 
     const likePath = document.querySelector("#likePath").cloneNode();
@@ -379,8 +380,9 @@ function createInteractiveBar() {
 
     // Create paragraph element for number of likes
     const likeNumber = document.createElement("p");
-    likeNumber.id = "likeNumber";
+    likeNumber.id = `likeNumber${interactiveBarIndex}`;
     likeNumber.className = "flex justify-center items-center text-gray-500 text-sm";
+    likeNumber.dataset.value = 0;
     likeNumber.textContent = "";
 
     // Create Span:
