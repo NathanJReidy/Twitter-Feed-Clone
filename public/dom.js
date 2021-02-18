@@ -286,6 +286,9 @@ function hideModalImageExitBtn() {
 
 
 // Add interactive bar (reply, retweet, like & share) to tweet cards
+
+let interactiveBarIndex = 0;
+
 function createInteractiveBar() {
     const tweetImageCardID = document.querySelector("#tweetImageCardID");
     
@@ -310,9 +313,7 @@ function createInteractiveBar() {
     const replyNumber = document.createElement("p");
     replyNumber.id = "replyNumber"
     replyNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    replyNumber.textContent = "5";
-
-
+    replyNumber.textContent = "";
 
     // Create Span:
     const replyText = document.createElement("span");
@@ -337,6 +338,7 @@ function createInteractiveBar() {
     retweetIcon.setAttribute("viewBox", "0 0 24 24");
     retweetIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     retweetIcon.setAttribute("id", "retweetIcon");
+    retweetIcon.dataset.value = interactiveBarIndex;
 
     const retweetPath = document.querySelector("#retweetPath").cloneNode();
     retweetIcon.appendChild(retweetPath);
@@ -345,13 +347,14 @@ function createInteractiveBar() {
     const retweetNumber = document.createElement("p");
     retweetNumber.id = "retweetNumber";
     retweetNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    retweetNumber.textContent = "6";
+    retweetNumber.textContent = "";
 
     // Create Span:
     const retweetText = document.createElement("span");
     retweetText.className = "h-6 w-14 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-11 -ml-2";
     retweetText.id = "retweetText";
     retweetText.textContent = "Retweet";
+
     // Append retweetIcon, retweetNumber retweetText to retweetClass:
     retweetClass.appendChild(retweetIcon);
     retweetClass.appendChild(retweetNumber);
@@ -369,6 +372,7 @@ function createInteractiveBar() {
     likeIcon.setAttribute("viewBox", "0 0 24 24");
     likeIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     likeIcon.setAttribute("id", "likeIcon");
+    likeIcon.dataset.value = interactiveBarIndex;
 
     const likePath = document.querySelector("#likePath").cloneNode();
     likeIcon.appendChild(likePath);
@@ -377,7 +381,7 @@ function createInteractiveBar() {
     const likeNumber = document.createElement("p");
     likeNumber.id = "likeNumber";
     likeNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    likeNumber.textContent = "7";
+    likeNumber.textContent = "";
 
     // Create Span:
     const likeText = document.createElement("span");
@@ -419,6 +423,9 @@ function createInteractiveBar() {
 
     // Add interactiveBar to position after tweetImageCardID
     tweetImageCardID.after(interactiveBar);
+    
+    // Add 1 to the interactiveBarIndex so as to keep track of each individual interactive element on each card 
+    interactiveBarIndex += 1;
 }
 
 
