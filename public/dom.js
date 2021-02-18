@@ -294,10 +294,10 @@ function createInteractiveBar() {
 
     // Create reply elements
     const replyClass = document.createElement("div");
-    replyClass.className = "replyClass";
+    replyClass.className = "replyClass flex";
     // Create SVG: ...
     const replyIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    replyIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-blue-400 hover:bg-blue-100");
+    replyIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-500 rounded-full hover:text-blue-400 hover:bg-blue-100");
     replyIcon.setAttribute("fill", "currentColor");
     replyIcon.setAttribute("viewBox", "0 0 24 24");
     replyIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -306,13 +306,22 @@ function createInteractiveBar() {
     const replyPath = document.querySelector("#replyPath").cloneNode();
     replyIcon.appendChild(replyPath);
 
+    // Create paragraph element for number of replies 
+    const replyNumber = document.createElement("p");
+    replyNumber.id = "replyNumber"
+    replyNumber.className = "flex justify-center items-center text-gray-500 text-sm";
+    replyNumber.textContent = "5";
+
+
+
     // Create Span:
     const replyText = document.createElement("span");
-    replyText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    replyText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-11";
     replyText.id = "replyText";
     replyText.textContent = "Reply";
-    // Append replyIcon and replyText to replyClass:
+    // Append replyIcon, replyNumber and replyText to replyClass:
     replyClass.appendChild(replyIcon);
+    replyClass.appendChild(replyNumber);
     replyClass.appendChild(replyText);
     // Append replyClass to Interactive Bar
     interactiveBar.appendChild(replyClass);
@@ -320,10 +329,10 @@ function createInteractiveBar() {
 
     // Create retweet elements:
     const retweetClass = document.createElement("div");
-    retweetClass.className = "retweetClass";
+    retweetClass.className = "retweetClass flex";
     // Create SVG: 
     const retweetIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    retweetIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-green-400 hover:bg-green-100");
+    retweetIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-500 rounded-full hover:text-green-400 hover:bg-green-100");
     retweetIcon.setAttribute("fill", "currentColor");
     retweetIcon.setAttribute("viewBox", "0 0 24 24");
     retweetIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -332,23 +341,30 @@ function createInteractiveBar() {
     const retweetPath = document.querySelector("#retweetPath").cloneNode();
     retweetIcon.appendChild(retweetPath);
 
+    // Create paragraph element for number of retweets
+    const retweetNumber = document.createElement("p");
+    retweetNumber.id = "retweetNumber";
+    retweetNumber.className = "flex justify-center items-center text-gray-500 text-sm";
+    retweetNumber.textContent = "6";
+
     // Create Span:
     const retweetText = document.createElement("span");
-    retweetText.className = "h-6 w-14 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1 -ml-2";
+    retweetText.className = "h-6 w-14 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-11 -ml-2";
     retweetText.id = "retweetText";
     retweetText.textContent = "Retweet";
-    // Append retweetIcon and retweetText to retweetClass:
+    // Append retweetIcon, retweetNumber retweetText to retweetClass:
     retweetClass.appendChild(retweetIcon);
+    retweetClass.appendChild(retweetNumber);
     retweetClass.appendChild(retweetText);
     // Append retweetClass to Interactive Bar
     interactiveBar.appendChild(retweetClass);
 
     // Create like elements:
     const likeClass = document.createElement("div");
-    likeClass.className = "likeClass";
+    likeClass.className = "likeClass flex";
     // Create SVG: ...
     const likeIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    likeIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-red-400 hover:bg-red-100");
+    likeIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-500 rounded-full hover:text-red-400 hover:bg-red-100");
     likeIcon.setAttribute("fill", "currentColor");
     likeIcon.setAttribute("viewBox", "0 0 24 24");
     likeIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -357,23 +373,30 @@ function createInteractiveBar() {
     const likePath = document.querySelector("#likePath").cloneNode();
     likeIcon.appendChild(likePath);
 
+    // Create paragraph element for number of likes
+    const likeNumber = document.createElement("p");
+    likeNumber.id = "likeNumber";
+    likeNumber.className = "flex justify-center items-center text-gray-500 text-sm";
+    likeNumber.textContent = "7";
+
     // Create Span:
     const likeText = document.createElement("span");
-    likeText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    likeText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-11";
     likeText.id = "likeText";
     likeText.textContent = "Like";
-    // Append likeIcon and likeText to likeClass:
+    // Append likeIcon, likeNumber and likeText to likeClass:
     likeClass.appendChild(likeIcon);
+    likeClass.appendChild(likeNumber);
     likeClass.appendChild(likeText);
     // Append likeClass to Interactive Bar
     interactiveBar.appendChild(likeClass);
 
     // Create share elements:
     const shareClass = document.createElement("div");
-    shareClass.className = "shareClass";
+    shareClass.className = "shareClass flex";
     // Create SVG: ...
     const shareIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    shareIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-400 rounded-full hover:text-blue-400 hover:bg-blue-100");
+    shareIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-500 rounded-full hover:text-blue-400 hover:bg-blue-100");
     shareIcon.setAttribute("fill", "currentColor");
     shareIcon.setAttribute("viewBox", "0 0 24 24");
     shareIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -385,7 +408,7 @@ function createInteractiveBar() {
 
     // Create Span:
     const shareText = document.createElement("span");
-    shareText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-1";
+    shareText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-11";
     shareText.id = "shareText";
     shareText.textContent = "Share";
     // Append shareIcon and shareText to shareClass:
