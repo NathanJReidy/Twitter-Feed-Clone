@@ -92,7 +92,7 @@ function createTweetCard(tweet) {
     // dataset value so that our event listener can then delete
     // specific cards the user selects
     horizontalBar.dataset.value = index;
-    index += 1;
+    // index += 1;
 
     // // Create path tag within SVG element and append it to SVG 
     const pathTag = document.querySelector("#svgPath").cloneNode()
@@ -108,7 +108,7 @@ function createTweetCard(tweet) {
     // Create div for user's new tweet
     const newTweet = document.createElement("div");
     newTweet.className = "flex px-2 py-1 text-sm";
-    newTweet.id = "tweetText";
+    newTweet.id = `tweetText${index}`;
     newTweet.textContent = tweet; 
 
     // Append topInfoDiv and newTweet div to elementsDiv
@@ -144,7 +144,7 @@ function createTweetImage(imageSrc) {
 
 // Add uploaded image to the Feed
 function createTweetImageCard(imageSrc) {
-    const tweetText = document.querySelector("#tweetText");
+    const tweetText = document.querySelector(`#tweetText${index}`);
 
     const newImg = document.createElement("img");
     newImg.className = "flex px-2 pb-2 pt-6 items-start";
@@ -153,6 +153,8 @@ function createTweetImageCard(imageSrc) {
     newImg.src = imageSrc; 
 
     tweetText.after(newImg);
+
+    index += 1;
 }
 
 // Adds selected image to below 'What's happening' modal status bar

@@ -318,9 +318,21 @@ function retweetIconListener() {
             // Add 1 to the number of retweets 
             let selectedRetweetNumber = document.querySelector(`#retweetNumber${datasetValue}`);
             let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
-            currentDatasetValue += 1; 
+            currentDatasetValue = 1; 
             selectedRetweetNumber.dataset.value = currentDatasetValue;
             selectedRetweetNumber.textContent = currentDatasetValue;
+
+            // Create clone of card on retweet
+            // Append entire cloned tweet card after the status card in the feed
+            let selectedTweetText = document.querySelector(`#tweetText${datasetValue}`);
+            console.log(`selectedTweetText.value is ${selectedTweetText.textContent}`);
+            createTweetCard(selectedTweetText.textContent);
+            createTweetImageCard(globalTweetImgSrc);
+            createInteractiveBar();
+            deleteBtnListener();
+            deleteTweetImage();
+            // retweetIconListener();
+
 
 
         })
