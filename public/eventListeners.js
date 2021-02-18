@@ -302,6 +302,7 @@ function deleteDefaultCardListener(index) {
 
 
 // Create event listeners for retweetIcons
+
 function retweetIconListener() {
     let retweetIconBtns = document.querySelectorAll('[id^="retweetIcon"]');
     retweetIconBtns.forEach((btn) => {
@@ -326,15 +327,29 @@ function retweetIconListener() {
             // Append entire cloned tweet card after the status card in the feed
             let selectedTweetText = document.querySelector(`#tweetText${datasetValue}`);
             console.log(`selectedTweetText.value is ${selectedTweetText.textContent}`);
+            
+            
             createTweetCard(selectedTweetText.textContent);
             createTweetImageCard(globalTweetImgSrc);
             createInteractiveBar();
+            
             deleteBtnListener();
             deleteTweetImage();
             // retweetIconListener();
+            // let selectedRetweetNumber2 = document.querySelector(`#retweetNumber${datasetValue + 1}`);
+            // let currentDatasetValue2 = parseInt(selectedRetweetNumber2.dataset.value);
+            // currentDatasetValue2 = 1; 
+            // selectedRetweetNumber2.dataset.value = currentDatasetValue2;
+            // selectedRetweetNumber2.textContent = currentDatasetValue2;
+
+            // PROBLEMS:
+            // 1. createTweetImageCard doesn't work above bc I need to actually select the specific image, not globalTweetImgSrc
+            // 2. I don't want to be able to retweet more than once (currently I can). Fix this with queryselectorAll.length == 1 conditional
+            // 3. When I retweet a card, it doesn't show the green retweet nor the 1. I need to re-run this whole function on creation of a new card or something maybe, but outside the scope so that the queryselectorAll captures the new card?
 
 
 
         })
     })
 }
+
