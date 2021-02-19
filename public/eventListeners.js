@@ -49,8 +49,8 @@ mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
     createTweetImageCard(globalTweetImgSrc);
     createInteractiveBar(false);
-    retweetIconListener();
     likeIconListener();
+    retweetIconListener();
     textarea.value = "";
     hideProgressBar();
     hideCharacterCountWatcher();
@@ -400,11 +400,17 @@ function retweetIconBtnListener(dataValue) {
         // Append entire cloned tweet card after the status card in the feed
         let selectedTweetText = document.querySelector(`#tweetText${dataValue}`);
         console.log(`selectedTweetText.value is ${selectedTweetText.textContent}`);
+
+        // Select image source of the clicked card 
+        let selectedTweetImageCardIDSrc = document.querySelector(`#tweetImageCardID${dataValue}`).src;
+        //selectedTweetImageSrc = selectedTweetImageCardID.src.textContent;
         
         
         createTweetCard(selectedTweetText.textContent);
-        createTweetImageCard(globalTweetImgSrc);
+        createTweetImageCard(selectedTweetImageCardIDSrc);
         createInteractiveBar(true);
+
+        likeIconListener();
 
         retweetIconListener();
         

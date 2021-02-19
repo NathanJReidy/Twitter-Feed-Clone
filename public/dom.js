@@ -148,7 +148,7 @@ function createTweetImageCard(imageSrc) {
 
     const newImg = document.createElement("img");
     newImg.className = "flex px-2 pb-2 pt-6 items-start";
-    newImg.id="tweetImageCardID";
+    newImg.id=`tweetImageCardID${index}`;
     console.log(`imageSrc is ${imageSrc}`);
     newImg.src = imageSrc; 
 
@@ -292,9 +292,10 @@ function hideModalImageExitBtn() {
 let interactiveBarIndex = 0;
 
 function createInteractiveBar(retweeted) {
-    const tweetImageCardID = document.querySelector("#tweetImageCardID");
+    let tweetImageCardID = document.querySelector(`#tweetImageCardID${interactiveBarIndex}`);
     
-    const interactiveBar = document.createElement("div");
+    
+    let interactiveBar = document.createElement("div");
     interactiveBar.className = "flex w-full px-2 py-1 justify-start space-x-32";
 
     // Create reply elements
