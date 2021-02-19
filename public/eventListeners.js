@@ -48,8 +48,9 @@ modalTextArea.addEventListener("keyup", () => {
 mainTweetBtn.addEventListener("click", () => {
     createTweetCard(textarea.value);
     createTweetImageCard(globalTweetImgSrc);
-    createInteractiveBar();
+    createInteractiveBar(false);
     retweetIconListener();
+    likeIconListener();
     textarea.value = "";
     hideProgressBar();
     hideCharacterCountWatcher();
@@ -101,8 +102,9 @@ modalTweetBtn.addEventListener("click", () => {
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     createTweetImageCard(modalGlobalTweetImgSrc);
-    createInteractiveBar();
+    createInteractiveBar(false);
     retweetIconListener();
+    likeIconListener();
     deleteBtnListener();
     deleteModalTweetImage();
 });
@@ -302,39 +304,56 @@ function deleteDefaultCardListener(index) {
 
 
 // Create event listeners for retweetIcons
+let dataValue = "";
+let count = 0; 
 
 function retweetIconListener() {
+    console.log("retweetIconListener function runs!");
     let retweetIconBtns = document.querySelectorAll('[id^="retweetIcon"]');
+    count = 0;
+
     retweetIconBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             let datasetValue = e.target.dataset.value;
             console.log(`DATASET VALUE FOR RETWEET ICON IS ${datasetValue}`);
+            dataValue = datasetValue;
+            console.log(`dataValue equals ${dataValue}`);
+            //count = 0; 
+            // RETWEET FUNCTION IS STILL BROKEN BECAUSE I HAVE A CLICK FUNCTION INSIDE OF A CLICK FUNCTION (IE NEED TWO CLICKS TO RETWEET).
+            if (count === 0) {
+                retweetIconBtnListener(dataValue);
+                
+                count = 1;
+            }
+
+
+        })
+    
+
+    })
+
+}
+
+
+            // if (shouldSkip) {
+            //     return;
+            // }
+
+            // if (dataValue == datasetValue) {
+            //     retweetIconBtnListener(dataValue);
+            //     shouldSkip = true;
+            //     return;
+            // }
 
             // Send to function to retweet that specific card and change the colour of the retweet text to green to show that it has been retweeted
-            let selectedRetweetIcon = document.querySelector(`#retweetIcon${datasetValue}`);
-            selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
+
+            // let selectedRetweetIcon = document.querySelector(`#retweetIcon${datasetValue}`);
+            // selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
+
             // Create retweet function here (or send it to existing creating tweet card?)
 
 
-            // Add 1 to the number of retweets 
-            let selectedRetweetNumber = document.querySelector(`#retweetNumber${datasetValue}`);
-            let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
-            currentDatasetValue = 1; 
-            selectedRetweetNumber.dataset.value = currentDatasetValue;
-            selectedRetweetNumber.textContent = currentDatasetValue;
-
-            // Create clone of card on retweet
-            // Append entire cloned tweet card after the status card in the feed
-            let selectedTweetText = document.querySelector(`#tweetText${datasetValue}`);
-            console.log(`selectedTweetText.value is ${selectedTweetText.textContent}`);
             
-            
-            createTweetCard(selectedTweetText.textContent);
-            createTweetImageCard(globalTweetImgSrc);
-            createInteractiveBar();
-            
-            deleteBtnListener();
-            deleteTweetImage();
             // retweetIconListener();
             // let selectedRetweetNumber2 = document.querySelector(`#retweetNumber${datasetValue + 1}`);
             // let currentDatasetValue2 = parseInt(selectedRetweetNumber2.dataset.value);
@@ -349,7 +368,108 @@ function retweetIconListener() {
 
 
 
-        })
+        // })
+    // })
+
+    
+
+
+    // retweetIconBtnListener(dataValue);
+// ?
+
+
+function retweetIconBtnListener(dataValue) {
+    console.log(`NEW FUNCTION RUNS AND dataValue is ${dataValue}`);
+    // change the colour of the retweet text to green to show that it has been retweeted
+    let selectedRetweetIcon = document.querySelector(`#retweetIcon${dataValue}`);
+
+    // Add event listener for that specific retweet button so that it only runs and creates a new card (clone) once
+
+    selectedRetweetIcon.addEventListener("click", () => {
+
+        selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
+
+        // Add 1 to the number of retweets 
+        let selectedRetweetNumber = document.querySelector(`#retweetNumber${dataValue}`);
+        let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
+        currentDatasetValue = 1; 
+        selectedRetweetNumber.dataset.value = currentDatasetValue;
+        selectedRetweetNumber.textContent = currentDatasetValue;
+
+        // Create clone of card on retweet
+        // Append entire cloned tweet card after the status card in the feed
+        let selectedTweetText = document.querySelector(`#tweetText${dataValue}`);
+        console.log(`selectedTweetText.value is ${selectedTweetText.textContent}`);
+        
+        
+        createTweetCard(selectedTweetText.textContent);
+        createTweetImageCard(globalTweetImgSrc);
+        createInteractiveBar(true);
+
+        retweetIconListener();
+        
+        deleteBtnListener();
+        deleteTweetImage();
+
+
     })
+    
 }
 
+
+function likeIconListener() {
+    let likeIconBtns = document.querySelectorAll('[id^="likeIcon"]');
+    likeIconBtns.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            let datasetValue = e.target.dataset.value;
+            let selectedLikeIcon = document.querySelector(`#likeIcon${datasetValue}`);
+            console.log(`datasetValue is ${datasetValue}`);
+
+            selectedLikeIcon.setAttribute("class", "p-2 h-10 w-10 text-red-500 rounded-full hover:text-red-400 hover:bg-red-100");
+
+            // Add 1 to the number of likes
+            let selectedLikeNumber = document.querySelector(`#likeNumber${datasetValue}`);
+            let currentDatasetValue = parseInt(selectedLikeNumber.dataset.value);
+            currentDatasetValue += 1; 
+            selectedLikeNumber.dataset.value = currentDatasetValue;
+            selectedLikeNumber.textContent = currentDatasetValue;
+    
+
+
+        })
+    
+
+    })
+
+}
+
+
+
+
+
+
+
+
+
+
+// function checkDOMChange() {
+//     retweetIconListener();
+//     retweetIconBtnListener(dataValue);
+//     setTimeout( checkDOMChange, 100 );
+// }
+
+// checkDOMChange();
+
+
+// function callback () { console.log('all done'); }
+
+// var itemsProcessed = 0;
+
+// [1, 2, 3].forEach((item, index, array) => {
+//   asyncFunction(item, () => {
+//     itemsProcessed++;
+//     if(itemsProcessed === array.length) {
+//       callback();
+//     }
+//   });
+// });
