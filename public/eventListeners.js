@@ -1,5 +1,6 @@
 import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
+import { createTweet, allTweets } from './logic.js';
 
 // Declare query selectors that will be needed
 
@@ -45,19 +46,39 @@ modalTextArea.addEventListener("keyup", () => {
 // 
 
 // Monitors main tweet button and sends to the post a new tweet function on click 
-mainTweetBtn.addEventListener("click", () => {
-    createTweetCard(textarea.value);
-    createTweetImageCard(globalTweetImgSrc);
-    createInteractiveBar(false);
-    likeIconListener();
-    retweetIconListener();
-    textarea.value = "";
-    hideProgressBar();
-    hideCharacterCountWatcher();
-    hideImageExitBtn();
-    deleteBtnListener();
-    deleteTweetImage();
-});
+// OLD (WORKS):
+// mainTweetBtn.addEventListener("click", () => {
+//     createTweetCard(textarea.value);
+//     createTweetImageCard(globalTweetImgSrc);
+//     createInteractiveBar(false);
+//     likeIconListener();
+//     retweetIconListener();
+//     textarea.value = "";
+//     hideProgressBar();
+//     hideCharacterCountWatcher();
+//     hideImageExitBtn();
+//     deleteBtnListener();
+//     deleteTweetImage();
+// });
+
+function mainTweetBtnListener() {
+    mainTweetBtn.addEventListener("click", () => {
+        createTweet(textarea.value, globalTweetImgSrc, 0, 0);
+
+        createTweetCard(textarea.value);
+        createTweetImageCard(globalTweetImgSrc);
+        createInteractiveBar(false);
+        likeIconListener();
+        retweetIconListener();
+        textarea.value = "";
+        hideProgressBar();
+        hideCharacterCountWatcher();
+        hideImageExitBtn();
+        deleteBtnListener();
+        deleteTweetImage();
+    });
+}
+mainTweetBtnListener(); 
 
 function deleteTweetImage() {
     const tweetImage = document.querySelector("#tweetImageID");
@@ -81,39 +102,70 @@ leftTweetBtn.addEventListener("click", () => {
 
 // Hide overlay on click 
 overlay.addEventListener("click", () => {
-    overlay.className="";
-    modal.className="";
-    modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border h-full";
-    modalTextArea.value = "";
+
+    hideModalOverlayCard();
+
     hideModalProgressBar();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     deleteModalTweetImage();
 })
 
+// OLD (WORKS)
 // Monitors modal tweet button, sends the post to a new tweet function on click and hides the overlay and modal 
-modalTweetBtn.addEventListener("click", () => {
-    createTweetCard(modalTextArea.value);
+// modalTweetBtn.addEventListener("click", () => {
+//     createTweetCard(modalTextArea.value);
+//     overlay.className="";
+//     modal.className="";
+//     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
+//     modalTextArea.value = "";
+//     hideModalProgressBar();
+//     hideModalCharacterCountWatcher();
+//     hideModalImageExitBtn();
+//     createTweetImageCard(modalGlobalTweetImgSrc);
+//     createInteractiveBar(false);
+//     retweetIconListener();
+//     likeIconListener();
+//     deleteBtnListener();
+//     deleteModalTweetImage();
+// });
+
+// NEW, MODULAR MODAL TWEET BTN EVENT LISTENER
+function modalTweetBtnListener() {
+    modalTweetBtn.addEventListener("click", () => {
+        createTweet(modalTextArea.value, modalGlobalTweetImgSrc, 0, 0);
+
+
+        createTweetCard(modalTextArea.value);
+
+        hideModalOverlayCard();
+
+        hideModalProgressBar();
+        hideModalCharacterCountWatcher();
+        hideModalImageExitBtn();
+        createTweetImageCard(modalGlobalTweetImgSrc);
+        createInteractiveBar(false);
+        retweetIconListener();
+        likeIconListener();
+        deleteBtnListener();
+        deleteModalTweetImage();
+    });
+}
+
+modalTweetBtnListener();
+
+function hideModalOverlayCard() {
     overlay.className="";
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
-    hideModalProgressBar();
-    hideModalCharacterCountWatcher();
-    hideModalImageExitBtn();
-    createTweetImageCard(modalGlobalTweetImgSrc);
-    createInteractiveBar(false);
-    retweetIconListener();
-    likeIconListener();
-    deleteBtnListener();
-    deleteModalTweetImage();
-});
+}
+
 
 modalExit.addEventListener("click", () => {
-    overlay.className="";
-    modal.className="";
-    modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
-    modalTextArea.value = "";
+
+    hideModalOverlayCard();
+
     hideModalProgressBar();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
@@ -307,6 +359,7 @@ function deleteDefaultCardListener(index) {
 let dataValue = "";
 let count = 0; 
 
+
 function retweetIconListener() {
     console.log("retweetIconListener function runs!");
     let retweetIconBtns = document.querySelectorAll('[id^="retweetIcon"]');
@@ -335,48 +388,6 @@ function retweetIconListener() {
 }
 
 
-            // if (shouldSkip) {
-            //     return;
-            // }
-
-            // if (dataValue == datasetValue) {
-            //     retweetIconBtnListener(dataValue);
-            //     shouldSkip = true;
-            //     return;
-            // }
-
-            // Send to function to retweet that specific card and change the colour of the retweet text to green to show that it has been retweeted
-
-            // let selectedRetweetIcon = document.querySelector(`#retweetIcon${datasetValue}`);
-            // selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
-
-            // Create retweet function here (or send it to existing creating tweet card?)
-
-
-            
-            // retweetIconListener();
-            // let selectedRetweetNumber2 = document.querySelector(`#retweetNumber${datasetValue + 1}`);
-            // let currentDatasetValue2 = parseInt(selectedRetweetNumber2.dataset.value);
-            // currentDatasetValue2 = 1; 
-            // selectedRetweetNumber2.dataset.value = currentDatasetValue2;
-            // selectedRetweetNumber2.textContent = currentDatasetValue2;
-
-            // PROBLEMS:
-            // 1. createTweetImageCard doesn't work above bc I need to actually select the specific image, not globalTweetImgSrc
-            // 2. I don't want to be able to retweet more than once (currently I can). Fix this with queryselectorAll.length == 1 conditional
-            // 3. When I retweet a card, it doesn't show the green retweet nor the 1. I need to re-run this whole function on creation of a new card or something maybe, but outside the scope so that the queryselectorAll captures the new card?
-
-
-
-        // })
-    // })
-
-    
-
-
-    // retweetIconBtnListener(dataValue);
-// ?
-
 
 function retweetIconBtnListener(dataValue) {
     console.log(`NEW FUNCTION RUNS AND dataValue is ${dataValue}`);
@@ -401,9 +412,9 @@ function retweetIconBtnListener(dataValue) {
         let selectedTweetText = document.querySelector(`#tweetText${dataValue}`);
         console.log(`selectedTweetText.value is ${selectedTweetText.textContent}`);
 
-        // Select image source of the clicked card 
+        // Select image source of the clicked card and add it to the retweeted card
         let selectedTweetImageCardIDSrc = document.querySelector(`#tweetImageCardID${dataValue}`).src;
-        //selectedTweetImageSrc = selectedTweetImageCardID.src.textContent;
+
         
         
         createTweetCard(selectedTweetText.textContent);
@@ -431,6 +442,9 @@ function likeIconListener() {
             let selectedLikeIcon = document.querySelector(`#likeIcon${datasetValue}`);
             console.log(`datasetValue is ${datasetValue}`);
 
+            // Update like count in array of objects
+            updateLikeCount(datasetValue);
+
             selectedLikeIcon.setAttribute("class", "p-2 h-10 w-10 text-red-500 rounded-full hover:text-red-400 hover:bg-red-100");
 
             // Add 1 to the number of likes
@@ -449,12 +463,22 @@ function likeIconListener() {
 
 }
 
+// NEW, BETTER, MODULAR FUNCTIONS
+function updateLikeCount(index) {
+    allTweets[index].likes += 1;
+    console.log(`allTweets[index].likes equals ${allTweets[index].likes}`);
+}
 
+function updateRetweetCount(index) {
+    allTweets[index].retweets += 1;
+    console.log(`allTweets[index].retweets equals ${allTweets[index].retweets}`);
+}
 
-
-
-
-
+// This replaces the deleteDefaultCardListener function
+function deleteTweet(index) {
+    allTweets.splice(index, 1);
+    
+}
 
 
 

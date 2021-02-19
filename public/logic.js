@@ -1,12 +1,17 @@
+// Store all current tweets in an array of objects
 
+let allTweets = [];
 
-// allTweets = [];
+function createTweet(text, image, likes, retweets) {
+    allTweets.push({
+        text,
+        image,
+        likes,
+        retweets,
+    })
+    console.log(`allTweets[0] is: ${allTweets[0].image}`);
 
-// function createTweet(name) {
-//     allTweets.push({
-//         tweetText
-//     })
-// }
+}
 
 
 // import ProgressBar from 'progressbar.js';
@@ -51,4 +56,4 @@ function createProgressBar(characterLimitDecimal, ID) {
 
 }
 
-export { createProgressBar };
+export { createProgressBar, createTweet, allTweets };

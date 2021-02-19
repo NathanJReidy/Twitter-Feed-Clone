@@ -1,6 +1,6 @@
 // The purpose of this js file is to manipulate the DOM.
 
-import { createProgressBar } from './logic.js';
+import { allTweets, createProgressBar } from './logic.js';
 
 let index = 0;
 
@@ -156,6 +156,8 @@ function createTweetImageCard(imageSrc) {
 
     index += 1;
 }
+
+
 
 // Adds selected image to below 'What's happening' modal status bar
 function createModalTweetImage(imageSrc) {
@@ -444,6 +446,15 @@ function createInteractiveBar(retweeted) {
     interactiveBarIndex += 1;
 }
 
+
+// NEW, MORE MODULAR FUNCTIONS FOR LOADING ALL TWEETS
+function loadTweets() {
+    allTweets.forEach((tweet, index) => {
+        createTweetCard(tweet.text);
+        createTweetImageCard(tweet.image);
+        createInteractiveBar(false);
+    })
+}
 
 
 
