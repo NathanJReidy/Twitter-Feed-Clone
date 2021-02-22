@@ -61,6 +61,8 @@ modalTextArea.addEventListener("keyup", () => {
 //     deleteTweetImage();
 // });
 
+let likeListenerTrigger = 0;
+
 function mainTweetBtnListener() {
     mainTweetBtn.addEventListener("click", () => {
         createTweet(textarea.value, globalTweetImgSrc, 0, 0);
@@ -68,7 +70,7 @@ function mainTweetBtnListener() {
         createTweetCard(textarea.value);
         createTweetImageCard(globalTweetImgSrc);
         createInteractiveBar(false);
-        likeIconListener();
+
         retweetIconListener();
         textarea.value = "";
         hideProgressBar();
@@ -146,7 +148,7 @@ function modalTweetBtnListener() {
         createTweetImageCard(modalGlobalTweetImgSrc);
         createInteractiveBar(false);
         retweetIconListener();
-        likeIconListener();
+
         deleteBtnListener();
         deleteModalTweetImage();
     });
@@ -421,7 +423,7 @@ function retweetIconBtnListener(dataValue) {
         createTweetImageCard(selectedTweetImageCardIDSrc);
         createInteractiveBar(true);
 
-        likeIconListener();
+        
 
         retweetIconListener();
         
@@ -434,34 +436,42 @@ function retweetIconBtnListener(dataValue) {
 }
 
 
-function likeIconListener() {
-    let likeIconBtns = document.querySelectorAll('[id^="likeIcon"]');
-    likeIconBtns.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-            let datasetValue = e.target.dataset.value;
-            let selectedLikeIcon = document.querySelector(`#likeIcon${datasetValue}`);
-            console.log(`datasetValue is ${datasetValue}`);
-
-            // Update like count in array of objects
-            updateLikeCount(datasetValue);
-
-            selectedLikeIcon.setAttribute("class", "p-2 h-10 w-10 text-red-500 rounded-full hover:text-red-400 hover:bg-red-100");
-
-            // Add 1 to the number of likes
-            let selectedLikeNumber = document.querySelector(`#likeNumber${datasetValue}`);
-            let currentDatasetValue = parseInt(selectedLikeNumber.dataset.value);
-            currentDatasetValue += 1; 
-            selectedLikeNumber.dataset.value = currentDatasetValue;
-            selectedLikeNumber.textContent = currentDatasetValue;
+// Use event bubbling to listen to events so that it is more computationally efficient
+document.addEventListener('click', event => {
+  // Event listener for likes
+  if (event.target.matches('[id^="likeIcon"]')) {
+      console.log('NEW EVENT LISTENTER WORKS!');
+      let datasetValue = event.target.dataset.value;
+      console.log(`datasetValue is ${datasetValue}`);
     
+      // Update like count in array of objects
+      updateLikeCount(datasetValue);
+
+      // Change like display and colour
+      displayLikeCount(datasetValue);
 
 
-        })
-    
+  }
 
-    })
+  // Event listener for retweets
 
-}
+  if (event.target.matches('[id^="retweetIcon"]')) {
+    let datasetValue = event.target.dataset.value;
+    console.log(`datasetValue is ${datasetValue}`);
+
+    // Update retweet count in array of objects
+    updateRetweetCount(datasetValue);
+
+    // Change retweet display and colour
+    displayRetweetCount(datasetValue);
+
+  }
+
+
+  
+});
+
+
 
 // NEW, BETTER, MODULAR FUNCTIONS
 function updateLikeCount(index) {
@@ -469,10 +479,43 @@ function updateLikeCount(index) {
     console.log(`allTweets[index].likes equals ${allTweets[index].likes}`);
 }
 
+function displayLikeCount(index) {
+    // Change colour of like icon on selected like card
+    let selectedLikeIcon = document.querySelector(`#likeIcon${index}`);
+    selectedLikeIcon.setAttribute("class", "p-2 h-10 w-10 text-red-500 rounded-full hover:text-red-400 hover:bg-red-100");
+    // Change display of like count on selected like card
+    let selectedLikeNumber = document.querySelector(`#likeNumber${index}`);
+    selectedLikeNumber.textContent = allTweets[index].likes;
+}
+
+
 function updateRetweetCount(index) {
     allTweets[index].retweets += 1;
     console.log(`allTweets[index].retweets equals ${allTweets[index].retweets}`);
 }
+
+function displayRetweetCount(index) {
+    // Change colour of retweet on selected retweet card 
+    let selectedRetweetIcon = document.querySelector(`#retweetIcon${index}`);
+    selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
+
+    // Change display of retweet count on selected retweet card
+    let selectedRetweetNumber = document.querySelector(`#retweetNumber${index}`);
+    selectedRetweetNumber.textContent = allTweets[index].retweets;
+
+}
+
+function createRetweetCard(index) {
+    createTweet(textarea.value, globalTweetImgSrc, 0, 0);
+
+    createTweetCard(textarea.value);
+    createTweetImageCard(globalTweetImgSrc);
+    createInteractiveBar(false);
+
+
+}
+
+
 
 // This replaces the deleteDefaultCardListener function
 function deleteTweet(index) {
@@ -482,24 +525,3 @@ function deleteTweet(index) {
 
 
 
-// function checkDOMChange() {
-//     retweetIconListener();
-//     retweetIconBtnListener(dataValue);
-//     setTimeout( checkDOMChange, 100 );
-// }
-
-// checkDOMChange();
-
-
-// function callback () { console.log('all done'); }
-
-// var itemsProcessed = 0;
-
-// [1, 2, 3].forEach((item, index, array) => {
-//   asyncFunction(item, () => {
-//     itemsProcessed++;
-//     if(itemsProcessed === array.length) {
-//       callback();
-//     }
-//   });
-// });

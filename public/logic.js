@@ -9,7 +9,7 @@ function createTweet(text, image, likes, retweets) {
         likes,
         retweets,
     })
-    console.log(`allTweets[0] is: ${allTweets[0].image}`);
+    //console.log(`allTweets[0] is: ${allTweets[0].image}`);
 
 }
 
