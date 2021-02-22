@@ -4,6 +4,7 @@
 // which exceed Twitter's 280 post limit. 
 
 import { showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar } from './dom.js';
+import { mainTweetBtn, modalTweetBtn } from './eventListeners.js';
 
 function characterLimit(characters, id, div) {
     if (characters.length > 280) {
@@ -14,11 +15,13 @@ function characterLimit(characters, id, div) {
         if (div === "main") {
             hideProgressBar();
             showCharacterCountWatcher(characters);
+            mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full focus:outline-none";
         }
 
         else if (div === "modal") {
             hideModalProgressBar();
             showModalCharacterCountWatcher(characters);
+            modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full focus:outline-none";
         }
 
     }

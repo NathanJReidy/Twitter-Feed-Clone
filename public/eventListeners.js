@@ -23,46 +23,68 @@ textarea.addEventListener("keyup", () => {
     textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
     characterLimit(textarea.value, "#resize-ta", "main");
+    focusMainText();
+    
 
+
+});
+
+mainTweetBtnListener();
+
+// Focuses main text area after highlighting excess characters 
+function focusMainText() {
     textarea.focus(); //sets focus to element
     let val = textarea.value; //store the value of the element
     textarea.value = ''; //clear the value of the element
     textarea.value = val; //set that value back.
-});
+}
+
+
+// Focuses modal text area after highlighting excess characters 
+function focusModalText() {
+    modalTextArea.focus(); //sets focus to element
+    let val = modalTextArea.value; //store the value of the element
+    modalTextArea.value = ''; //clear the value of the element
+    modalTextArea.value = val; //set that value back.
+}
+
 
 // Monitors modal tweet input box for keystrokes
 modalTextArea.addEventListener("keyup", () => {
     modalTextArea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
     characterLimit(modalTextArea.value, "#resize-ta-modal", "modal");
+    focusModalText();
 
-    modalTextArea.focus(); //sets focus to element
-    let val = modalTextArea.value; //store the value of the element
-    modalTextArea.value = ''; //clear the value of the element
-    modalTextArea.value = val; //set that value back.
 });
 
 
 
 let likeListenerTrigger = 0;
 
+// Listens for main tweet button being clicked and creates new tweet if number of characters does not exceed 280
 function mainTweetBtnListener() {
     mainTweetBtn.addEventListener("click", () => {
-        createTweet(textarea.value, globalTweetImgSrc, 0, 0);
+        if (textarea.value.length <= 280) {
+            createTweet(textarea.value, globalTweetImgSrc, 0, 0);
 
-        createTweetCard(textarea.value);
-        createTweetImageCard(globalTweetImgSrc);
-        createInteractiveBar();
+            createTweetCard(textarea.value);
+            createTweetImageCard(globalTweetImgSrc);
+            createInteractiveBar();
+    
+            textarea.value = "";
+            hideProgressBar();
+            hideCharacterCountWatcher();
+            hideImageExitBtn();
+            deleteBtnListener();
+            deleteTweetImage();
+        } else {
+            return;
+        }
 
-        textarea.value = "";
-        hideProgressBar();
-        hideCharacterCountWatcher();
-        hideImageExitBtn();
-        deleteBtnListener();
-        deleteTweetImage();
     });
 }
-mainTweetBtnListener(); 
+
 
 function deleteTweetImage() {
     const tweetImage = document.querySelector("#tweetImageID");
@@ -100,22 +122,22 @@ overlay.addEventListener("click", () => {
 // NEW, MODULAR MODAL TWEET BTN EVENT LISTENER
 function modalTweetBtnListener() {
     modalTweetBtn.addEventListener("click", () => {
-        createTweet(modalTextArea.value, modalGlobalTweetImgSrc, 0, 0);
+        if (modalTextArea.value.length <= 280) {
+            createTweet(modalTextArea.value, modalGlobalTweetImgSrc, 0, 0);
+            createTweetCard(modalTextArea.value);
+            hideModalOverlayCard();
+            hideModalProgressBar();
+            hideModalCharacterCountWatcher();
+            hideModalImageExitBtn();
+            createTweetImageCard(modalGlobalTweetImgSrc);
+            createInteractiveBar();
 
+            deleteBtnListener();
+            deleteModalTweetImage();
+        } else {
+            return;
+        }
 
-        createTweetCard(modalTextArea.value);
-
-        hideModalOverlayCard();
-
-        hideModalProgressBar();
-        hideModalCharacterCountWatcher();
-        hideModalImageExitBtn();
-        createTweetImageCard(modalGlobalTweetImgSrc);
-        createInteractiveBar();
-
-
-        deleteBtnListener();
-        deleteModalTweetImage();
     });
 }
 
@@ -456,3 +478,4 @@ function deleteTweet(index) {
 
 
 
+export { mainTweetBtn, modalTweetBtn };
