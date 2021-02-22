@@ -92,7 +92,6 @@ function createTweetCard(tweet) {
     // dataset value so that our event listener can then delete
     // specific cards the user selects
     horizontalBar.dataset.value = index;
-    // index += 1;
 
     // // Create path tag within SVG element and append it to SVG 
     const pathTag = document.querySelector("#svgPath").cloneNode()
@@ -127,18 +126,14 @@ function createTweetCard(tweet) {
 
 // Adds selected image to below 'What's happening' status bar
 function createTweetImage(imageSrc) {
-    // const statusWrapper = document.querySelector("#statusWrapper");
     const imageExitBtn = document.querySelector("#imageExitBtn");
 
     const newImg = document.createElement("img");
     newImg.className = "flex ml-2 px-12 py-2 items-start";
     newImg.id="tweetImageID";
-    console.log(`imageSrc is ${imageSrc}`);
     newImg.src = imageSrc; 
 
     imageExitBtn.after(newImg);
-
-    // statusWrapper.after(newImg);
 
 }
 
@@ -149,7 +144,6 @@ function createTweetImageCard(imageSrc) {
     const newImg = document.createElement("img");
     newImg.className = "flex px-2 pb-2 pt-6 items-start";
     newImg.id=`tweetImageCardID${index}`;
-    console.log(`imageSrc is ${imageSrc}`);
     newImg.src = imageSrc; 
 
     tweetText.after(newImg);
@@ -161,7 +155,7 @@ function createTweetImageCard(imageSrc) {
 
 // Adds selected image to below 'What's happening' modal status bar
 function createModalTweetImage(imageSrc) {
-    // const modalStatusWrapper = document.querySelector("#modalStatusWrapper");
+
     const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
     
     const wrappingModalDiv = document.createElement("div");
@@ -170,14 +164,12 @@ function createModalTweetImage(imageSrc) {
     const newImg = document.createElement("img");
     newImg.className = "flex px-12 py-4 items-start w-3/5";
     newImg.id="modalTweetImageID";
-    console.log(`imageSrc is ${imageSrc}`);
     newImg.src = imageSrc; 
 
     wrappingModalDiv.appendChild(newImg);
 
     modalImageExitBtn.after(wrappingModalDiv);
 
-    // modalStatusWrapper.after(wrappingModalDiv);
 }
 
 
@@ -197,14 +189,12 @@ function hideCharacterCountWatcher() {
     // Hide the chacterSurplus div and hide the display of number of characters > 280 
     const characterSurplus = document.querySelector("#characterSurplus");
     characterSurplus.className = "hidden flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300";
-    //characterSurplus.textContent = excessCharacters;
 }
 
 function showProgressBar(characters) {
     const progressBar = document.querySelector("#progressBar");
     progressBar.className = "flex justify-center items-center text-lg pr-2 h-10 w-10";
     
-
     // Divides current number of characters in tweet by the maximum allowed of 280
     let characterLimitDecimal = (characters.length) / 280;
     createProgressBar(characterLimitDecimal, progressBar);
@@ -213,13 +203,11 @@ function showProgressBar(characters) {
 function deleteProgressBar(characters) {
     let progressBar = document.querySelector("#progressBar");
     progressBar.removeChild(progressBar.firstChild);
-
 }
 
 function hideProgressBar() {
     const progressBar = document.querySelector("#progressBar");
     progressBar.className = "hidden flex justify-center items-center text-lg pr-2 h-10 w-10";
-
 }
 
 
@@ -239,14 +227,12 @@ function hideModalCharacterCountWatcher() {
     // Hide the modalChacterSurplus div and hide the display of number of characters > 280 
     const modalCharacterSurplus = document.querySelector("#modalCharacterSurplus");
     modalCharacterSurplus.className = "hidden flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300";
-    //characterSurplus.textContent = excessCharacters;
 }
 
 function showModalProgressBar(characters) {
     const modalProgressBar = document.querySelector("#modalProgressBar");
     modalProgressBar.className = "flex justify-center items-center text-lg pr-2 h-10 w-10";
     
-
     // Divides current number of characters in tweet by the maximum allowed of 280
     let characterLimitDecimal = (characters.length) / 280;
     createProgressBar(characterLimitDecimal, modalProgressBar);
@@ -255,20 +241,17 @@ function showModalProgressBar(characters) {
 function deleteModalProgressBar(characters) {
     let modalProgressBar = document.querySelector("#modalProgressBar");
     modalProgressBar.removeChild(modalProgressBar.firstChild);
-
 }
 
 function hideModalProgressBar() {
     const modalProgressBar = document.querySelector("#modalProgressBar");
     modalProgressBar.className = "hidden flex justify-center items-center text-lg pr-2 h-10 w-10";
-
 }
 
 // Toggling the exit button for the user's uploaded image
 function showImageExitBtn() {
     const imageExitBtn = document.querySelector("#imageExitBtn");
     imageExitBtn.className = "absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3"
-
 }
 
 function hideImageExitBtn() {
@@ -280,7 +263,6 @@ function hideImageExitBtn() {
 function showModalImageExitBtn() {
     const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
     modalImageExitBtn.className = "absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3"
-
 }
 
 function hideModalImageExitBtn() {
@@ -303,7 +285,7 @@ function createInteractiveBar() {
     // Create reply elements
     const replyClass = document.createElement("div");
     replyClass.className = "replyClass flex";
-    // Create SVG: ...
+    // Create SVG
     const replyIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     replyIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-500 rounded-full hover:text-blue-400 hover:bg-blue-100");
     replyIcon.setAttribute("fill", "currentColor");
@@ -352,8 +334,6 @@ function createInteractiveBar() {
     const retweetNumber = document.createElement("p");
     retweetNumber.id = `retweetNumber${interactiveBarIndex}`;
     retweetNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    // retweetNumber.dataset.value = parseInt(0);
-    // retweetNumber.textContent = null;
     retweetNumber.dataset.value = interactiveBarIndex;
 
     // Create Span:
@@ -372,7 +352,7 @@ function createInteractiveBar() {
     // Create like elements:
     const likeClass = document.createElement("div");
     likeClass.className = "likeClass flex";
-    // Create SVG: ...
+    // Create SVG: 
     const likeIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     likeIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-500 rounded-full hover:text-red-400 hover:bg-red-100");
     likeIcon.setAttribute("fill", "currentColor");
@@ -388,26 +368,24 @@ function createInteractiveBar() {
     const likeNumber = document.createElement("p");
     likeNumber.id = `likeNumber${interactiveBarIndex}`;
     likeNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    // likeNumber.dataset.value = 0;
-    // likeNumber.textContent = "";
     likeNumber.dataset.value = interactiveBarIndex;
 
-    // Create Span:
+    // Create Span
     const likeText = document.createElement("span");
     likeText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-11";
     likeText.id = "likeText";
     likeText.textContent = "Like";
-    // Append likeIcon, likeNumber and likeText to likeClass:
+    // Append likeIcon, likeNumber and likeText to likeClass
     likeClass.appendChild(likeIcon);
     likeClass.appendChild(likeNumber);
     likeClass.appendChild(likeText);
     // Append likeClass to Interactive Bar
     interactiveBar.appendChild(likeClass);
 
-    // Create share elements:
+    // Create share elements
     const shareClass = document.createElement("div");
     shareClass.className = "shareClass flex";
-    // Create SVG: ...
+    // Create SVG
     const shareIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     shareIcon.setAttribute("class", "p-2 h-10 w-10 text-gray-500 rounded-full hover:text-blue-400 hover:bg-blue-100");
     shareIcon.setAttribute("fill", "currentColor");
@@ -419,12 +397,12 @@ function createInteractiveBar() {
     shareIcon.appendChild(sharePath);
 
 
-    // Create Span:
+    // Create Span
     const shareText = document.createElement("span");
     shareText.className = "h-6 w-11 text-center absolute opacity-50 z-10 bg-black text-white text-xs px-1 py-1 mt-11";
     shareText.id = "shareText";
     shareText.textContent = "Share";
-    // Append shareIcon and shareText to shareClass:
+    // Append shareIcon and shareText to shareClass
     shareClass.appendChild(shareIcon);
     shareClass.appendChild(shareText);
     // Append shareClass to Interactive Bar
@@ -437,8 +415,4 @@ function createInteractiveBar() {
 }
 
 
-
-
 export { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar };
-
-

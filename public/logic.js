@@ -9,15 +9,11 @@ function createTweet(text, image, likes, retweets) {
         likes,
         retweets,
     })
-    //console.log(`allTweets[0] is: ${allTweets[0].image}`);
 
 }
 
 
 // import ProgressBar from 'progressbar.js';
-
-
-
 // Add js script for progress bar that counts how close the tweet is to the 280 character limit
 
 function createProgressBar(characterLimitDecimal, ID) {
