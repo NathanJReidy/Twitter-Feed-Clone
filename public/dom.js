@@ -293,7 +293,7 @@ function hideModalImageExitBtn() {
 
 let interactiveBarIndex = 0;
 
-function createInteractiveBar(retweeted) {
+function createInteractiveBar() {
     let tweetImageCardID = document.querySelector(`#tweetImageCardID${interactiveBarIndex}`);
     
     
@@ -352,8 +352,9 @@ function createInteractiveBar(retweeted) {
     const retweetNumber = document.createElement("p");
     retweetNumber.id = `retweetNumber${interactiveBarIndex}`;
     retweetNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    retweetNumber.dataset.value = parseInt(0);
-    retweetNumber.textContent = null;
+    // retweetNumber.dataset.value = parseInt(0);
+    // retweetNumber.textContent = null;
+    retweetNumber.dataset.value = interactiveBarIndex;
 
     // Create Span:
     const retweetText = document.createElement("span");
@@ -387,8 +388,9 @@ function createInteractiveBar(retweeted) {
     const likeNumber = document.createElement("p");
     likeNumber.id = `likeNumber${interactiveBarIndex}`;
     likeNumber.className = "flex justify-center items-center text-gray-500 text-sm";
-    likeNumber.dataset.value = 0;
-    likeNumber.textContent = "";
+    // likeNumber.dataset.value = 0;
+    // likeNumber.textContent = "";
+    likeNumber.dataset.value = interactiveBarIndex;
 
     // Create Span:
     const likeText = document.createElement("span");
@@ -432,15 +434,15 @@ function createInteractiveBar(retweeted) {
     tweetImageCardID.after(interactiveBar);
 
     // if creating another card that has been retweeted, change the colour of the retweet text to green to show that it has been retweeted
-    if (retweeted == true) {
-        let selectedRetweetIcon = document.querySelector(`#retweetIcon${interactiveBarIndex}`);
-        selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
-        let selectedRetweetNumber = document.querySelector(`#retweetNumber${interactiveBarIndex}`);
-        let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
-        currentDatasetValue = 1; 
-        selectedRetweetNumber.dataset.value = currentDatasetValue;
-        selectedRetweetNumber.textContent = currentDatasetValue;
-    }
+    // if (retweeted == true) {
+    //     let selectedRetweetIcon = document.querySelector(`#retweetIcon${interactiveBarIndex}`);
+    //     selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
+    //     let selectedRetweetNumber = document.querySelector(`#retweetNumber${interactiveBarIndex}`);
+    //     let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
+    //     currentDatasetValue = 1; 
+    //     selectedRetweetNumber.dataset.value = currentDatasetValue;
+    //     selectedRetweetNumber.textContent = currentDatasetValue;
+    // }
     
     // Add 1 to the interactiveBarIndex so as to keep track of each individual interactive element on each card 
     interactiveBarIndex += 1;
@@ -448,13 +450,13 @@ function createInteractiveBar(retweeted) {
 
 
 // NEW, MORE MODULAR FUNCTIONS FOR LOADING ALL TWEETS
-function loadTweets() {
-    allTweets.forEach((tweet, index) => {
-        createTweetCard(tweet.text);
-        createTweetImageCard(tweet.image);
-        createInteractiveBar(false);
-    })
-}
+// function loadTweets() {
+//     allTweets.forEach((tweet, index) => {
+//         createTweetCard(tweet.text);
+//         createTweetImageCard(tweet.image);
+//         createInteractiveBar(false);
+//     })
+// }
 
 
 
