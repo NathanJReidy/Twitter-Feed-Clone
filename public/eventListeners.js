@@ -346,8 +346,8 @@ function deleteDefaultTweet(index) {
     })
 }
 
-// If user clicks anywhere except the delete button,
-// the delete button disappears and the three dots delete button icon reappears
+// If user clicks anywhere except the default delete button,
+// the default delete button disappears and the three dots default delete button icon reappears
 function hideDefaultBlockerLayer(index) {
     const blocker = document.querySelector("#blockerLayer");
     const selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${index}`);
@@ -358,9 +358,9 @@ function hideDefaultBlockerLayer(index) {
         selectedDefaultDeleteBtn.style.display = 'flex';
         blocker.className = "hidden absolute z-10 h-full w-full";
     })
-
 }
 
+// Listens for deleting default card
 function deleteDefaultCardListener(index) {
     showBlockerLayer(index);
     hideDefaultBlockerLayer(index);
@@ -368,31 +368,24 @@ function deleteDefaultCardListener(index) {
 }
 
 
-
-
 // Use event bubbling to listen to retweet and like events so that it is more computationally efficient
 document.addEventListener('click', event => {
 
   // Event listener for likes
   if (event.target.matches('[id^="likeIcon"]')) {
-      console.log('NEW EVENT LISTENTER WORKS!');
       let datasetValue = event.target.dataset.value;
-      console.log(`datasetValue is ${datasetValue}`);
-    
+
       // Update like count in array of objects
       updateLikeCount(datasetValue);
 
       // Change like display and colour
       displayLikeCount(datasetValue);
-
-
   }
 
   // Event listener for retweets
 
   if (event.target.matches('[id^="retweetIcon"]')) {
     let datasetValue = event.target.dataset.value;
-    console.log(`datasetValue is ${datasetValue}`);
 
     // Update retweet count in array of objects
     updateRetweetCount(datasetValue);
@@ -405,18 +398,16 @@ document.addEventListener('click', event => {
 
   }
 
-
-  
 });
 
 
 
-// NEW, BETTER, MODULAR FUNCTIONS
+// Updates the number of likes on the liked card, in the array of objects
 function updateLikeCount(index) {
     allTweets[index].likes += 1;
-    console.log(`allTweets[index].likes equals ${allTweets[index].likes}`);
 }
 
+// Displays number of likes on the tweet 
 function displayLikeCount(index) {
 
     // Change colour of like icon on selected like card
@@ -431,12 +422,12 @@ function displayLikeCount(index) {
 
 }
 
-
+// Updates the number of retweets on the retweeted card, in the array of objects 
 function updateRetweetCount(index) {
     allTweets[index].retweets += 1;
-    console.log(`allTweets[index].retweets equals ${allTweets[index].retweets}`);
 }
 
+// Displays number of retweets on the tweet 
 function displayRetweetCount(index) {
 
     // Change colour of retweet on selected retweet card 
@@ -449,6 +440,7 @@ function displayRetweetCount(index) {
 
 }
 
+// Creates a retweeted card and adds it to the feed
 function createRetweetCard(index) {
     let retweetedText = allTweets[index].text;
     let retweetedImage = allTweets[index].image;
@@ -474,19 +466,6 @@ function createRetweetCard(index) {
 // NB: The placeholder tweet cards CANNOT be retweeted or liked, because they are deliberately 
 // not included/pushed to the array of tweet objects. HOWEVER, they can be deleted if the user doesn't
 // want to see them. 
-
-
-
-
-
-
-
-// This replaces the deleteDefaultCardListener function
-// function deleteTweet(index) {
-//     allTweets.splice(index, 1);
-    
-// }
-
 
 
 export { mainTweetBtn, modalTweetBtn };
