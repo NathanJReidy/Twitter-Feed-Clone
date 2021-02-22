@@ -433,30 +433,8 @@ function createInteractiveBar() {
     // Add interactiveBar to position after tweetImageCardID
     tweetImageCardID.after(interactiveBar);
 
-    // if creating another card that has been retweeted, change the colour of the retweet text to green to show that it has been retweeted
-    // if (retweeted == true) {
-    //     let selectedRetweetIcon = document.querySelector(`#retweetIcon${interactiveBarIndex}`);
-    //     selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
-    //     let selectedRetweetNumber = document.querySelector(`#retweetNumber${interactiveBarIndex}`);
-    //     let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
-    //     currentDatasetValue = 1; 
-    //     selectedRetweetNumber.dataset.value = currentDatasetValue;
-    //     selectedRetweetNumber.textContent = currentDatasetValue;
-    // }
-    
-    // Add 1 to the interactiveBarIndex so as to keep track of each individual interactive element on each card 
     interactiveBarIndex += 1;
 }
-
-
-// NEW, MORE MODULAR FUNCTIONS FOR LOADING ALL TWEETS
-// function loadTweets() {
-//     allTweets.forEach((tweet, index) => {
-//         createTweetCard(tweet.text);
-//         createTweetImageCard(tweet.image);
-//         createInteractiveBar(false);
-//     })
-// }
 
 
 
