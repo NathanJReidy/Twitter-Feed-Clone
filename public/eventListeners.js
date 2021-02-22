@@ -43,23 +43,6 @@ modalTextArea.addEventListener("keyup", () => {
 });
 
 
-// 
-
-// Monitors main tweet button and sends to the post a new tweet function on click 
-// OLD (WORKS):
-// mainTweetBtn.addEventListener("click", () => {
-//     createTweetCard(textarea.value);
-//     createTweetImageCard(globalTweetImgSrc);
-//     createInteractiveBar(false);
-//     likeIconListener();
-//     retweetIconListener();
-//     textarea.value = "";
-//     hideProgressBar();
-//     hideCharacterCountWatcher();
-//     hideImageExitBtn();
-//     deleteBtnListener();
-//     deleteTweetImage();
-// });
 
 let likeListenerTrigger = 0;
 
@@ -112,24 +95,7 @@ overlay.addEventListener("click", () => {
     deleteModalTweetImage();
 })
 
-// OLD (WORKS)
-// Monitors modal tweet button, sends the post to a new tweet function on click and hides the overlay and modal 
-// modalTweetBtn.addEventListener("click", () => {
-//     createTweetCard(modalTextArea.value);
-//     overlay.className="";
-//     modal.className="";
-//     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
-//     modalTextArea.value = "";
-//     hideModalProgressBar();
-//     hideModalCharacterCountWatcher();
-//     hideModalImageExitBtn();
-//     createTweetImageCard(modalGlobalTweetImgSrc);
-//     createInteractiveBar(false);
-//     retweetIconListener();
-//     likeIconListener();
-//     deleteBtnListener();
-//     deleteModalTweetImage();
-// });
+
 
 // NEW, MODULAR MODAL TWEET BTN EVENT LISTENER
 function modalTweetBtnListener() {
@@ -356,85 +322,6 @@ function deleteDefaultCardListener(index) {
 
 
 
-// Create event listeners for retweetIcons
-let dataValue = "";
-let count = 0; 
-
-
-// function retweetIconListener() {
-//     console.log("retweetIconListener function runs!");
-//     let retweetIconBtns = document.querySelectorAll('[id^="retweetIcon"]');
-//     count = 0;
-
-//     retweetIconBtns.forEach((btn) => {
-//         btn.addEventListener("click", (e) => {
-//             let datasetValue = e.target.dataset.value;
-//             console.log(`DATASET VALUE FOR RETWEET ICON IS ${datasetValue}`);
-//             dataValue = datasetValue;
-//             console.log(`dataValue equals ${dataValue}`);
-//             //count = 0; 
-//             // RETWEET FUNCTION IS STILL BROKEN BECAUSE I HAVE A CLICK FUNCTION INSIDE OF A CLICK FUNCTION (IE NEED TWO CLICKS TO RETWEET).
-//             if (count === 0) {
-//                 retweetIconBtnListener(dataValue);
-                
-//                 count = 1;
-//             }
-
-
-//         })
-    
-
-//     })
-
-// }
-
-
-
-// function retweetIconBtnListener(dataValue) {
-//     console.log(`NEW FUNCTION RUNS AND dataValue is ${dataValue}`);
-//     // change the colour of the retweet text to green to show that it has been retweeted
-//     let selectedRetweetIcon = document.querySelector(`#retweetIcon${dataValue}`);
-
-//     // Add event listener for that specific retweet button so that it only runs and creates a new card (clone) once
-
-//     selectedRetweetIcon.addEventListener("click", () => {
-
-//         selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
-
-//         // Add 1 to the number of retweets 
-//         let selectedRetweetNumber = document.querySelector(`#retweetNumber${dataValue}`);
-//         let currentDatasetValue = parseInt(selectedRetweetNumber.dataset.value);
-//         currentDatasetValue = 1; 
-//         selectedRetweetNumber.dataset.value = currentDatasetValue;
-//         selectedRetweetNumber.textContent = currentDatasetValue;
-
-//         // Create clone of card on retweet
-//         // Append entire cloned tweet card after the status card in the feed
-//         let selectedTweetText = document.querySelector(`#tweetText${dataValue}`);
-//         console.log(`selectedTweetText.value is ${selectedTweetText.textContent}`);
-
-//         // Select image source of the clicked card and add it to the retweeted card
-//         let selectedTweetImageCardIDSrc = document.querySelector(`#tweetImageCardID${dataValue}`).src;
-
-        
-        
-//         createTweetCard(selectedTweetText.textContent);
-//         createTweetImageCard(selectedTweetImageCardIDSrc);
-//         createInteractiveBar(true);
-
-        
-
-//         retweetIconListener();
-        
-//         deleteBtnListener();
-//         deleteTweetImage();
-
-
-//     })
-    
-// }
-
-
 // Use event bubbling to listen to events so that it is more computationally efficient
 document.addEventListener('click', event => {
 
@@ -483,12 +370,17 @@ function updateLikeCount(index) {
 }
 
 function displayLikeCount(index) {
+
     // Change colour of like icon on selected like card
     let selectedLikeIcon = document.querySelector(`#likeIcon${index}`);
     selectedLikeIcon.setAttribute("class", "p-2 h-10 w-10 text-red-500 rounded-full hover:text-red-400 hover:bg-red-100");
-    // Change display of like count on selected like card
+
+    // Change display of like count on selected like card, except when like count is 0
     let selectedLikeNumber = document.querySelector(`#likeNumber${index}`);
-    selectedLikeNumber.textContent = allTweets[index].likes;
+    if (allTweets[index].likes != 0) {
+        selectedLikeNumber.textContent = allTweets[index].likes;
+    }
+
 }
 
 
@@ -498,6 +390,7 @@ function updateRetweetCount(index) {
 }
 
 function displayRetweetCount(index) {
+
     // Change colour of retweet on selected retweet card 
     let selectedRetweetIcon = document.querySelector(`#retweetIcon${index}`);
     selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
@@ -519,11 +412,39 @@ function createRetweetCard(index) {
     createTweetImageCard(retweetedImage);
     createInteractiveBar();
 
-            
+    // Display the retweeted card's retweets and likes
+    let retweetedCardIndex = allTweets.length - 1;
+    displayLikeCount(retweetedCardIndex);
+    displayRetweetCount(retweetedCardIndex);
+
+       
     deleteBtnListener();
     deleteTweetImage();
 
 }
+
+// NB: The placeholder tweet cards CANNOT be retweeted or liked, because they are deliberately 
+// not included/pushed to the array of tweet objects. HOWEVER, they can be deleted if the user doesn't
+// want to see them. 
+
+
+
+
+
+
+// This function checks to see if there are any retweeted cards. If there are, it links them. I.e
+// Each time the user clicks like/retweet on one card, it is also reflected in the count of
+// retweets/likes on the other identical card. 
+
+// function identicalCardChecker(text) {
+//     for (let card of allTweets) {
+//         if (card.text === card.text) {
+
+//         })
+//     }
+
+// }
+
 
 
 
