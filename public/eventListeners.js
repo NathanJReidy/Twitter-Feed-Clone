@@ -2,7 +2,7 @@ import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
 import { createTweet, allTweets } from './logic.js';
 
-// Declare query selectors that will be needed
+// Declare variables that will be needed
 
 let textarea = document.querySelector("#resize-ta");
 let mainTweetBtn = document.querySelector("#mainTweetBtn");
@@ -24,12 +24,7 @@ textarea.addEventListener("keyup", () => {
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
     characterLimit(textarea.value, "#resize-ta", "main");
     focusMainText();
-    
-
-
 });
-
-mainTweetBtnListener();
 
 // Focuses main text area after highlighting excess characters 
 function focusMainText() {
@@ -55,23 +50,16 @@ modalTextArea.addEventListener("keyup", () => {
     modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
     characterLimit(modalTextArea.value, "#resize-ta-modal", "modal");
     focusModalText();
-
 });
-
-
-
-let likeListenerTrigger = 0;
 
 // Listens for main tweet button being clicked and creates new tweet if number of characters does not exceed 280
 function mainTweetBtnListener() {
     mainTweetBtn.addEventListener("click", () => {
         if (textarea.value.length <= 280) {
             createTweet(textarea.value, globalTweetImgSrc, 0, 0);
-
             createTweetCard(textarea.value);
             createTweetImageCard(globalTweetImgSrc);
             createInteractiveBar();
-    
             textarea.value = "";
             hideProgressBar();
             hideCharacterCountWatcher();
@@ -85,6 +73,8 @@ function mainTweetBtnListener() {
     });
 }
 
+// Run mainTweetBtnListener globally
+mainTweetBtnListener();
 
 function deleteTweetImage() {
     const tweetImage = document.querySelector("#tweetImageID");
@@ -103,14 +93,11 @@ leftTweetBtn.addEventListener("click", () => {
     overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
     modal.className = "absolute z-20 h-1/2 w-1/2 bg-white rounded-lg mt-8";
     modalStatusCard.className = "flex flex-col relative px-5 py-2 border-gray-100 justify-center border h-full";
-
 })
 
 // Hide overlay on click 
 overlay.addEventListener("click", () => {
-
     hideModalOverlayCard();
-
     hideModalProgressBar();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
@@ -141,8 +128,10 @@ function modalTweetBtnListener() {
     });
 }
 
+// Run modalTweetBtnListener globally
 modalTweetBtnListener();
 
+// Hides modal overlay card
 function hideModalOverlayCard() {
     overlay.className="";
     modal.className="";
@@ -150,20 +139,17 @@ function hideModalOverlayCard() {
     modalTextArea.value = "";
 }
 
-
+// Hide modal card and components upon clicking modal card exit button 
 modalExit.addEventListener("click", () => {
-
     hideModalOverlayCard();
-
     hideModalProgressBar();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     deleteModalTweetImage();
-
 })
 
+// Add event listener for when user selects an image file to upload
 let globalTweetImgSrc = "";
-// add event listener for when user selects an image file to upload
 file.addEventListener("change", (event) => {
     let selectedFile = event.target.files[0];
     let reader = new FileReader();
@@ -183,16 +169,14 @@ file.addEventListener("change", (event) => {
 
 })
 
-//On image click, open user's local files
+// On image click, open user's local files
 image.addEventListener("click", () => {
     file.click(); 
 })
 
 
-
-// Replicate the above with the modalFile image
+// Add event listener for when user selects a modal image file to upload
 let modalGlobalTweetImgSrc = "";
-// add event listener for when user selects an image file to upload
 modalFile.addEventListener("change", (event) => {
     let selectedModalFile = event.target.files[0];
     let modalReader = new FileReader();
@@ -218,6 +202,7 @@ modalImage.addEventListener("click", () => {
     modalFile.click(); 
 })
 
+
 // Create event listeners to delete each card when horizonal delete button is clicked
 function deleteBtnListener() {
     let deleteBtns = document.querySelectorAll('[id^="deleteBtn"]');
@@ -226,12 +211,10 @@ function deleteBtnListener() {
             let datasetValue = e.target.dataset.value;
 
             // Make three horizonal dots disappear
-            const selectedDeleteBtn = document.querySelector(`#deleteBtn${datasetValue}`);
-            selectedDeleteBtn.style.display = 'none';
+            hideDeleteIcon(datasetValue);
 
             // Display card for delete button 
-            let selectedDeletedCard = document.querySelector(`#deleteCard${datasetValue}`);
-            selectedDeletedCard.style.display = 'flex';
+            showDeleteCard(datasetValue);
 
             // Send datasetValue to function to listen for if
             // user clicks the specific delete card button
@@ -240,23 +223,44 @@ function deleteBtnListener() {
     })
 }
 
-// If user clicks the delete card button, then both the delete card button
-// and the tweet card itself disappears 
-function deleteCardListener(index) {
-    const selectedDeleteCard = document.querySelector(`#deleteCard${index}`);
-    const selectedCard = document.querySelector(`#tweetCard${index}`);
-    
-    // If user clicks anywhere except the delete button,
-    // the delete button disappears and the three dots button reappears
+// Make three horizonal dots disappear
+function hideDeleteIcon(index) {
+    let selectedDeleteBtn = document.querySelector(`#deleteBtn${index}`);
+    selectedDeleteBtn.style.display = 'none';
+}
+
+function showDeleteCard(index) {
+    let selectedDeletedCard = document.querySelector(`#deleteCard${index}`);
+    selectedDeletedCard.style.display = 'flex';
+
+}
+
+// Creates a blocker overlay 
+function showBlockerLayer(index) {
+    const blocker = document.querySelector("#blockerLayer");
+    blocker.className = "absolute z-10 h-full w-full";
+
+}
+
+// If user clicks anywhere except the delete button,
+// the delete button disappears and the three dots delete button icon reappears
+function hideBlockerLayer(index) {
     const blocker = document.querySelector("#blockerLayer");
     const selectedDeleteBtn = document.querySelector(`#deleteBtn${index}`);
-    blocker.className = "absolute z-10 h-full w-full";
+    const selectedDeleteCard = document.querySelector(`#deleteCard${index}`);
+
     blocker.addEventListener('click', () => {
         selectedDeleteCard.style.display = 'none';
         selectedDeleteBtn.style.display = 'flex';
         blocker.className = "hidden absolute z-10 h-full w-full";
     })
-    
+
+}
+
+function deleteTweet(index) {
+    const selectedDeleteCard = document.querySelector(`#deleteCard${index}`);
+    const selectedCard = document.querySelector(`#tweetCard${index}`);
+    const blocker = document.querySelector("#blockerLayer");
     
     // If user clicks the delete card button, 
     // both the delete card button and the tweet card itself disappear
@@ -265,18 +269,23 @@ function deleteCardListener(index) {
         selectedCard.style.display = 'none';
         blocker.className = "hidden absolute z-10 h-full w-full";
     })
+}
 
+// If user clicks the delete card button, then both the delete card button
+// and the tweet card itself disappears 
+function deleteCardListener(index) {
+    showBlockerLayer(index);
+    hideBlockerLayer(index);
+    deleteTweet(index);
 }
 
 // Event listener for the exit button on the user's uploaded image
-
 // Removes the user's uploaded image on clicking the exit button 
 let imageExitBtn = document.querySelector("#imageExitBtn");
 imageExitBtn.addEventListener("click", () => {
     deleteTweetImage();
     hideImageExitBtn();
 })
-
 
 // Removes the user's uploaded modal image on clicking the exit button 
 let modalImageExitBtn = document.querySelector("#modalImageExitBtn");
@@ -286,22 +295,31 @@ modalImageExitBtn.addEventListener("click", () => {
 })
 
 
+// Make three default horizonal dots disappear for default delete icon
+function hideDefaultDeleteIcon(index) {
+    let selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${index}`);
+    selectedDefaultDeleteBtn.style.display = 'none';
+}
 
-// event listeners for delete buttons and cards that are default
+// Display delete card for default delete button 
+function showDefaultDeleteCard(index) {
+    let selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${index}`);
+    selectedDefaultDeleteCard.style.display = 'flex';
+}
+
+
+// Event listeners for delete buttons and cards that are from the default tweet placeholders
 function deleteDefaultBtnListener() {
     let deleteDefaultBtns = document.querySelectorAll('[id^="deleteDefaultBtn"]');
     deleteDefaultBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             let datasetValue = e.target.dataset.value;
-            console.log(`THE DATASETVALE IS ${datasetValue}`)
 
-            // Make three horizonal dots disappear
-            const selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${datasetValue}`);
-            selectedDefaultDeleteBtn.style.display = 'none';
+            // Make three default horizonal dots disappear for default delete icon
+            hideDefaultDeleteIcon(datasetValue);
 
-            // Display card for delete button 
-            let selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${datasetValue}`);
-            selectedDefaultDeleteCard.style.display = 'flex';
+            // Display delete card for default delete button 
+            showDefaultDeleteCard(datasetValue);
 
             // Send datasetValue to function to listen for if
             // user clicks the specific delete card button
@@ -313,38 +331,46 @@ function deleteDefaultBtnListener() {
 // Run the above function in the global space
 deleteDefaultBtnListener();
 
-// If user clicks the delete card button on the default cards, then both the delete card button
-// and the tweet card itself disappears 
-function deleteDefaultCardListener(index) {
+
+// If user clicks the delete card button on the default placeholder tweets, 
+// both the default delete card button and the default tweet card itself disappear
+function deleteDefaultTweet(index) {
     const selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${index}`);
     const selectedFeedCard = document.querySelector(`#feedCard${index}`);
-    
-    // If user clicks anywhere except the delete button,
-    // the delete button disappears and the three dots button reappears
     const blocker = document.querySelector("#blockerLayer");
-    const selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${index}`);
-    blocker.className = "absolute z-10 h-full w-full";
-    blocker.addEventListener('click', () => {
-        selectedDefaultDeleteCard.style.display = 'none';
-        selectedDefaultDeleteBtn.style.display = 'flex';
-        blocker.className = "hidden absolute z-10 h-full w-full";
-    })
-    
-    
-    // If user clicks the delete card button, 
-    // both the delete card button and the tweet card itself disappear
+
     selectedDefaultDeleteCard.addEventListener('click', () => {
         selectedDefaultDeleteCard.style.display = 'none';
         selectedFeedCard.style.display = 'none';
         blocker.className = "hidden absolute z-10 h-full w-full";
     })
+}
 
+// If user clicks anywhere except the delete button,
+// the delete button disappears and the three dots delete button icon reappears
+function hideDefaultBlockerLayer(index) {
+    const blocker = document.querySelector("#blockerLayer");
+    const selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${index}`);
+    const selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${index}`);
+
+    blocker.addEventListener('click', () => {
+        selectedDefaultDeleteCard.style.display = 'none';
+        selectedDefaultDeleteBtn.style.display = 'flex';
+        blocker.className = "hidden absolute z-10 h-full w-full";
+    })
+
+}
+
+function deleteDefaultCardListener(index) {
+    showBlockerLayer(index);
+    hideDefaultBlockerLayer(index);
+    deleteDefaultTweet(index);
 }
 
 
 
 
-// Use event bubbling to listen to events so that it is more computationally efficient
+// Use event bubbling to listen to retweet and like events so that it is more computationally efficient
 document.addEventListener('click', event => {
 
   // Event listener for likes
@@ -454,27 +480,12 @@ function createRetweetCard(index) {
 
 
 
-// This function checks to see if there are any retweeted cards. If there are, it links them. I.e
-// Each time the user clicks like/retweet on one card, it is also reflected in the count of
-// retweets/likes on the other identical card. 
-
-// function identicalCardChecker(text) {
-//     for (let card of allTweets) {
-//         if (card.text === card.text) {
-
-//         })
-//     }
-
-// }
-
-
-
 
 // This replaces the deleteDefaultCardListener function
-function deleteTweet(index) {
-    allTweets.splice(index, 1);
+// function deleteTweet(index) {
+//     allTweets.splice(index, 1);
     
-}
+// }
 
 
 
