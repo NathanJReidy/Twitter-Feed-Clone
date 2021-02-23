@@ -46,7 +46,7 @@ function focusModalText() {
 
 // Monitors modal tweet input box for keystrokes
 modalTextArea.addEventListener("keyup", () => {
-    modalTextArea.style = `display: flex; height: ${textarea.scrollHeight}px`;
+    modalTextArea.style = `display: flex; height: ${modalTextArea.scrollHeight}px`;
     modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
     characterLimit(modalTextArea.value, "#resize-ta-modal", "modal");
     focusModalText();
@@ -521,13 +521,51 @@ function closeMobileOverlays() {
 }
 
 
+
 // Event listener for mobile tweet button
 let mobileTweetBtn = document.querySelector("#mobileTweetBtn");
 mobileTweetBtn.addEventListener("click", () => {
-    // Show mobile tweet screen 
-    
+    // Show mobile (same as modal) tweet screen 
+    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
+    modal.className = "absolute z-20 h-full w-full bg-white rounded-lg";
+    modalStatusCard.className = "flex flex-col relative px-5 pt-2 pb-12 border-gray-100 justify-center border h-full";
+
+    hideMobileFooterNav();
+    showMobileTweetFooter();
+
+
 })
 
+let mobileFooterNav = document.querySelector("#mobileFooterNav");
+
+// Function to show fixed footer nav on tweet click submit button
+function showMobileFooterNav() {
+    mobileFooterNav.className = "fixed bottom-0 w-full lg:hidden z-50 bg-white";
+}
+
+// Function to hide fixed footer nav bar when mobile tweet button is clicked
+function hideMobileFooterNav() {
+    mobileFooterNav.className = "hidden fixed bottom-0 w-full lg:hidden z-50 bg-white";
+}
+
+// Change the layout of the mobile tweet card 
+let modalTweetFooterBarWrapper = document.querySelector("#mobileTweetFooterBarWrapper");
+let modalTweetFooterBar = document.querySelector("#mobileTweetFooterBar");
+
+// Change the layout of the footer bar on the mobile version
+function showMobileTweetFooter() {
+    modalTweetFooterBarWrapper.className = "flex w-full pt-2 justify-between items-center flex-wrap mb-2 border-gray-100 border-t-2";
+    modalTweetFooterBar.className = "flex w-full justify-between space-x-4 items-center flex-wrap";
+
+}
+
+// Hide the mobile layout settings after the mobile/modal tweet submit button is clicked
+function hideMobileTweetFooter() {
+
+    modalTweetFooterBarWrapper.className = "flex pt-2 ml-16 justify-between items-center flex-wrap mb-2 border-gray-100 border-t-2";
+    modalTweetFooterBar.className = "flex justify-around space-x-4 items-center flex-wrap";
+    
+}
 
 
 export { mainTweetBtn, modalTweetBtn };
