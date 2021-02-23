@@ -467,5 +467,28 @@ function createRetweetCard(index) {
 // not included/pushed to the array of tweet objects. HOWEVER, they can be deleted if the user doesn't
 // want to see them. 
 
+// Event handler for sliding nav bar on mobile
+let mobileMenu = document.querySelector("#mobileMenu");
+
+function showMobileOverlay() {
+    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
+}
+
+function hideMobileOverlay() {
+    overlay.addEventListener("click", () => {
+        overlay.className="";
+    })
+}
+
+mobileMenu.addEventListener("click", () => {
+    // Open mobile menu on screen
+
+    // Display black overlay 
+    showMobileOverlay();
+
+    // Run event listener overlay so that if user clicks the overlay it makes the menu disappear
+    hideMobileOverlay();
+})
+
 
 export { mainTweetBtn, modalTweetBtn };
