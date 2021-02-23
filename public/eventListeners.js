@@ -11,6 +11,8 @@ let overlay = document.querySelector("#overlay");
 let modal = document.querySelector("#modal");
 let modalStatusCard = document.querySelector("#modalStatusCard");
 let modalTweetBtn = document.querySelector("#modalTweetBtn");
+let mobileTweetSubmitBtn = document.querySelector("#mobileTweetSubmitBtn");
+
 let modalTextArea = document.querySelector("#resize-ta-modal");
 let modalExit = document.querySelector("#modalExit");
 let image = document.querySelector("#image");
@@ -48,8 +50,10 @@ function focusModalText() {
 modalTextArea.addEventListener("keyup", () => {
     modalTextArea.style = `display: flex; height: ${modalTextArea.scrollHeight}px`;
     modalTweetBtn.className = "lg:flex hidden text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
+    mobileTweetSubmitBtn.className = "lg:hidden flex text-white items-center text-sm py-1 px-4 bg-blue-500 hover:bg-blue-600 cursor-default rounded-full";
     characterLimit(modalTextArea.value, "#resize-ta-modal", "modal");
     focusModalText();
+
 });
 
 // Listens for main tweet button being clicked and creates new tweet if number of characters does not exceed 280
@@ -61,6 +65,7 @@ function mainTweetBtnListener() {
             createTweetImageCard(globalTweetImgSrc);
             createInteractiveBar();
             textarea.value = "";
+            textarea.style = ""; // Resets the size of the text area to the default size
             hideProgressBar();
             hideCharacterCountWatcher();
             hideImageExitBtn();
@@ -102,6 +107,7 @@ overlay.addEventListener("click", () => {
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     deleteModalTweetImage();
+    modalTextArea.style = ""; // Resets the size of the text area to the default size
 })
 
 
@@ -118,6 +124,7 @@ function modalTweetBtnListener() {
             hideModalImageExitBtn();
             createTweetImageCard(modalGlobalTweetImgSrc);
             createInteractiveBar();
+            
 
             deleteBtnListener();
             deleteModalTweetImage();
@@ -137,6 +144,7 @@ function hideModalOverlayCard() {
     modal.className="";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
+    modalTextArea.style = ""; // Resets the size of the modal text area to the default size
 }
 
 // Hide modal card and components upon clicking modal card exit button 
@@ -523,18 +531,6 @@ function closeMobileOverlays() {
 
 
 // Event listener for mobile tweet button
-let mobileTweetBtn = document.querySelector("#mobileTweetBtn");
-mobileTweetBtn.addEventListener("click", () => {
-    // Show mobile (same as modal) tweet screen 
-    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
-    modal.className = "absolute z-20 h-full w-full bg-white rounded-lg";
-    modalStatusCard.className = "flex flex-col relative px-5 pt-2 pb-12 border-gray-100 justify-center border h-full";
-
-    hideMobileFooterNav();
-    showMobileTweetFooter();
-
-
-})
 
 let mobileFooterNav = document.querySelector("#mobileFooterNav");
 
@@ -567,5 +563,25 @@ function hideMobileTweetFooter() {
     
 }
 
+mobileTweetBtn.addEventListener("click", () => {
+    // Show mobile (same as modal) tweet screen 
+    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
+    modal.className = "absolute z-20 h-full w-full bg-white rounded-lg";
+    modalStatusCard.className = "flex flex-col relative px-5 pt-2 pb-12 border-gray-100 justify-center border h-full";
+
+    hideMobileFooterNav();
+    showMobileTweetFooter();
+
+})
+
+// Event listener for submitting a mobile tweet 
+mobileTweetSubmitBtn.addEventListener("click", () => {
+    // Mimick clicking the modalTweetBtn so I don't need to re-write the code for mobile tweet submit btn
+    modalTweetBtn.click();
+
+    // Exit full screen layout
+    showMobileFooterNav();
+    hideMobileTweetFooter();
+})
 
 export { mainTweetBtn, modalTweetBtn };
