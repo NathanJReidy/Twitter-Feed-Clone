@@ -280,7 +280,7 @@ function createInteractiveBar() {
     
     
     let interactiveBar = document.createElement("div");
-    interactiveBar.className = "flex w-full px-2 py-1 justify-start space-x-32";
+    interactiveBar.className = "flex w-10/12 px-2 py-1 justify-between";
 
     // Create reply elements
     const replyClass = document.createElement("div");
