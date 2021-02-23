@@ -196,8 +196,10 @@ modalFile.addEventListener("change", (event) => {
         // Show modal image exit button;
         showModalImageExitBtn();
         // Change modalTweetBtn to blue when image is uploaded
-        modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
-        
+        modalTweetBtn.className = "lg:flex hidden text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
+        // Change mobileTweetSubmitBtn to blue when image is uploaded
+        mobileTweetSubmitBtn.className = "lg:hidden flex text-white items-center text-sm py-1 px-4 bg-blue-500 hover:bg-blue-600 cursor-default rounded-full";
+
         modalGlobalTweetImgSrc = modalFileImgSrc;
     }
 
@@ -584,4 +586,4 @@ mobileTweetSubmitBtn.addEventListener("click", () => {
     hideMobileTweetFooter();
 })
 
-export { mainTweetBtn, modalTweetBtn };
+export { mainTweetBtn, modalTweetBtn, mobileTweetSubmitBtn };

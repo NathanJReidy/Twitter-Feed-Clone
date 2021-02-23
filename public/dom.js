@@ -61,7 +61,7 @@ function createTweetCard(tweet) {
     // Create card for a hidden delete card button 
 
     const deleteCard = document.createElement("div");
-    deleteCard.className = "-mb-6 z-50 bg-white w-1/5 h-12 p-2 shadow-lg rounded-lg hover:bg-gray-100";
+    deleteCard.className = "-ml-12 lg:-mb-6 z-50 bg-white w-1/3 lg:w-1/5 h-12 p-2 shadow-lg rounded-lg hover:bg-gray-100";
     deleteCard.id = `deleteCard${index}`;
 
     const flexDeleteCard = document.createElement("div");
