@@ -494,7 +494,7 @@ function showMobileMenuCard() {
 }
 
 function hideMobileMenuCard() {
-    mobileMenuCard.className = "fixed top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border transform -translate-x-full transition duration-300";
+    mobileMenuCard.className = "fixed opacity-0 top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border transform -translate-x-full transition duration-300";
 }
 
 mobileMenu.addEventListener("click", () => {
