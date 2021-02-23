@@ -21,7 +21,7 @@ function characterLimit(characters, id, div) {
         else if (div === "modal") {
             hideModalProgressBar();
             showModalCharacterCountWatcher(characters);
-            modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full focus:outline-none";
+            modalTweetBtn.className = "lg:flex hidden text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full focus:outline-none";
         }
 
     }

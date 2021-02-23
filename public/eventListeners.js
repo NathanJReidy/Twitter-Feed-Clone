@@ -47,7 +47,7 @@ function focusModalText() {
 // Monitors modal tweet input box for keystrokes
 modalTextArea.addEventListener("keyup", () => {
     modalTextArea.style = `display: flex; height: ${modalTextArea.scrollHeight}px`;
-    modalTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
+    modalTweetBtn.className = "lg:flex hidden text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
     characterLimit(modalTextArea.value, "#resize-ta-modal", "modal");
     focusModalText();
 });
@@ -549,13 +549,13 @@ function hideMobileFooterNav() {
 }
 
 // Change the layout of the mobile tweet card 
-let modalTweetFooterBarWrapper = document.querySelector("#mobileTweetFooterBarWrapper");
-let modalTweetFooterBar = document.querySelector("#mobileTweetFooterBar");
+let modalTweetFooterBarWrapper = document.querySelector("#modalTweetFooterBarWrapper");
+let modalTweetFooterBar = document.querySelector("#modalTweetFooterBar");
 
 // Change the layout of the footer bar on the mobile version
 function showMobileTweetFooter() {
     modalTweetFooterBarWrapper.className = "flex w-full pt-2 justify-between items-center flex-wrap mb-2 border-gray-100 border-t-2";
-    modalTweetFooterBar.className = "flex w-full justify-between space-x-4 items-center flex-wrap";
+    modalTweetFooterBar.className = "flex justify-between space-x-4 items-center flex-wrap";
 
 }
 
