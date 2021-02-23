@@ -467,28 +467,62 @@ function createRetweetCard(index) {
 // not included/pushed to the array of tweet objects. HOWEVER, they can be deleted if the user doesn't
 // want to see them. 
 
+
+
+
 // Event handler for sliding nav bar on mobile
 let mobileMenu = document.querySelector("#mobileMenu");
+let mobileMenuCard = document.querySelector("#mobileMenuCard");
+let exitMobileMenuCard = document.querySelector("#exitMobileMenuCard");
 
 function showMobileOverlay() {
-    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
+    overlay.className = "absolute z-20 bg-black opacity-50 h-full w-full ";
 }
 
 function hideMobileOverlay() {
-    overlay.addEventListener("click", () => {
-        overlay.className="";
-    })
+    overlay.className="";
+}
+
+function showMobileMenuCard() {
+    mobileMenuCard.className = "fixed z-30 top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border";
+}
+
+
+function hideMobileMenuCard() {
+    mobileMenuCard.className = "hidden fixed top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border";
 }
 
 mobileMenu.addEventListener("click", () => {
     // Open mobile menu on screen
+    showMobileMenuCard();
 
     // Display black overlay 
     showMobileOverlay();
 
     // Run event listener overlay so that if user clicks the overlay it makes the menu disappear
-    hideMobileOverlay();
+    closeMobileOverlays();
 })
+
+function closeMobileOverlays() {
+    overlay.addEventListener("click", () => {
+        hideMobileOverlay();
+        hideMobileMenuCard();
+    })
+
+    exitMobileMenuCard.addEventListener("click", () => {
+        hideMobileOverlay();
+        hideMobileMenuCard();
+    })
+}
+
+
+// Event listener for mobile tweet button
+let mobileTweetBtn = document.querySelector("#mobileTweetBtn");
+mobileTweetBtn.addEventListener("click", () => {
+    // Show mobile tweet screen 
+    
+})
+
 
 
 export { mainTweetBtn, modalTweetBtn };
