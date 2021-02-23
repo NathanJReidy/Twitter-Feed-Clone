@@ -483,13 +483,18 @@ function hideMobileOverlay() {
     overlay.className="";
 }
 
+
+// Add animation to mobile menu card by transition between left to right positions
+// using transform / translate. Note that we can't use hidden to hide the card, 
+// because it messes up the translations/transformations. Therefore, we hide
+// the card by using -translate-x-full instead.
+
 function showMobileMenuCard() {
-    mobileMenuCard.className = "fixed z-30 top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border";
+    mobileMenuCard.className = "fixed z-30 top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border transform translate-x-0 transition duration-300";
 }
 
-
 function hideMobileMenuCard() {
-    mobileMenuCard.className = "hidden fixed top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border";
+    mobileMenuCard.className = "fixed top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border transform -translate-x-full transition duration-300";
 }
 
 mobileMenu.addEventListener("click", () => {
