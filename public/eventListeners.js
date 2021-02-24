@@ -141,7 +141,7 @@ modalTweetBtnListener();
 // Hides modal overlay card
 function hideModalOverlayCard() {
     overlay.className="";
-    modal.className="";
+    modal.className="transform translate-y-full transition duration-300";
     modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
     modalTextArea.value = "";
     modalTextArea.style = ""; // Resets the size of the modal text area to the default size
@@ -568,13 +568,26 @@ function hideMobileTweetFooter() {
 mobileTweetBtn.addEventListener("click", () => {
     // Show mobile (same as modal) tweet screen 
     overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
-    modal.className = "absolute z-20 h-full w-full bg-white rounded-lg";
+    
+    showModalLayout();
+    
     modalStatusCard.className = "flex flex-col relative px-5 pt-2 pb-12 border-gray-100 justify-center border h-full";
 
     hideMobileFooterNav();
     showMobileTweetFooter();
 
 })
+
+// Makes the Modal tweet screen occupy the entire screen
+function showModalLayout() {
+    modal.className = "absolute z-20 h-full w-full bg-white rounded-lg transform translate-y-0 transition duration-300";
+}
+
+// Hides the entire Modal tweet screen 
+// function hideModalLayout() {
+//     modal.className = "transform translate-y-full transition duration-300";
+// }
+
 
 // Event listener for submitting a mobile tweet 
 mobileTweetSubmitBtn.addEventListener("click", () => {
@@ -584,6 +597,8 @@ mobileTweetSubmitBtn.addEventListener("click", () => {
     // Exit full screen layout
     showMobileFooterNav();
     hideMobileTweetFooter();
+
+ 
 })
 
 
