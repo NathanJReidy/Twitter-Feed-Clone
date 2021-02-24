@@ -61,7 +61,7 @@ function createTweetCard(tweet) {
     // Create card for a hidden delete card button 
 
     const deleteCard = document.createElement("div");
-    deleteCard.className = "-ml-12 lg:-mb-6 z-50 bg-white w-1/3 lg:w-1/5 h-12 p-2 shadow-lg rounded-lg hover:bg-gray-100";
+    deleteCard.className = "-ml-16 lg:-mb-6 z-50 bg-white w-1/3 lg:w-1/5 h-12 p-2 shadow-lg rounded-lg hover:bg-gray-100";
     deleteCard.id = `deleteCard${index}`;
 
     const flexDeleteCard = document.createElement("div");
@@ -218,7 +218,7 @@ function showModalCharacterCountWatcher(characters) {
 
     // Unhide the modalChacterSurplus div and update the display of number of characters > 280 
     const modalCharacterSurplus = document.querySelector("#modalCharacterSurplus");
-    modalCharacterSurplus.className = "flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300";
+    modalCharacterSurplus.className = "flex justify-center items-center text-lg pr-2 text-red-400 border-r-2 border-gray-300 h-10 w-10";
     modalCharacterSurplus.textContent = modalExcessCharacters;
 }
 

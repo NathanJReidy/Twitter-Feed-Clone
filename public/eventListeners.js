@@ -554,7 +554,7 @@ let modalTweetFooterBar = document.querySelector("#modalTweetFooterBar");
 
 // Change the layout of the footer bar on the mobile version
 function showMobileTweetFooter() {
-    modalTweetFooterBarWrapper.className = "flex w-full pt-2 justify-between items-center flex-wrap mb-2 border-gray-100 border-t-2";
+    modalTweetFooterBarWrapper.className = "flex w-full pt-2 justify-between h-full items-end flex-wrap mb-2 ";
     modalTweetFooterBar.className = "flex justify-between space-x-4 items-center flex-wrap";
 
 }
@@ -573,7 +573,7 @@ mobileTweetBtn.addEventListener("click", () => {
     
     showModalLayout();
     
-    modalStatusCard.className = "flex flex-col relative px-5 pt-2 pb-12 border-gray-100 justify-center border h-full";
+    modalStatusCard.className = "flex flex-col relative px-5 pt-2 pb-2 border-gray-100 border h-full";
 
     hideMobileFooterNav();
     showMobileTweetFooter();
