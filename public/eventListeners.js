@@ -95,8 +95,8 @@ function deleteModalTweetImage() {
 
 // Display overlay and modal for new tweet on click of LHS tweet btn
 leftTweetBtn.addEventListener("click", () => {
-    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
-    modal.className = "absolute z-20 h-1/2 w-1/2 bg-white rounded-lg mt-8";
+    overlay.className = "fixed z-10 bg-black opacity-50 h-full w-full";
+    modal.className = "fixed z-20 h-1/2 w-1/2 bg-white rounded-lg mt-8";
     modalStatusCard.className = "flex flex-col relative px-5 py-2 border-gray-100 justify-center border h-full";
 })
 
@@ -104,6 +104,7 @@ leftTweetBtn.addEventListener("click", () => {
 overlay.addEventListener("click", () => {
     hideModalOverlayCard();
     hideModalProgressBar();
+    showMobileFooterNav();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     deleteModalTweetImage();
@@ -151,6 +152,7 @@ function hideModalOverlayCard() {
 modalExit.addEventListener("click", () => {
     hideModalOverlayCard();
     hideModalProgressBar();
+    showMobileFooterNav();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     deleteModalTweetImage();
@@ -486,7 +488,7 @@ let mobileMenuCard = document.querySelector("#mobileMenuCard");
 let exitMobileMenuCard = document.querySelector("#exitMobileMenuCard");
 
 function showMobileOverlay() {
-    overlay.className = "absolute z-20 bg-black opacity-50 h-full w-full ";
+    overlay.className = "fixed z-20 bg-black opacity-50 h-full w-full ";
 }
 
 function hideMobileOverlay() {
@@ -567,7 +569,7 @@ function hideMobileTweetFooter() {
 
 mobileTweetBtn.addEventListener("click", () => {
     // Show mobile (same as modal) tweet screen 
-    overlay.className = "absolute z-10 bg-black opacity-50 h-full w-full";
+    overlay.className = "fixed z-10 bg-black opacity-50 h-full w-full";
     
     showModalLayout();
     
@@ -580,7 +582,7 @@ mobileTweetBtn.addEventListener("click", () => {
 
 // Makes the Modal tweet screen occupy the entire screen
 function showModalLayout() {
-    modal.className = "absolute z-20 h-full w-full bg-white rounded-lg transform translate-y-0 transition duration-300";
+    modal.className = "fixed z-20 h-full w-full bg-white rounded-lg transform translate-y-0 transition duration-300";
 }
 
 // Hides the entire Modal tweet screen 
