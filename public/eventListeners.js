@@ -578,6 +578,9 @@ mobileTweetBtn.addEventListener("click", () => {
     hideMobileFooterNav();
     showMobileTweetFooter();
 
+    // Focus modal text so user is ready to type straight away 
+    focusModalText();
+
 })
 
 // Makes the Modal tweet screen occupy the entire screen
