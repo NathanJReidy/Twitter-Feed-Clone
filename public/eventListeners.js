@@ -1,7 +1,7 @@
 import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
 import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp } from './logic.js';
-import { deleteTweetImage, deleteModalTweetImage, hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard } from './DOMchanges.js';
+import { deleteTweetImage, deleteModalTweetImage, hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard } from './DOMchanges.js';
 
 // Declare variables that will be needed
 
@@ -274,13 +274,11 @@ deleteDefaultBtnListener();
 // both the default delete card button and the default tweet card itself disappear
 function deleteDefaultTweet(index) {
     const selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${index}`);
-    const selectedFeedCard = document.querySelector(`#feedCard${index}`);
-    const blocker = document.querySelector("#blockerLayer");
 
     selectedDefaultDeleteCard.addEventListener('click', () => {
         hideDefaultDeleteCard(index);
-        selectedFeedCard.style.display = 'none';
-        hideBlocker();
+        hideDefaultTweetCard(index);
+        hideBlocker(index);
     })
 }
 
@@ -292,7 +290,7 @@ function hideDefaultBlockerLayer(index) {
     blocker.addEventListener('click', () => {
         hideDefaultDeleteCard(index);
         showDefaultDeleteIcon(index);
-        blocker.className = "hidden absolute z-10 h-full w-full";
+        hideBlocker(index);
     })
 }
 
@@ -533,7 +531,9 @@ mobileTweetSubmitBtn.addEventListener("click", () => {
 
 // Scroll page to top of screen when footer home icon is clicked
 let footerHomeIcon = document.querySelector("#footerHomeIcon");
-footerHomeIcon.addEventListener("click", windowScrollUp());
+footerHomeIcon.addEventListener("click", () => {
+    windowScrollUp();
+});
 
 
 

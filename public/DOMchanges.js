@@ -88,6 +88,12 @@ function hideDefaultDeleteCard(index) {
     selectedDefaultDeleteCard.style.display = 'none';
 }
 
+function hideDefaultTweetCard(index) {
+    const selectedFeedCard = document.querySelector(`#feedCard${index}`);
+    selectedFeedCard.style.display = 'none';
+}
 
 
-export { deleteTweetImage, deleteModalTweetImage, hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard }
+
+
+export { deleteTweetImage, deleteModalTweetImage, hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard }
