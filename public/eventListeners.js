@@ -1,6 +1,7 @@
 import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
-import { createTweet, allTweets } from './logic.js';
+import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp } from './logic.js';
+import { deleteTweetImage, deleteModalTweetImage, hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard } from './DOMchanges.js';
 
 // Declare variables that will be needed
 
@@ -12,7 +13,6 @@ let modal = document.querySelector("#modal");
 let modalStatusCard = document.querySelector("#modalStatusCard");
 let modalTweetBtn = document.querySelector("#modalTweetBtn");
 let mobileTweetSubmitBtn = document.querySelector("#mobileTweetSubmitBtn");
-
 let modalTextArea = document.querySelector("#resize-ta-modal");
 let modalExit = document.querySelector("#modalExit");
 let image = document.querySelector("#image");
@@ -27,24 +27,6 @@ textarea.addEventListener("keyup", () => {
     characterLimit(textarea.value, "#resize-ta", "main");
     focusMainText();
 });
-
-// Focuses main text area after highlighting excess characters 
-function focusMainText() {
-    textarea.focus(); //sets focus to element
-    let val = textarea.value; //store the value of the element
-    textarea.value = ''; //clear the value of the element
-    textarea.value = val; //set that value back.
-}
-
-
-// Focuses modal text area after highlighting excess characters 
-function focusModalText() {
-    modalTextArea.focus(); //sets focus to element
-    let val = modalTextArea.value; //store the value of the element
-    modalTextArea.value = ''; //clear the value of the element
-    modalTextArea.value = val; //set that value back.
-}
-
 
 // Monitors modal tweet input box for keystrokes
 modalTextArea.addEventListener("keyup", () => {
@@ -81,23 +63,13 @@ function mainTweetBtnListener() {
 // Run mainTweetBtnListener globally
 mainTweetBtnListener();
 
-function deleteTweetImage() {
-    const tweetImage = document.querySelector("#tweetImageID");
-    tweetImage.style.display = "none";
-    globalTweetImgSrc = "";
-}
-
-function deleteModalTweetImage() {
-    const modalTweetImage = document.querySelector("#modalTweetImageID");
-    modalTweetImage.style.display = "none";
-    modalGlobalTweetImgSrc = "";
-}
 
 // Display overlay and modal for new tweet on click of LHS tweet btn
 leftTweetBtn.addEventListener("click", () => {
     overlay.className = "fixed z-10 bg-black opacity-50 h-full w-full";
     modal.className = "fixed z-20 h-1/2 w-1/2 bg-white rounded-lg mt-8";
     modalStatusCard.className = "flex flex-col relative px-5 py-2 border-gray-100 justify-center border h-full";
+    focusModalText();
 })
 
 // Hide overlay on click 
@@ -111,9 +83,7 @@ overlay.addEventListener("click", () => {
     modalTextArea.style = ""; // Resets the size of the text area to the default size
 })
 
-
-
-// NEW, MODULAR MODAL TWEET BTN EVENT LISTENER
+// MODAL TWEET BTN EVENT LISTENER
 function modalTweetBtnListener() {
     modalTweetBtn.addEventListener("click", () => {
         if (modalTextArea.value.length <= 280) {
@@ -139,14 +109,6 @@ function modalTweetBtnListener() {
 // Run modalTweetBtnListener globally
 modalTweetBtnListener();
 
-// Hides modal overlay card
-function hideModalOverlayCard() {
-    overlay.className="";
-    modal.className="transform translate-y-full transition duration-300";
-    modalStatusCard.className = "hidden px-5 py-2 border-gray-100 justify-center border rounded-lg h-full";
-    modalTextArea.value = "";
-    modalTextArea.style = ""; // Resets the size of the modal text area to the default size
-}
 
 // Hide modal card and components upon clicking modal card exit button 
 modalExit.addEventListener("click", () => {
@@ -235,51 +197,29 @@ function deleteBtnListener() {
     })
 }
 
-// Make three horizonal dots disappear
-function hideDeleteIcon(index) {
-    let selectedDeleteBtn = document.querySelector(`#deleteBtn${index}`);
-    selectedDeleteBtn.style.display = 'none';
-}
-
-function showDeleteCard(index) {
-    let selectedDeletedCard = document.querySelector(`#deleteCard${index}`);
-    selectedDeletedCard.style.display = 'flex';
-
-}
-
-// Creates a blocker overlay 
-function showBlockerLayer(index) {
-    const blocker = document.querySelector("#blockerLayer");
-    blocker.className = "absolute z-10 h-full w-full";
-
-}
 
 // If user clicks anywhere except the delete button,
 // the delete button disappears and the three dots delete button icon reappears
 function hideBlockerLayer(index) {
     const blocker = document.querySelector("#blockerLayer");
-    const selectedDeleteBtn = document.querySelector(`#deleteBtn${index}`);
-    const selectedDeleteCard = document.querySelector(`#deleteCard${index}`);
 
     blocker.addEventListener('click', () => {
-        selectedDeleteCard.style.display = 'none';
-        selectedDeleteBtn.style.display = 'flex';
-        blocker.className = "hidden absolute z-10 h-full w-full";
+        hideDeleteCard(index);
+        showDeleteIcon(index);
+        hideBlocker(index);
     })
 
 }
 
+// If user clicks the delete card button, 
+// both the delete card button and the tweet card itself disappear
 function deleteTweet(index) {
     const selectedDeleteCard = document.querySelector(`#deleteCard${index}`);
-    const selectedCard = document.querySelector(`#tweetCard${index}`);
-    const blocker = document.querySelector("#blockerLayer");
-    
-    // If user clicks the delete card button, 
-    // both the delete card button and the tweet card itself disappear
+
     selectedDeleteCard.addEventListener('click', () => {
-        selectedDeleteCard.style.display = 'none';
-        selectedCard.style.display = 'none';
-        blocker.className = "hidden absolute z-10 h-full w-full";
+        hideDeleteCard(index);
+        hideTweetCard(index);
+        hideBlocker(index);
     })
 }
 
@@ -305,20 +245,6 @@ modalImageExitBtn.addEventListener("click", () => {
     deleteModalTweetImage();
     hideModalImageExitBtn();
 })
-
-
-// Make three default horizonal dots disappear for default delete icon
-function hideDefaultDeleteIcon(index) {
-    let selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${index}`);
-    selectedDefaultDeleteBtn.style.display = 'none';
-}
-
-// Display delete card for default delete button 
-function showDefaultDeleteCard(index) {
-    let selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${index}`);
-    selectedDefaultDeleteCard.style.display = 'flex';
-}
-
 
 // Event listeners for delete buttons and cards that are from the default tweet placeholders
 function deleteDefaultBtnListener() {
@@ -352,9 +278,9 @@ function deleteDefaultTweet(index) {
     const blocker = document.querySelector("#blockerLayer");
 
     selectedDefaultDeleteCard.addEventListener('click', () => {
-        selectedDefaultDeleteCard.style.display = 'none';
+        hideDefaultDeleteCard(index);
         selectedFeedCard.style.display = 'none';
-        blocker.className = "hidden absolute z-10 h-full w-full";
+        hideBlocker();
     })
 }
 
@@ -362,12 +288,10 @@ function deleteDefaultTweet(index) {
 // the default delete button disappears and the three dots default delete button icon reappears
 function hideDefaultBlockerLayer(index) {
     const blocker = document.querySelector("#blockerLayer");
-    const selectedDefaultDeleteBtn = document.querySelector(`#deleteDefaultBtn${index}`);
-    const selectedDefaultDeleteCard = document.querySelector(`#TweetDeleteCard${index}`);
 
     blocker.addEventListener('click', () => {
-        selectedDefaultDeleteCard.style.display = 'none';
-        selectedDefaultDeleteBtn.style.display = 'flex';
+        hideDefaultDeleteCard(index);
+        showDefaultDeleteIcon(index);
         blocker.className = "hidden absolute z-10 h-full w-full";
     })
 }
@@ -609,11 +533,9 @@ mobileTweetSubmitBtn.addEventListener("click", () => {
 
 // Scroll page to top of screen when footer home icon is clicked
 let footerHomeIcon = document.querySelector("#footerHomeIcon");
-footerHomeIcon.addEventListener("click", () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-});
+footerHomeIcon.addEventListener("click", windowScrollUp());
 
 
 
 
-export { mainTweetBtn, modalTweetBtn, mobileTweetSubmitBtn };
+export { mainTweetBtn, modalTweetBtn, mobileTweetSubmitBtn, textarea, modalTextArea, globalTweetImgSrc, modalGlobalTweetImgSrc, overlay, modal, modalStatusCard };

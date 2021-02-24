@@ -1,5 +1,7 @@
-// Store all current tweets in an array of objects
+import { textarea, modalTextArea } from './eventListeners.js';
 
+
+// Store all current tweets in an array of objects
 let allTweets = [];
 
 function createTweet(text, image, likes, retweets) {
@@ -11,6 +13,31 @@ function createTweet(text, image, likes, retweets) {
     })
 
 }
+
+// Focuses main text area after highlighting excess characters 
+function focusMainText() {
+    textarea.focus(); //sets focus to element
+    let val = textarea.value; //store the value of the element
+    textarea.value = ''; //clear the value of the element
+    textarea.value = val; //set that value back.
+}
+
+
+// Focuses modal text area after highlighting excess characters 
+function focusModalText() {
+    modalTextArea.focus(); //sets focus to element
+    let val = modalTextArea.value; //store the value of the element
+    modalTextArea.value = ''; //clear the value of the element
+    modalTextArea.value = val; //set that value back.
+}
+
+function windowScrollUp() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+
+
+
 
 
 // import ProgressBar from 'progressbar.js';
@@ -52,4 +79,4 @@ function createProgressBar(characterLimitDecimal, ID) {
 
 }
 
-export { createProgressBar, createTweet, allTweets };
+export { createProgressBar, createTweet, allTweets, focusMainText, focusModalText, windowScrollUp };
