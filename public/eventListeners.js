@@ -586,4 +586,14 @@ mobileTweetSubmitBtn.addEventListener("click", () => {
     hideMobileTweetFooter();
 })
 
+
+// Scroll page to top of screen when footer home icon is clicked
+let footerHomeIcon = document.querySelector("#footerHomeIcon");
+footerHomeIcon.addEventListener("click", () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+});
+
+
+
+
 export { mainTweetBtn, modalTweetBtn, mobileTweetSubmitBtn };
