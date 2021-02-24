@@ -1,18 +1,22 @@
-import { globalTweetImgSrc, modalGlobalTweetImgSrc, overlay, modal, modalStatusCard, modalTextArea } from './eventListeners.js';
+import { globalTweetImgSrc, overlay, modal, modalStatusCard, modalTextArea } from './eventListeners.js';
 
 // Deletes tweet image from main tweet screen
-function deleteTweetImage() {
-    const tweetImage = document.querySelector("#tweetImageID");
-    tweetImage.style.display = "none";
-    globalTweetImgSrc = "";
-};
+// function deleteTweetImage() {
+//     let tweetImage = document.querySelector("#tweetImageID");
+//     tweetImage.style.display = "none";
+//     globalTweetImgSrc = "";
+// };
 
-// Deletes tweet image from modal tweet screen
-function deleteModalTweetImage() {
-    const modalTweetImage = document.querySelector("#modalTweetImageID");
-    modalTweetImage.style.display = "none";
-    modalGlobalTweetImgSrc = "";
-};
+// // Deletes tweet image from modal tweet screen
+// function deleteModalTweetImage() {
+//     let modalTweetImage = document.querySelector("#modalTweetImageID");
+//     modalTweetImage.style.display = "none";
+//     //console.log(`modalGlobalTweetImgSrc is ${modalGlobalTweetImgSrc}`);
+//     //modalGlobalTweetImgSrc = "test";
+//     //console.log(`modalGlobalTweetImgSrc is ${modalGlobalTweetImgSrc}`);
+// };
+
+
 
 // Hides modal overlay card
 function hideModalOverlayCard() {
@@ -96,4 +100,4 @@ function hideDefaultTweetCard(index) {
 
 
 
-export { deleteTweetImage, deleteModalTweetImage, hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard }
+export { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard }

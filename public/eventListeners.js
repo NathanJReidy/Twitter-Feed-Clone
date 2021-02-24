@@ -1,7 +1,7 @@
 import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
 import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp } from './logic.js';
-import { deleteTweetImage, deleteModalTweetImage, hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard } from './DOMchanges.js';
+import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard } from './DOMchanges.js';
 
 // Declare variables that will be needed
 
@@ -175,6 +175,30 @@ modalFile.addEventListener("change", (event) => {
 modalImage.addEventListener("click", () => {
     modalFile.click(); 
 })
+
+
+// Deletes tweet image from main tweet screen
+function deleteTweetImage() {
+    let tweetImage = document.querySelector("#tweetImageID");
+    tweetImage.style.display = "none";
+    globalTweetImgSrc = "";
+};
+
+// Deletes tweet image from modal tweet screen
+function deleteModalTweetImage() {
+    let modalTweetImage = document.querySelector("#modalTweetImageID");
+    modalTweetImage.style.display = "none";
+    console.log(`modalGlobalTweetImgSrc is ${modalGlobalTweetImgSrc}`);
+    modalGlobalTweetImgSrc = "";
+};
+
+
+
+
+
+
+
+
 
 
 // Create event listeners to delete each card when horizonal delete button is clicked
