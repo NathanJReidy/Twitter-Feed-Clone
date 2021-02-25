@@ -31,6 +31,22 @@ function focusModalText() {
     modalTextArea.value = val; //set that value back.
 }
 
+// Updates the number of likes on the liked card, in the array of objects
+function updateLikeCount(index) {
+    allTweets[index].likes += 1;
+}
+
+// Updates the number of retweets on the retweeted card, in the array of objects 
+function updateRetweetCount(index) {
+    allTweets[index].retweets += 1;
+}
+
+
+
+
+
+
+
 function windowScrollUp() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
@@ -79,4 +95,4 @@ function createProgressBar(characterLimitDecimal, ID) {
 
 }
 
-export { createProgressBar, createTweet, allTweets, focusMainText, focusModalText, windowScrollUp };
+export { createProgressBar, createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount };

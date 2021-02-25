@@ -1,7 +1,7 @@
 import { characterLimit } from './main.js';
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
-import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp } from './logic.js';
-import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard } from './DOMchanges.js';
+import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount } from './logic.js';
+import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout } from './DOMchanges.js';
 
 // Declare variables that will be needed
 
@@ -192,15 +192,6 @@ function deleteModalTweetImage() {
     modalGlobalTweetImgSrc = "";
 };
 
-
-
-
-
-
-
-
-
-
 // Create event listeners to delete each card when horizonal delete button is clicked
 function deleteBtnListener() {
     let deleteBtns = document.querySelectorAll('[id^="deleteBtn"]');
@@ -360,71 +351,9 @@ document.addEventListener('click', event => {
 
 
 
-// Updates the number of likes on the liked card, in the array of objects
-function updateLikeCount(index) {
-    allTweets[index].likes += 1;
-}
-
-// Displays number of likes on the tweet 
-function displayLikeCount(index) {
-
-    // Change colour of like icon on selected like card
-    let selectedLikeIcon = document.querySelector(`#likeIcon${index}`);
-    selectedLikeIcon.setAttribute("class", "p-2 h-10 w-10 text-red-500 rounded-full hover:text-red-400 hover:bg-red-100");
-
-    // Change display of like count on selected like card, except when like count is 0
-    let selectedLikeNumber = document.querySelector(`#likeNumber${index}`);
-    if (allTweets[index].likes != 0) {
-        selectedLikeNumber.textContent = allTweets[index].likes;
-    }
-
-}
-
-// Updates the number of retweets on the retweeted card, in the array of objects 
-function updateRetweetCount(index) {
-    allTweets[index].retweets += 1;
-}
-
-// Displays number of retweets on the tweet 
-function displayRetweetCount(index) {
-
-    // Change colour of retweet on selected retweet card 
-    let selectedRetweetIcon = document.querySelector(`#retweetIcon${index}`);
-    selectedRetweetIcon.setAttribute("class", "p-2 h-10 w-10 text-green-500 rounded-full hover:text-green-400 hover:bg-green-100");
-
-    // Change display of retweet count on selected retweet card
-    let selectedRetweetNumber = document.querySelector(`#retweetNumber${index}`);
-    selectedRetweetNumber.textContent = allTweets[index].retweets;
-
-}
-
-// Creates a retweeted card and adds it to the feed
-function createRetweetCard(index) {
-    let retweetedText = allTweets[index].text;
-    let retweetedImage = allTweets[index].image;
-    let retweetedLikes = allTweets[index].likes;
-    let retweetedRetweets = allTweets[index].retweets;
-
-    createTweet(retweetedText, retweetedImage, retweetedLikes, retweetedRetweets);
-    createTweetCard(retweetedText);
-    createTweetImageCard(retweetedImage);
-    createInteractiveBar();
-
-    // Display the retweeted card's retweets and likes
-    let retweetedCardIndex = allTweets.length - 1;
-    displayLikeCount(retweetedCardIndex);
-    displayRetweetCount(retweetedCardIndex);
-
-       
-    deleteBtnListener();
-    deleteTweetImage();
-
-}
-
 // NB: The placeholder tweet cards CANNOT be retweeted or liked, because they are deliberately 
 // not included/pushed to the array of tweet objects. HOWEVER, they can be deleted if the user doesn't
 // want to see them. 
-
 
 
 
@@ -432,28 +361,6 @@ function createRetweetCard(index) {
 let mobileMenu = document.querySelector("#mobileMenu");
 let mobileMenuCard = document.querySelector("#mobileMenuCard");
 let exitMobileMenuCard = document.querySelector("#exitMobileMenuCard");
-
-function showMobileOverlay() {
-    overlay.className = "fixed z-20 bg-black opacity-50 h-full w-full ";
-}
-
-function hideMobileOverlay() {
-    overlay.className="";
-}
-
-
-// Add animation to mobile menu card by transition between left to right positions
-// using transform / translate. Note that we can't use hidden to hide the card, 
-// because it messes up the translations/transformations. Therefore, we hide
-// the card by using -translate-x-full instead.
-
-function showMobileMenuCard() {
-    mobileMenuCard.className = "fixed z-30 top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border transform translate-x-0 transition duration-300";
-}
-
-function hideMobileMenuCard() {
-    mobileMenuCard.className = "fixed opacity-0 top-0 left-0 w-3/4 h-full bg-white lg:hidden p-2 border transform -translate-x-full transition duration-300";
-}
 
 mobileMenu.addEventListener("click", () => {
     // Open mobile menu on screen
@@ -478,41 +385,15 @@ function closeMobileOverlays() {
     })
 }
 
-
-
 // Event listener for mobile tweet button
 
 let mobileFooterNav = document.querySelector("#mobileFooterNav");
-
-// Function to show fixed footer nav on tweet click submit button
-function showMobileFooterNav() {
-    mobileFooterNav.className = "fixed bottom-0 w-full lg:hidden z-50 bg-white";
-}
-
-// Function to hide fixed footer nav bar when mobile tweet button is clicked
-function hideMobileFooterNav() {
-    mobileFooterNav.className = "hidden fixed bottom-0 w-full lg:hidden z-50 bg-white";
-}
 
 // Change the layout of the mobile tweet card 
 let modalTweetFooterBarWrapper = document.querySelector("#modalTweetFooterBarWrapper");
 let modalTweetFooterBar = document.querySelector("#modalTweetFooterBar");
 
-// Change the layout of the footer bar on the mobile version
-function showMobileTweetFooter() {
-    modalTweetFooterBarWrapper.className = "flex w-full pt-2 justify-between h-full items-end flex-wrap mb-2 ";
-    modalTweetFooterBar.className = "flex justify-between space-x-4 items-center flex-wrap";
-
-}
-
-// Hide the mobile layout settings after the mobile/modal tweet submit button is clicked
-function hideMobileTweetFooter() {
-
-    modalTweetFooterBarWrapper.className = "flex pt-2 ml-16 justify-between items-center flex-wrap mb-2 border-gray-100 border-t-2";
-    modalTweetFooterBar.className = "flex justify-around space-x-4 items-center flex-wrap";
-    
-}
-
+// Listens to mobile tweet button 
 mobileTweetBtn.addEventListener("click", () => {
     // Show mobile (same as modal) tweet screen 
     overlay.className = "fixed z-10 bg-black opacity-50 h-full w-full";
@@ -529,17 +410,6 @@ mobileTweetBtn.addEventListener("click", () => {
 
 })
 
-// Makes the Modal tweet screen occupy the entire screen
-function showModalLayout() {
-    modal.className = "fixed z-20 h-full w-full bg-white rounded-lg transform translate-y-0 transition duration-300";
-}
-
-// Hides the entire Modal tweet screen 
-// function hideModalLayout() {
-//     modal.className = "transform translate-y-full transition duration-300";
-// }
-
-
 // Event listener for submitting a mobile tweet 
 mobileTweetSubmitBtn.addEventListener("click", () => {
     // Mimick clicking the modalTweetBtn so I don't need to re-write the code for mobile tweet submit btn
@@ -548,8 +418,6 @@ mobileTweetSubmitBtn.addEventListener("click", () => {
     // Exit full screen layout
     showMobileFooterNav();
     hideMobileTweetFooter();
-
- 
 })
 
 
@@ -559,7 +427,15 @@ footerHomeIcon.addEventListener("click", () => {
     windowScrollUp();
 });
 
+// Scroll page to top of screen when main home icon is clicked
+let mainHomeIcon = document.querySelector("#mainHomeIcon");
+mainHomeIcon.addEventListener("click", () => {
+    windowScrollUp();
+});
 
 
 
-export { mainTweetBtn, modalTweetBtn, mobileTweetSubmitBtn, textarea, modalTextArea, globalTweetImgSrc, modalGlobalTweetImgSrc, overlay, modal, modalStatusCard };
+
+
+export { mainTweetBtn, modalTweetBtn, mobileTweetSubmitBtn, textarea, modalTextArea, globalTweetImgSrc, modalGlobalTweetImgSrc, overlay, modal, modalStatusCard, deleteBtnListener, deleteTweetImage, mobileMenu, mobileMenuCard, exitMobileMenuCard, mobileFooterNav, modalTweetFooterBarWrapper, modalTweetFooterBar };
+
