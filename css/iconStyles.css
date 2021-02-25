@@ -1,0 +1,46 @@
+
+
+#replyText {
+    visibility: hidden;
+}
+
+
+#replyIcon:hover ~ #replyText {
+    visibility: visible;
+
+}
+
+#retweetText {
+    visibility: hidden;
+}
+
+
+#retweetIcon:hover ~ #retweetText {
+    visibility: visible;
+
+}
+
+#likeText {
+    visibility: hidden;
+}
+
+
+#likeIcon:hover ~ #likeText {
+    visibility: visible;
+
+}
+
+#shareText {
+    visibility: hidden;
+}
+
+
+#shareIcon:hover ~ #shareText {
+    visibility: visible;
+
+}
+/* 
+#bell {
+    stroke:black;
+    fill: white;
+} */
