@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-css": "tailwindcss build src/styles.css -o public/css/styles.css"
+    "build-css": "tailwindcss build src/styles.css -o dist/css/styles.css",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,9 @@
     "postcss": "^8.2.5",
     "progressbar.js": "^1.1.0",
     "tailwindcss": "^2.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0"
   }
 }
