@@ -3,6 +3,7 @@ import { showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, 
 
 var ProgressBar = require('progressbar.js');
 
+
 // Store all current tweets in an array of objects
 let allTweets = [];
 
