@@ -21,7 +21,7 @@ let modalImage = document.querySelector("#modalImage");
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
-    //textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
+    textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
     characterLimit(textarea.value, "#resize-ta", "main");
     focusMainText();
