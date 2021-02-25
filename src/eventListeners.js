@@ -1,6 +1,5 @@
-import { characterLimit } from './main.js';
-import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './dom.js';
-import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount } from './logic.js';
+import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './DOMmain.js';
+import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount, characterLimit } from './logic.js';
 import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout } from './DOMchanges.js';
 
 // Declare variables that will be needed

@@ -1,5 +1,4 @@
 // The purpose of this js file is to manipulate the DOM.
-
 import { allTweets, createProgressBar } from './logic.js';
 
 let index = 0;
@@ -124,7 +123,7 @@ function createTweetCard(tweet) {
 
 }
 
-// Adds selected image to below 'What's happening' status bar
+// Adds selected image to below 'What's happening' main status bar
 function createTweetImage(imageSrc) {
     const imageExitBtn = document.querySelector("#imageExitBtn");
 
@@ -134,7 +133,6 @@ function createTweetImage(imageSrc) {
     newImg.src = imageSrc; 
 
     imageExitBtn.after(newImg);
-
 }
 
 // Add uploaded image to the Feed
@@ -151,11 +149,8 @@ function createTweetImageCard(imageSrc) {
     index += 1;
 }
 
-
-
 // Adds selected image to below 'What's happening' modal status bar
 function createModalTweetImage(imageSrc) {
-
     const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
     
     const wrappingModalDiv = document.createElement("div");
@@ -169,9 +164,7 @@ function createModalTweetImage(imageSrc) {
     wrappingModalDiv.appendChild(newImg);
 
     modalImageExitBtn.after(wrappingModalDiv);
-
 }
-
 
 
 // If the character count exceeds 280, this unhides the character surplus div and updates it based on number of characters that exceed 280
@@ -209,7 +202,6 @@ function hideProgressBar() {
     const progressBar = document.querySelector("#progressBar");
     progressBar.className = "hidden flex justify-center items-center text-lg pr-2 h-10 w-10";
 }
-
 
 // The below functions replicate the above, except with the modal status bar 
 // If the modal character count exceeds 280, this unhides the modal character surplus div and updates it based on number of characters that exceed 280
@@ -270,14 +262,12 @@ function hideModalImageExitBtn() {
     modalImageExitBtn.className = "hidden absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3";
 }
 
-
 // Add interactive bar (reply, retweet, like & share) to tweet cards
 
 let interactiveBarIndex = 0;
 
 function createInteractiveBar() {
     let tweetImageCardID = document.querySelector(`#tweetImageCardID${interactiveBarIndex}`);
-    
     
     let interactiveBar = document.createElement("div");
     interactiveBar.className = "flex w-10/12 px-2 py-1 justify-between";
@@ -313,7 +303,6 @@ function createInteractiveBar() {
     replyClass.appendChild(replyText);
     // Append replyClass to Interactive Bar
     interactiveBar.appendChild(replyClass);
-
 
     // Create retweet elements:
     const retweetClass = document.createElement("div");
@@ -395,7 +384,6 @@ function createInteractiveBar() {
 
     const sharePath = document.querySelector("#sharePath").cloneNode();
     shareIcon.appendChild(sharePath);
-
 
     // Create Span
     const shareText = document.createElement("span");

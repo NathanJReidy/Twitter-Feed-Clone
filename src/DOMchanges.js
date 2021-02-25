@@ -1,6 +1,6 @@
 import { globalTweetImgSrc, overlay, modal, modalStatusCard, modalTextArea, deleteBtnListener, deleteTweetImage, mobileMenu, mobileMenuCard, exitMobileMenuCard, mobileFooterNav, modalTweetFooterBarWrapper, modalTweetFooterBar } from './eventListeners.js';
 import { allTweets, createTweet } from './logic.js';
-import { createTweetCard, createTweetImageCard, createInteractiveBar } from './dom.js';
+import { createTweetCard, createTweetImageCard, createInteractiveBar } from './DOMmain.js';
 
 
 
