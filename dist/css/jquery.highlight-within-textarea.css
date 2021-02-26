@@ -3,6 +3,10 @@
 	position: relative;
 	overflow: hidden !important;
 	-webkit-text-size-adjust: none !important;
+	background-color: white;
+	margin-top: 0.5rem;
+	width: 100%;
+	outline: hidden;
 }
 
 .hwt-backdrop {
@@ -37,12 +41,35 @@
 	overflow-y: auto !important;
 }
 
+.hwt-input:focus {
+	outline-color: #495057;
+}
+
 .hwt-content {
 	border: none;
 	background: none transparent !important;
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	color: inherit;
+	font: inherit;
 }
 
 .hwt-content mark {
 	padding: 0 !important;
 	color: inherit;
+	border-radius: 3px;
+	background-color: #dd7d92;
+}
+
+.hwt-content mark.red {
+	background-color: #ffc9c9;
+}
+
+.hwt-content mark.blue {
+	background-color: #a3daff;
+}
+
+.hwt-content mark.yellow {
+	background-color: #ffec99;
 }
