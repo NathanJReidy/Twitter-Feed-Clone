@@ -112,6 +112,25 @@ function characterLimit(characters, id, div) {
 
     }
 
+    else if (characters.length == 0) {
+        if (div === "main") {
+            hideProgressBar();
+            hideCharacterCountWatcher(characters);
+            //deleteProgressBar(characters);
+            mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full focus:outline-none";
+        }
+
+        else if (div === "modal") {
+            hideModalProgressBar();
+            hideModalCharacterCountWatcher(characters);
+            //deleteModalProgressBar(characters);
+            modalTweetBtn.className = "lg:flex hidden text-white py-2 px-4 bg-blue-400 cursor-default opacity-80 rounded-full focus:outline-none";
+            mobileTweetSubmitBtn.className = "lg:hidden flex text-white items-center text-sm py-1 px-4 bg-blue-400 cursor-default opacity-80 rounded-full";
+        }
+        
+
+    }
+
     else {
         if (div === "main") {
             hideCharacterCountWatcher();

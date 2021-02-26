@@ -40,7 +40,8 @@ modalTextArea.addEventListener("keyup", () => {
 // Listens for main tweet button being clicked and creates new tweet if number of characters does not exceed 280
 function mainTweetBtnListener() {
     mainTweetBtn.addEventListener("click", () => {
-        if (textarea.value.length <= 280) {
+        if ((textarea.value.length <= 280 && textarea.value.length != 0) || (textarea.value.length <= 280 && globalTweetImgSrc != "")) {
+            console.log(`textarea.value.length equals ${textarea.value.length}`);
             createTweet(textarea.value, globalTweetImgSrc, 0, 0);
             createTweetCard(textarea.value);
             createTweetImageCard(globalTweetImgSrc);
@@ -85,7 +86,7 @@ overlay.addEventListener("click", () => {
 // MODAL TWEET BTN EVENT LISTENER
 function modalTweetBtnListener() {
     modalTweetBtn.addEventListener("click", () => {
-        if (modalTextArea.value.length <= 280) {
+        if ((modalTextArea.value.length <= 280 && modalTextArea.value.length != 0) || (modalTextArea.value.length <= 280 && modalGlobalTweetImgSrc != "")) {
             createTweet(modalTextArea.value, modalGlobalTweetImgSrc, 0, 0);
             createTweetCard(modalTextArea.value);
             hideModalOverlayCard();
