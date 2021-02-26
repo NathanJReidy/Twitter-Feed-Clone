@@ -1,9 +1,12 @@
 import { textarea, modalTextArea, mainTweetBtn, modalTweetBtn, mobileTweetSubmitBtn } from './eventListeners.js';
 import { showCharacterCountWatcher, hideCharacterCountWatcher, showProgressBar, deleteProgressBar, hideProgressBar, hideModalProgressBar, showModalCharacterCountWatcher, hideModalCharacterCountWatcher, deleteModalProgressBar, showModalProgressBar } from './DOMmain.js';
 
-import _ from 'highlight-within-textarea';
+// import _ from 'highlight-within-textarea';
+
+import highlightWithinTextarea from 'highlight-within-textarea';
 
 var ProgressBar = require('progressbar.js');
+
 
 
 // Store all current tweets in an array of objects
