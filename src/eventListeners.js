@@ -66,7 +66,7 @@ mainTweetBtnListener();
 // Display overlay and modal for new tweet on click of LHS tweet btn
 leftTweetBtn.addEventListener("click", () => {
     overlay.className = "fixed z-10 bg-black opacity-50 h-full w-full";
-    modal.className = "fixed z-20 h-1/2 w-1/2 bg-white rounded-lg mt-8";
+    modal.className = "fixed z-20 h-3/4 w-1/2 bg-white rounded-lg mt-8";
     modalStatusCard.className = "flex flex-col relative px-5 py-2 border-gray-100 justify-center border h-full";
     focusModalText();
 })
