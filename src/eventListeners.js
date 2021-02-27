@@ -93,6 +93,7 @@ function modalTweetBtnListener() {
             hideModalProgressBar();
             hideModalCharacterCountWatcher();
             hideModalImageExitBtn();
+
             createTweetImageCard(modalGlobalTweetImgSrc);
             createInteractiveBar();
             

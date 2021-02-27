@@ -128,7 +128,7 @@ function createTweetImage(imageSrc) {
     const imageExitBtn = document.querySelector("#imageExitBtn");
 
     const newImg = document.createElement("img");
-    newImg.className = "flex ml-2 px-12 py-2 items-start";
+    newImg.className = "flex ml-14 mb-2 mt-6 mr-4 items-start h-80 object-cover border-2 rounded-3xl";
     newImg.id="tweetImageID";
     newImg.src = imageSrc; 
 
@@ -140,7 +140,14 @@ function createTweetImageCard(imageSrc) {
     const tweetText = document.querySelector(`#tweetText${index}`);
 
     const newImg = document.createElement("img");
-    newImg.className = "flex px-2 pb-2 pt-6 items-start";
+    if (imageSrc != "") {
+        newImg.className = "flex ml-2 mb-2 mt-6 mr-4 items-start h-80 object-cover border-2 rounded-3xl";
+    }
+    
+    else if (imageSrc = "") {
+        newImg.className = "flex px-2 pb-2 pt-6 items-start";
+    }
+
     newImg.id=`tweetImageCardID${index}`;
     newImg.src = imageSrc; 
 
@@ -157,7 +164,7 @@ function createModalTweetImage(imageSrc) {
     wrappingModalDiv.className = "flex w-full justify-center items-center";
 
     const newImg = document.createElement("img");
-    newImg.className = "flex px-12 py-4 items-start w-3/5";
+    newImg.className = "flex w-full ml-14 mb-2 mt-4 mr-4 items-start h-80 object-cover border-2 rounded-3xl";
     newImg.id="modalTweetImageID";
     newImg.src = imageSrc; 
 
@@ -254,12 +261,12 @@ function hideImageExitBtn() {
 // Toggling the exit button for the user's uploaded modal image
 function showModalImageExitBtn() {
     const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
-    modalImageExitBtn.className = "absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3"
+    modalImageExitBtn.className = "fixed justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3"
 }
 
 function hideModalImageExitBtn() {
     const modalImageExitBtn = document.querySelector("#modalImageExitBtn");
-    modalImageExitBtn.className = "hidden absolute justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3";
+    modalImageExitBtn.className = "hidden fixed justify-center items-center bg-black z-20 rounded-full text-white h-8 w-8 font-bold text-sm ml-16 -mb-10 mt-3";
 }
 
 // Add interactive bar (reply, retweet, like & share) to tweet cards
