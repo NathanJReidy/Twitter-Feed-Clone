@@ -147,5 +147,19 @@ function characterLimit(characters, id, div) {
     }
 }
 
+// Changes the height of the main text area to the scroll height if conditional is met 
+function changeTextScrollHeight() {
+    if (textarea.scrollHeight < 200) {
+        textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
+    }
+}
 
-export { createProgressBar, createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount, characterLimit };
+// Changes the height of the modal text area to the scroll height if conditional is met 
+function changeModalTextScrollHeight() {
+    if (modalTextArea.scrollHeight < 200) {
+        modalTextArea.style = `display: flex; height: ${modalTextArea.scrollHeight}px`;
+    }
+}
+
+
+export { createProgressBar, createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount, characterLimit, changeTextScrollHeight, changeModalTextScrollHeight };

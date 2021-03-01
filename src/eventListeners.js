@@ -1,5 +1,5 @@
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './DOMmain.js';
-import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount, characterLimit } from './logic.js';
+import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount, characterLimit, changeTextScrollHeight, changeModalTextScrollHeight } from './logic.js';
 import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout } from './DOMchanges.js';
 
 // Declare variables that will be needed
@@ -21,7 +21,7 @@ let modalImage = document.querySelector("#modalImage");
 
 // Monitors tweet input box for keystrokes 
 textarea.addEventListener("keyup", () => {
-    textarea.style = `display: flex; height: ${textarea.scrollHeight}px`;
+    changeTextScrollHeight();
     mainTweetBtn.className = "flex text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer focus:outline-none";
     characterLimit(textarea.value, "#resize-ta", "main");
     focusMainText();
@@ -29,12 +29,11 @@ textarea.addEventListener("keyup", () => {
 
 // Monitors modal tweet input box for keystrokes
 modalTextArea.addEventListener("keyup", () => {
-    modalTextArea.style = `display: flex; height: ${modalTextArea.scrollHeight}px`;
+    changeModalTextScrollHeight();
     modalTweetBtn.className = "lg:flex hidden text-white py-2 px-4 bg-blue-500 cursor-default rounded-full hover:bg-blue-600 cursor-pointer";
     mobileTweetSubmitBtn.className = "lg:hidden flex text-white items-center text-sm py-1 px-4 bg-blue-500 hover:bg-blue-600 cursor-default rounded-full";
     characterLimit(modalTextArea.value, "#resize-ta-modal", "modal");
     focusModalText();
-
 });
 
 // Listens for main tweet button being clicked and creates new tweet if number of characters does not exceed 280
