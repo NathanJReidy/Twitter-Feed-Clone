@@ -178,6 +178,14 @@ function showModalLayout() {
     modal.className = "fixed z-20 h-full w-full bg-white rounded-lg transform translate-y-0 transition duration-300";
 }
 
+function noBodyScroll() {
+    let bodyDiv = document.querySelector("#main");
+    bodyDiv.className = "flex h-full justify-center overflow-hidden";
+}
 
+function enableBodyScroll() {
+    let bodyDiv = document.querySelector("#main");
+    bodyDiv.className = "flex h-full justify-center";
+}
 
-export { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout }
+export { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout, noBodyScroll, enableBodyScroll }

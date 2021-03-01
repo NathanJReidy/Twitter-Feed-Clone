@@ -1,6 +1,6 @@
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './DOMmain.js';
 import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount, characterLimit, changeTextScrollHeight, changeModalTextScrollHeight } from './logic.js';
-import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout } from './DOMchanges.js';
+import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout, enableBodyScroll, noBodyScroll } from './DOMchanges.js';
 
 // Declare variables that will be needed
 
@@ -76,6 +76,7 @@ overlay.addEventListener("click", () => {
     hideModalOverlayCard();
     hideModalProgressBar();
     showMobileFooterNav();
+    enableBodyScroll();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     deleteModalTweetImage();
@@ -115,6 +116,7 @@ modalExit.addEventListener("click", () => {
     hideModalOverlayCard();
     hideModalProgressBar();
     showMobileFooterNav();
+    enableBodyScroll();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
     deleteModalTweetImage();
@@ -395,7 +397,7 @@ let modalTweetFooterBar = document.querySelector("#modalTweetFooterBar");
 // Listens to mobile tweet button 
 mobileTweetBtn.addEventListener("click", () => {
     // Show mobile (same as modal) tweet screen 
-    overlay.className = "fixed z-10 bg-black opacity-50 h-full w-full";
+    overlay.className = "fixed overflow-hidden z-10 bg-black opacity-50 h-full w-full";
     
     showModalLayout();
     
@@ -403,6 +405,8 @@ mobileTweetBtn.addEventListener("click", () => {
 
     hideMobileFooterNav();
     showMobileTweetFooter();
+
+    noBodyScroll();
 
     // Focus modal text so user is ready to type straight away 
     focusModalText();
@@ -417,6 +421,7 @@ mobileTweetSubmitBtn.addEventListener("click", () => {
     // Exit full screen layout
     showMobileFooterNav();
     hideMobileTweetFooter();
+    enableBodyScroll();
 })
 
 
