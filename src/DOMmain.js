@@ -164,7 +164,7 @@ function createModalTweetImage(imageSrc) {
     wrappingModalDiv.className = "flex w-full justify-center items-center";
 
     const newImg = document.createElement("img");
-    newImg.className = "flex w-full ml-14 mb-2 mt-4 mr-4 items-start lg:h-44 2xl:h-72 object-cover border-2 rounded-3xl";
+    newImg.className = "flex w-full ml-14 mb-2 mt-4 mr-4 items-start h-56 lg:h-44 2xl:h-72 object-cover border-2 rounded-3xl";
     newImg.id="modalTweetImageID";
     newImg.src = imageSrc; 
 
