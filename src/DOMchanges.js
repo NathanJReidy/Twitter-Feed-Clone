@@ -188,4 +188,25 @@ function enableBodyScroll() {
     bodyDiv.className = "flex h-full justify-center";
 }
 
-export { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout, noBodyScroll, enableBodyScroll }
+// Show the clicked image fully
+function showSelectedImage(datasetValue) {
+    let fullSelectedImage = document.querySelector("#fullSelectedImage");
+    let imageModal = document.querySelector("#imageModal");
+    let selectedImage = document.querySelector(`#tweetImageCardID${datasetValue}`);
+    let selectedImageSrc = selectedImage.src;
+
+    imageModal.className = "fixed top-16 z-20 h-3/4 w-3/4 rounded-lg";
+    fullSelectedImage.src = selectedImageSrc;
+}
+
+// Hide the clicked image fully 
+function hideSelectedImage() {
+    let fullSelectedImage = document.querySelector("#fullSelectedImage");
+    let imageModal = document.querySelector("#imageModal");
+
+    imageModal.className = "hidden fixed top-16 z-20 h-3/4 w-3/4 rounded-lg";
+    fullSelectedImage.src = "";
+}
+
+
+export { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout, noBodyScroll, enableBodyScroll, showSelectedImage, hideSelectedImage }

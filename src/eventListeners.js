@@ -1,6 +1,6 @@
 import { createTweetCard, createTweetImage, createTweetImageCard, createModalTweetImage, deleteProgressBar, hideProgressBar, hideCharacterCountWatcher, hideModalProgressBar, hideModalCharacterCountWatcher, hideImageExitBtn, showImageExitBtn, showModalImageExitBtn, hideModalImageExitBtn, createInteractiveBar } from './DOMmain.js';
 import { createTweet, allTweets, focusMainText, focusModalText, windowScrollUp, updateLikeCount, updateRetweetCount, characterLimit, changeTextScrollHeight, changeModalTextScrollHeight } from './logic.js';
-import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout, enableBodyScroll, noBodyScroll } from './DOMchanges.js';
+import { hideModalOverlayCard, hideDeleteIcon, showDeleteCard, hideDeleteCard, showDeleteIcon, showBlockerLayer, hideBlocker, hideTweetCard, hideDefaultDeleteIcon, showDefaultDeleteCard, showDefaultDeleteIcon, hideDefaultDeleteCard, hideDefaultTweetCard, displayLikeCount, displayRetweetCount, createRetweetCard, showMobileOverlay, hideMobileOverlay, showMobileMenuCard, hideMobileMenuCard, showMobileFooterNav, hideMobileFooterNav, showMobileTweetFooter, hideMobileTweetFooter, showModalLayout, enableBodyScroll, noBodyScroll, showSelectedImage, hideSelectedImage } from './DOMchanges.js';
 
 // Declare variables that will be needed
 
@@ -79,6 +79,7 @@ overlay.addEventListener("click", () => {
     enableBodyScroll();
     hideModalCharacterCountWatcher();
     hideModalImageExitBtn();
+    hideSelectedImage();
     deleteModalTweetImage();
     modalTextArea.style = ""; // Resets the size of the text area to the default size
 })
@@ -348,9 +349,30 @@ document.addEventListener('click', event => {
 
   }
 
+  // Event listener for uploaded image click 
+
+  if (event.target.matches('[id^="tweetImageCardID"]')) {
+    let datasetValue = event.target.dataset.value;
+
+    // Show overlay 
+    overlay.className = "fixed z-10 bg-black opacity-50 h-full w-full";
+
+    // Show full selected image 
+    showSelectedImage(datasetValue);
+
+  }
+
 });
 
 
+// Hide selected image when exit button is clicked 
+let fullSelectedImageExitBtn = document.querySelector("#fullSelectedImageExitBtn");
+fullSelectedImageExitBtn.addEventListener("click", () => {
+    // Hide the image 
+    hideSelectedImage();
+    // Hide overlay
+    overlay.className="";
+})
 
 // NB: The placeholder tweet cards CANNOT be retweeted or liked, because they are deliberately 
 // not included/pushed to the array of tweet objects. HOWEVER, they can be deleted if the user doesn't

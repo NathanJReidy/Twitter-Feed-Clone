@@ -149,6 +149,7 @@ function createTweetImageCard(imageSrc) {
     }
 
     newImg.id=`tweetImageCardID${index}`;
+    newImg.dataset.value = index;
     newImg.src = imageSrc; 
 
     tweetText.after(newImg);
